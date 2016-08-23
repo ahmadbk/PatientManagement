@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Patient Management</string>
+    <string name="login">Log In</string>
+    <string name="one">One</string>
+    <string name="two">Two</string>
+    <string name="three">Three</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_diagnostic">Diagnostic</string>
+    <string name="action_settings">Settings</string>
+</resources>

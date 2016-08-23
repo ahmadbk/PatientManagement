@@ -1,0 +1,90 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/addPrescription"
+    tools:context="com.example.ahmad.patientmanagement.AddPrescriptionFragment">
+
+    <LinearLayout
+        android:layout_width="200pt"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text="Add a new Prescription"/>
+        <LinearLayout
+            android:layout_width="200pt"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="50pt"
+                android:layout_height="wrap_content"
+                android:text="Medicine Name: "/>
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinner"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="200pt"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dosage Quantity : "/>
+            <EditText
+                android:layout_width="20pt"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:id="@+id/dosageQuantity"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="200pt"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dosage Frequency : "/>
+            <EditText
+                android:layout_width="20pt"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:id="@+id/dosageFrequency"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" per day"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="200pt"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="100pt"
+                android:layout_height="20pt"
+                android:text="End Date : "
+                android:id="@+id/endDatePrescription"/>
+            <ImageButton
+                android:layout_width="20pt"
+                android:layout_height="20pt"
+                android:src="@drawable/image"
+                android:scaleType="fitXY"
+                android:onClick="setDate"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Status : Active"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add"
+            android:onClick="addPrescriptionButtonClick"/>
+    </LinearLayout>
+
+</FrameLayout>

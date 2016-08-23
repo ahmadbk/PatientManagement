@@ -1,0 +1,58 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="140pt"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.ahmad.patientmanagement.PatientInfo">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="45pt"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="50pt"
+                android:layout_height="50pt"
+                android:src="@drawable/image"
+                android:scaleType="fitXY"/>
+        </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name:"
+        android:id="@+id/firstName"
+        android:textSize="20dp"
+        android:layout_margin="@dimen/text_margin"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lastName"
+        android:textSize="20dp"
+        android:layout_margin="@dimen/text_margin"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date of birth"
+        android:id="@+id/dob"
+        android:textSize="20dp"
+        android:layout_margin="@dimen/text_margin"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date Admitted"
+        android:id="@+id/dateAdmitted"
+        android:textSize="20dp"
+        android:layout_margin="@dimen/text_margin"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Emergency Contact"
+        android:id="@+id/emergCon"
+        android:textSize="20dp"
+        android:layout_margin="@dimen/text_margin"/>
+</LinearLayout>
+
