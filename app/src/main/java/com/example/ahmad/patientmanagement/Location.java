@@ -1,7 +1,7 @@
 package com.example.ahmad.patientmanagement;
 
 /**
- * Created by Dawood on 2016/08/23.
+ * Created by Ahmad on 2016/08/23.
  */
 public class Location {
 

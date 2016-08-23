@@ -1,7 +1,7 @@
 package com.example.ahmad.patientmanagement;
 
 /**
- * Created by Dawood on 2016/08/15.
+ * Created by Ahmad on 2016/08/15.
  */
 public class Diagnostics {
 

@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 /**
- * Created by Dawood on 2016/08/13.
+ * Created by Ahmad on 2016/08/13.
  */
 public class DiagnosticFragment extends Fragment {
 

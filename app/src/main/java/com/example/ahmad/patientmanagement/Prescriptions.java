@@ -1,7 +1,7 @@
 package com.example.ahmad.patientmanagement;
 
 /**
- * Created by Dawood on 2016/08/15.
+ * Created by Ahmad on 2016/08/15.
  */
 public class Prescriptions {
     String start_date, end_date, doctor_name,medicine_name,quantity_per_day,frequency_per_day,status;
