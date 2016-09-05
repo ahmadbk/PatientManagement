@@ -33,7 +33,8 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
     JSONObject jsonObject;
     JSONArray jsonArray;
     public static PatientDetails patientDetails;
-    public static String serverAdd = "192.168.1.86";
+    //Change server address here
+    public static String serverAdd = "192.168.1.66";
     public static String medArray[] = new String[100];
     boolean flag = false;
     ArrayList<Diagnostics> diagnosticsArrayList = new ArrayList<Diagnostics>();

@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
+//I am testing gut now
 public class Login extends AppCompatActivity {
 
     private NfcAdapter nfcAdapter;
