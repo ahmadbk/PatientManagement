@@ -27,7 +27,7 @@ public class DiagnosticsFragmentLister extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_diagnostics_list, container, false);
-        mRowCount = BackgroundWorker.patientDetails.getDiagnosticsArrayList().size();
+        mRowCount = StaffLogin.patientDetails.getDiagnosticsArrayList().size();
         diagnostics = new String[mRowCount][3];
 
 /*        //temporary population of array
@@ -45,14 +45,14 @@ public class DiagnosticsFragmentLister extends Fragment {
         for(int i = 0; i < mRowCount; i++){
             DiagnosticFragment fragment = new DiagnosticFragment();
             Bundle bundle = new Bundle();
-            diagnostics[i] = BackgroundWorker.patientDetails.getDiagnosticsArrayList().get(i).getArray();
+            diagnostics[i] = StaffLogin.patientDetails.getDiagnosticsArrayList().get(i).getArray();
             bundle.putStringArray("diagnostics", diagnostics[i]);
             fragment.setArguments(bundle);
             fragTransaction = getFragmentManager().beginTransaction();
             fragTransaction.replace(getId(i), fragment, "fragment" + i);
             fragTransaction.commit();
         }
-        if(StaffBackgroundWorker.staffDetails.getRole().equalsIgnoreCase("doctor")){
+        if(StaffLogin.staffDetails.getRole().equalsIgnoreCase("doctor")){
             AddDiagnosticFragment fragment = new AddDiagnosticFragment();
             fragTransaction = getFragmentManager().beginTransaction();
             fragTransaction.replace(R.id.addDiagnostic, fragment, "fragment");

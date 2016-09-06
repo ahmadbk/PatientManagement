@@ -70,19 +70,19 @@ public class TabFragment extends Fragment {
                 case 1 :
                     DiagnosticsFragmentLister frag = new DiagnosticsFragmentLister();
                     Bundle bundle = new Bundle();
-                    bundle.putInt("rowCount", BackgroundWorker.patientDetails.getDiagnosticsArrayList().size());
+                    bundle.putInt("rowCount", StaffLogin.patientDetails.getDiagnosticsArrayList().size());
                     frag.setArguments(bundle);
                     return frag;
                 case 2 :
                     PrescriptionListerFragment frag1 = new PrescriptionListerFragment();
                     Bundle bundle1 = new Bundle();
-                    bundle1.putInt("rowCount", BackgroundWorker.patientDetails.getPrescriptionsArrayList().size());
+                    bundle1.putInt("rowCount", StaffLogin.patientDetails.getPrescriptionsArrayList().size());
                     frag1.setArguments(bundle1);
                     return frag1;
                 case 3 :
                     ObservationsListerFragment frag2 = new ObservationsListerFragment();
                     Bundle bundle2 = new Bundle();
-                    bundle2.putInt("rowCount", BackgroundWorker.patientDetails.getObservationsArrayList().size());
+                    bundle2.putInt("rowCount", StaffLogin.patientDetails.getObservationsArrayList().size());
                     frag2.setArguments(bundle2);
                     return frag2;
                 case 4 : return new OneFragment();

@@ -26,13 +26,13 @@ public class LocationListerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_location_lister, container, false);
-        mRowCount = BackgroundWorker.patientDetails.getLocationArrayList().size();
+        mRowCount = StaffLogin.patientDetails.getLocationArrayList().size();
         locations = new String[mRowCount][2];
 
         for(int i = 0; i < mRowCount; i++){
             LocationFragment fragment = new LocationFragment();
             Bundle bundle = new Bundle();
-            locations[i] = BackgroundWorker.patientDetails.getLocationArrayList().get(i).getArray();
+            locations[i] = StaffLogin.patientDetails.getLocationArrayList().get(i).getArray();
             bundle.putStringArray("location", locations[i]);
             fragment.setArguments(bundle);
             fragTransaction = getFragmentManager().beginTransaction();

@@ -49,7 +49,7 @@ public class ObservationsListerFragment extends Fragment {
         for(int i = 0; i < mRowCount; i++){
             ObservationFragment fragment = new ObservationFragment();
             Bundle bundle = new Bundle();
-            observations[i] = BackgroundWorker.patientDetails.getObservationsArrayList().get(i).getArray();
+            observations[i] = StaffLogin.patientDetails.getObservationsArrayList().get(i).getArray();
             bundle.putStringArray("observations", observations[i]);
             fragment.setArguments(bundle);
             fragTransaction = getFragmentManager().beginTransaction();
@@ -58,7 +58,7 @@ public class ObservationsListerFragment extends Fragment {
         }
 
 
-        if(StaffBackgroundWorker.staffDetails.getRole().equalsIgnoreCase("doctor")){
+        if(StaffLogin.staffDetails.getRole().equalsIgnoreCase("doctor")){
             AddObservationFragment fragment = new AddObservationFragment();
             fragTransaction = getFragmentManager().beginTransaction();
             fragTransaction.replace(R.id.addObservation, fragment, "fragment");

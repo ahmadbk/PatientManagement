@@ -30,10 +30,10 @@ public class MedicalBackground extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        int size = BackgroundWorker.patientDetails.getAllergiesArrayList().size();
+        int size = StaffLogin.patientDetails.getAllergiesArrayList().size();
         StringArray = new String[size];
         for(int i = 0; i < size; i++)
-            StringArray[i] = BackgroundWorker.patientDetails.getAllergiesArrayList().get(i).getType();
+            StringArray[i] = StaffLogin.patientDetails.getAllergiesArrayList().get(i).getType();
         View view = inflater.inflate(R.layout.fragment_medical_background, container, false);
         ListView listView = (ListView)view.findViewById(R.id.listView);
         ArrayAdapter adapter = new ArrayAdapter<String>(this.getActivity(), R.layout.listview, StringArray);
@@ -42,10 +42,10 @@ public class MedicalBackground extends Fragment {
         TextView smokerView = (TextView)view.findViewById(R.id.smokerId);
         TextView alcoholicView = (TextView)view.findViewById((R.id.alcoholicId));
 
-        smokerView.setText(BackgroundWorker.patientDetails.getSmoker());
-        alcoholicView.setText(BackgroundWorker.patientDetails.getAlcoholic());
+        smokerView.setText(StaffLogin.patientDetails.getSmoker());
+        alcoholicView.setText(StaffLogin.patientDetails.getAlcoholic());
 
-        if(StaffBackgroundWorker.staffDetails.getRole().equalsIgnoreCase("doctor")){
+        if(StaffLogin.staffDetails.getRole().equalsIgnoreCase("doctor")){
             AddAllergyFragment fragment = new AddAllergyFragment();
             fragTransaction = getFragmentManager().beginTransaction();
             fragTransaction.replace(R.id.addAllergy, fragment, "fragment");

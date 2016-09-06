@@ -24,7 +24,7 @@ public class AddPrescriptionFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_prescription, container, false);
         Spinner spinner = (Spinner)view.findViewById(R.id.spinner);
-        String[] tempArray = BackgroundWorker.medArray;
+        String[] tempArray = StaffLogin.medArray;
         int count = 0;
         for(;tempArray[count]!=null;count++ ){}
         String[] medicines = new String[count];

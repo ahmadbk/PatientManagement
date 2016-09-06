@@ -24,13 +24,13 @@ public class InsertBackgroundWorker extends AsyncTask<String,Void,String> {
 
     AlertDialog alertDialog;
     Context context;
-    String add_allergy_url = "http://"+BackgroundWorker.serverAdd+"/AddAllergy.php";
-    String add_diagnostics_url = "http://"+BackgroundWorker.serverAdd+"/AddDiagnostic.php";
-    String add_prescription_url = "http://"+BackgroundWorker.serverAdd+"/AddPrescription.php";
-    String add_observation_url = "http://"+BackgroundWorker.serverAdd+"/AddObservation.php";
+    String add_allergy_url = "http://"+StaffLogin.serverAdd+"/AddAllergy.php";
+    String add_diagnostics_url = "http://"+StaffLogin.serverAdd+"/AddDiagnostic.php";
+    String add_prescription_url = "http://"+StaffLogin.serverAdd+"/AddPrescription.php";
+    String add_observation_url = "http://"+StaffLogin.serverAdd+"/AddObservation.php";
 
-    int patient_tag = BackgroundWorker.patientDetails.getTagID();
-    int staff_tag = StaffBackgroundWorker.staffDetails.getTag();
+    int patient_tag = StaffLogin.patientDetails.getTagID();
+    int staff_tag = StaffLogin.staffDetails.getTag();
 
     InsertBackgroundWorker(Context ctx){
         context = ctx;

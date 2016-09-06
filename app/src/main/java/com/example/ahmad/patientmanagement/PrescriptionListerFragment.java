@@ -50,7 +50,7 @@ public class PrescriptionListerFragment extends Fragment {
         for(int i = 0; i < mRowCount; i++){
             PrescriptionFragment fragment = new PrescriptionFragment();
             Bundle bundle = new Bundle();
-            prescriptions[i]=BackgroundWorker.patientDetails.getPrescriptionsArrayList().get(i).getArray();
+            prescriptions[i]=StaffLogin.patientDetails.getPrescriptionsArrayList().get(i).getArray();
             bundle.putStringArray("prescriptions", prescriptions[i]);
             fragment.setArguments(bundle);
             fragTransaction = getFragmentManager().beginTransaction();
@@ -58,7 +58,7 @@ public class PrescriptionListerFragment extends Fragment {
             fragTransaction.commit();
         }
 
-        if(StaffBackgroundWorker.staffDetails.getRole().equalsIgnoreCase("doctor")){
+        if(StaffLogin.staffDetails.getRole().equalsIgnoreCase("doctor")){
             AddPrescriptionFragment fragment = new AddPrescriptionFragment();
             fragTransaction = getFragmentManager().beginTransaction();
             fragTransaction.replace(R.id.addPrescription, fragment, "fragment");
