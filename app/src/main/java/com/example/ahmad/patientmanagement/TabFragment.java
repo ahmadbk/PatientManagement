@@ -69,35 +69,18 @@ public class TabFragment extends Fragment {
         {
             switch (position){
                 case 0 : return new MedicalBackground();
-                case 1 :
-                    DiagnosticsFragmentLister frag = new DiagnosticsFragmentLister();
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("rowCount", StaffLogin.patientDetails.getDiagnosticsArrayList().size());
-                    frag.setArguments(bundle);
-                    return frag;
+                case 1 : return new DiagnosticsFragmentLister();
                 case 2 :
-                    Fragment frag1;
-                    if(!StaffLogin.patientDetails.isStaff()){
-                        if(StaffLogin.staffDetails.getRole().equalsIgnoreCase("doctor")){
-                            frag1 = new PrescriptionListerFragment();
-                            Bundle bundle1 = new Bundle();
-                            bundle1.putInt("rowCount", StaffLogin.patientDetails.getPrescriptionsArrayList().size());
-                            frag1.setArguments(bundle1);
-                            return frag1;
-                        }
-                        else{
-                            return new NextDosageListerFragment();
-                        }
-                    }
-                    break;
+                    if(StaffLogin.patientStaff) return new OneFragment();
+                    else if(StaffLogin.isDoctor) return new PrescriptionListerFragment();
+                    else return new NextDosageListerFragment();
                 case 3 :
-                    ObservationsListerFragment frag2 = new ObservationsListerFragment();
-                    Bundle bundle2 = new Bundle();
-                    bundle2.putInt("rowCount", StaffLogin.patientDetails.getObservationsArrayList().size());
-                    frag2.setArguments(bundle2);
-                    return frag2;
-                case 4 : return new OneFragment();
-                case 5: return new LocationListerFragment();
+                    if(StaffLogin.isDoctor) return new NextDosageListerFragment();
+                    else return new ObservationsListerFragment();
+                case 4 : if(StaffLogin.isDoctor) return new ObservationsListerFragment();
+                    else return new OneFragment();
+                case 5: return new OneFragment();
+                case 6: return new LocationListerFragment();
             }
             return null;
         }
@@ -105,8 +88,12 @@ public class TabFragment extends Fragment {
         @Override
         public int getCount() {
 
-
-            return int_items;
+            if(StaffLogin.patientStaff)
+                return 3;
+            else if(StaffLogin.isDoctor)
+                return 7;
+            else
+                return 5;
 
         }
 
@@ -123,13 +110,26 @@ public class TabFragment extends Fragment {
                 case 1 :
                     return "Diagnostics";
                 case 2 :
-                    return "Prescription";
+                    if(StaffLogin.patientStaff)
+                        return "Lab";
+                    else if(StaffLogin.isDoctor)
+                        return "Prescription";
+                    else
+                    return "Dosage";
                 case 3 :
-                    return "Observation";
+                    if(StaffLogin.isDoctor)
+                        return "Dosage";
+                    else
+                    return "Observations";
                 case 4 :
+                    if(StaffLogin.isDoctor)
+                        return "Observation";
+                    else
                     return "Lab";
                 case 5:
-                    return "Locations";
+                    return "Lab";
+                case 6:
+                    return "Location";
             }
             return null;
         }

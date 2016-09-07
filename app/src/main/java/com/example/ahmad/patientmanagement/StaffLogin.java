@@ -42,6 +42,8 @@ public class StaffLogin extends AppCompatActivity {
     public static final String MIME_TEXT_PLAIN = "text/plain";
     public static final String TAG = "NfcDemo";
     public static String serverAdd = "192.168.1.66";
+    public static boolean patientStaff = false;
+    public static boolean isDoctor = false;
 
     //private NfcAdapter nfcAdapter;
     private NfcAdapter mNfcAdapter;
@@ -255,6 +257,8 @@ public class StaffLogin extends AppCompatActivity {
 
                     if(output.equalsIgnoreCase("doctor") || output.equalsIgnoreCase("nurse"))
                     {
+
+
                         URL url1 = new URL(staff_login_url);
                         HttpURLConnection httpURLConnection1 = (HttpURLConnection) url1.openConnection();
                         httpURLConnection1.setDoOutput(true);
@@ -302,6 +306,7 @@ public class StaffLogin extends AppCompatActivity {
                                     return "doctor";
                                 else
                                     return "nurse";
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -677,6 +682,7 @@ public class StaffLogin extends AppCompatActivity {
             if (!result.equalsIgnoreCase("failed")) {
                 if(result.equalsIgnoreCase("patient"))
                 {
+                    patientStaff = true;
                     Intent intent = new Intent(context, PatientManager.class);
                     context.startActivity(intent);
                 }
@@ -687,6 +693,7 @@ public class StaffLogin extends AppCompatActivity {
                 }
                 else if(result.equalsIgnoreCase("doctor"))
                 {
+                    isDoctor = true;
                     Intent intent = new Intent(context, Login.class);
                     context.startActivity(intent);
                 }

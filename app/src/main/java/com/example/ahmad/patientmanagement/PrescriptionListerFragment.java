@@ -26,7 +26,7 @@ public class PrescriptionListerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_prescription_lister, container, false);
-        mRowCount = getArguments().getInt("rowCount");
+        mRowCount = StaffLogin.patientDetails.getPrescriptionsArrayList().size();
         prescriptions = new String[mRowCount][5];
 
        /* //temporary population of array
