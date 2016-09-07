@@ -77,6 +77,7 @@ public class StaffLogin extends AppCompatActivity {
     String medicine_list_url = "http://"+serverAdd+"/MedicineList.php";
     String locations_url = "http://"+serverAdd+"/Locations.php";
 
+
     @Override
     public Context getApplicationContext() {
         return super.getApplicationContext();

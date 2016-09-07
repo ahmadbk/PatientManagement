@@ -15,8 +15,7 @@ public class PatientDetails {
     private ArrayList<Prescriptions> prescriptionsArrayList = new ArrayList<Prescriptions>();
     private ArrayList<Allergies> allergiesArrayList = new ArrayList<Allergies>();
     private ArrayList<Location> locationArrayList = new ArrayList<Location>();
-
-
+    private ArrayList<NextDosage> nextDosageArrayList = new ArrayList<NextDosage>();
 
     public PatientDetails(int tID, String fN, String sN, String Dob, String dA, String eC, String g, String pN, String a, String cW, String smoker,String alcoholic, boolean is)
     {
@@ -33,6 +32,14 @@ public class PatientDetails {
         this.setSmoker(smoker);
         this.setAlcoholic(alcoholic);
         this.setStaff(is);
+    }
+
+    public ArrayList<NextDosage> getNextDosageArrayList() {
+        return nextDosageArrayList;
+    }
+
+    public void setNextDosageArrayList(ArrayList<NextDosage> nextDosageArrayList) {
+        this.nextDosageArrayList = nextDosageArrayList;
     }
 
     public boolean isStaff() {

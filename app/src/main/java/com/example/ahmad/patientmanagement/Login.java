@@ -35,84 +35,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
-//I am testing gut now
-//public class Login extends AppCompatActivity {
-//
-//    private NfcAdapter nfcAdapter;
-//    TextView textViewTagInfo;
-//    String JSON_STRING;
-//    Context context;
-//
-//    @Override
-//    public Context getApplicationContext() {
-//        return super.getApplicationContext();
-//    }
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_login);
-//
-//        //This is to display the ID --> Temporary
-//        textViewTagInfo = (TextView)findViewById(R.id.taginfo);
-//
-//        //Setting the NFC Adapter
-//        nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-//        if(nfcAdapter == null){
-//            Toast.makeText(this,
-//                    "NFC NOT supported on this devices!",
-//                    Toast.LENGTH_LONG).show();
-//            finish();
-//        }else if(!nfcAdapter.isEnabled()){
-//            Toast.makeText(this,
-//                    "NFC NOT Enabled!",
-//                    Toast.LENGTH_LONG).show();
-//            finish();
-//        }
-//
-//    }
-//
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//
-//        //Creates a new Intent each time
-//        Intent intent = getIntent();
-//        String action = intent.getAction();
-//
-//        if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)) {
-//            //Toast.makeText(this, "onResume() - ACTION_TECH_DISCOVERED" Toast.LENGTH_SHORT).show();
-//
-//            Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-//            if(tag == null){
-//                textViewTagInfo.setText("tag == null");
-//            }else{
-//                int temp = 0;
-//                String tagInfo = "";
-//                byte[] tagId = tag.getId();
-//                for(int i=0; i<tagId.length; i++){
-//                    tagInfo = Integer.toHexString(tagId[0] & 0xFF);
-//                    temp += Integer.valueOf(tagInfo,16);
-//                }
-//                tagInfo = "\nTag ID: ";
-//                String tempp = Integer.toString(temp);
-//                tagInfo += tempp;
-//                textViewTagInfo.setText(tagInfo);
-//                String type = "patient";
-//                BackgroundWorker backgroundWorker = new BackgroundWorker(Login.this);
-//                backgroundWorker.execute(type,tempp);
-//                //new BackgroundWorker(this).execute();
-//
-//            }
-//        }else{
-//            Toast.makeText(this,
-//                    "onResume() : " + action,
-//                    Toast.LENGTH_SHORT).show();
-//        }
-//
-//    }
-//}
-
 
 public class Login extends AppCompatActivity {
 
@@ -141,6 +63,7 @@ public class Login extends AppCompatActivity {
     ArrayList<Prescriptions> prescriptionsArrayList = new ArrayList<Prescriptions>();
     ArrayList<Allergies> allergiesArrayList = new ArrayList<Allergies>();
     ArrayList<Location> locationArrayList = new ArrayList<Location>();
+    ArrayList<NextDosage> nextDosageArrayList = new ArrayList<NextDosage>();
 
     String details_url = "http://"+StaffLogin.serverAdd+"/viewPatient.php";
     String login_url = "http://"+StaffLogin.serverAdd+"/login.php";
@@ -150,6 +73,8 @@ public class Login extends AppCompatActivity {
     String allergies_url = "http://"+StaffLogin.serverAdd+"/Allergies.php";
     String medicine_list_url = "http://"+StaffLogin.serverAdd+"/MedicineList.php";
     String locations_url = "http://"+StaffLogin.serverAdd+"/Locations.php";
+    String next_dosage_url = "http://"+StaffLogin.serverAdd+"/NextDosage.php";
+
 
     @Override
     public Context getApplicationContext() {
@@ -676,6 +601,55 @@ public class Login extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
+                        //Next Dosage
+//----------------------------------------------------------------------------------------------------------------------
+                        URL url9 = new URL(next_dosage_url);
+                        HttpURLConnection httpURLConnection9 = (HttpURLConnection)url9.openConnection();
+                        httpURLConnection9.setDoOutput(true);
+                        httpURLConnection9.setDoInput(true);
+                        OutputStream outputStream9 = httpURLConnection9.getOutputStream();
+                        BufferedWriter bufferedWriter9 = new BufferedWriter(new OutputStreamWriter(outputStream9,"UTF-8"));
+                        String post_data9 = URLEncoder.encode("tag_id","UTF-8")+"="+URLEncoder.encode(tag_id,"UTF-8");
+                        bufferedWriter9.write(post_data9);
+                        bufferedWriter9.flush();;
+                        bufferedWriter9.close();
+                        outputStream9.close();
+                        InputStream inputStream9 = httpURLConnection9.getInputStream();
+                        BufferedReader bufferedReader9 = new BufferedReader(new InputStreamReader(inputStream9,"iso-8859-1"));
+                        StringBuilder stringBuilder9 = new StringBuilder();
+                        while((JSON_STRING=bufferedReader9.readLine())!=null)
+                        {
+                            stringBuilder9.append(JSON_STRING+"\n");
+                        }
+                        bufferedReader9.close();
+                        inputStream9.close();
+                        httpURLConnection9.disconnect();
+                        jsonPersonal = stringBuilder9.toString().trim();
+
+                        try {
+                            jsonObject = new JSONObject(jsonPersonal);
+                            jsonArray = jsonObject.getJSONArray("server_response");
+
+                            int count = 0;
+                            String medName,quantity,mealRelation,pID;
+                            while (count<jsonArray.length())
+                            {
+                                JSONObject JO = jsonArray.getJSONObject(count);
+                                medName = JO.getString("medName");
+                                quantity = JO.getString("quantity_per_dosage");
+                                mealRelation = JO.getString("mealRelation");
+                                pID = JO.getString("prescription_id");
+
+                                NextDosage nextDosage = new NextDosage(medName,quantity,mealRelation,pID);
+                                nextDosageArrayList.add(nextDosage);
+                                count++;
+                            }
+                            StaffLogin.patientDetails.setNextDosageArrayList(nextDosageArrayList);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+//----------------------------------------------------------------------------------------------------------------------
 
                         return "patient";
 

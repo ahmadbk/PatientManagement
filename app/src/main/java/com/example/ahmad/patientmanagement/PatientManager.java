@@ -9,10 +9,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.TextureView;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -171,6 +173,11 @@ public class PatientManager extends AppCompatActivity {
     public void setTempDate(String date){
         tempDate = date;
         tempDateSet = true;
+    }
+
+    public void nextDosageSubmitOnClick(View view){
+        String medicine = ((TextView)findViewById(R.id.nextDosageMedicineName)).getText().toString();
+        System.out.println("administered " + medicine);
     }
 
 }

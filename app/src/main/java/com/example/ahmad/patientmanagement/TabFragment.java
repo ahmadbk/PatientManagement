@@ -19,6 +19,8 @@ public class TabFragment extends Fragment {
     public static TabLayout tabLayout;
     public static ViewPager viewPager;
     public static int int_items = 6 ;
+    boolean patientStaff = false;
+    boolean isDoctor = false;
 
     @Nullable
     @Override
@@ -66,7 +68,7 @@ public class TabFragment extends Fragment {
         public Fragment getItem(int position)
         {
             switch (position){
-                case 0 : return new MedicalBackground();//TODO set bundle arguments
+                case 0 : return new MedicalBackground();
                 case 1 :
                     DiagnosticsFragmentLister frag = new DiagnosticsFragmentLister();
                     Bundle bundle = new Bundle();
@@ -74,11 +76,20 @@ public class TabFragment extends Fragment {
                     frag.setArguments(bundle);
                     return frag;
                 case 2 :
-                    PrescriptionListerFragment frag1 = new PrescriptionListerFragment();
-                    Bundle bundle1 = new Bundle();
-                    bundle1.putInt("rowCount", StaffLogin.patientDetails.getPrescriptionsArrayList().size());
-                    frag1.setArguments(bundle1);
-                    return frag1;
+                    Fragment frag1;
+                    if(!StaffLogin.patientDetails.isStaff()){
+                        if(StaffLogin.staffDetails.getRole().equalsIgnoreCase("doctor")){
+                            frag1 = new PrescriptionListerFragment();
+                            Bundle bundle1 = new Bundle();
+                            bundle1.putInt("rowCount", StaffLogin.patientDetails.getPrescriptionsArrayList().size());
+                            frag1.setArguments(bundle1);
+                            return frag1;
+                        }
+                        else{
+                            return new NextDosageListerFragment();
+                        }
+                    }
+                    break;
                 case 3 :
                     ObservationsListerFragment frag2 = new ObservationsListerFragment();
                     Bundle bundle2 = new Bundle();
@@ -93,6 +104,7 @@ public class TabFragment extends Fragment {
 
         @Override
         public int getCount() {
+
 
             return int_items;
 

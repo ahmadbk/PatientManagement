@@ -13,8 +13,8 @@
         android:layout_height="wrap_content"
         android:textSize="15dp"
         android:textStyle="bold"
-        android:text="Doctor : "
-        android:layout_margin="@dimen/text_margin"/>
+        android:layout_margin="@dimen/text_margin"
+        android:text="Doctor : "/>
 
     <TextView
         android:id="@+id/medicine"
