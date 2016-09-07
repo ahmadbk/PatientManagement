@@ -58,12 +58,15 @@ public class PrescriptionListerFragment extends Fragment {
             fragTransaction.commit();
         }
 
-        if(StaffLogin.staffDetails.getRole().equalsIgnoreCase("doctor")){
-            AddPrescriptionFragment fragment = new AddPrescriptionFragment();
-            fragTransaction = getFragmentManager().beginTransaction();
-            fragTransaction.replace(R.id.addPrescription, fragment, "fragment");
-            fragTransaction.commit();
+        if(!StaffLogin.patientDetails.isStaff()) {
+            if(StaffLogin.staffDetails.getRole().equalsIgnoreCase("doctor")){
+                AddPrescriptionFragment fragment = new AddPrescriptionFragment();
+                fragTransaction = getFragmentManager().beginTransaction();
+                fragTransaction.replace(R.id.addPrescription, fragment, "fragment");
+                fragTransaction.commit();
+            }
         }
+
         return view;
     }
 

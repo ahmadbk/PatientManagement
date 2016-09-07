@@ -57,12 +57,13 @@ public class ObservationsListerFragment extends Fragment {
             fragTransaction.commit();
         }
 
-
-        if(StaffLogin.staffDetails.getRole().equalsIgnoreCase("doctor")){
-            AddObservationFragment fragment = new AddObservationFragment();
-            fragTransaction = getFragmentManager().beginTransaction();
-            fragTransaction.replace(R.id.addObservation, fragment, "fragment");
-            fragTransaction.commit();
+        if(!StaffLogin.patientDetails.isStaff()) {
+            if (StaffLogin.staffDetails.getRole().equalsIgnoreCase("doctor")) {
+                AddObservationFragment fragment = new AddObservationFragment();
+                fragTransaction = getFragmentManager().beginTransaction();
+                fragTransaction.replace(R.id.addObservation, fragment, "fragment");
+                fragTransaction.commit();
+            }
         }
         return view;
     }

@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 public class PatientDetails {
 
+    boolean isStaff = false;
     private int tagID;
     private String firstname, surname, DOB, dateAdmitted, emergencyContact,gender,phone_num,address, curr_ward_name, smoker, alcoholic;
     private ArrayList<Diagnostics> diagnosticsArrayList = new ArrayList<Diagnostics>();
@@ -17,7 +18,7 @@ public class PatientDetails {
 
 
 
-    public PatientDetails(int tID, String fN, String sN, String Dob, String dA, String eC, String g, String pN, String a, String cW, String smoker,String alcoholic)
+    public PatientDetails(int tID, String fN, String sN, String Dob, String dA, String eC, String g, String pN, String a, String cW, String smoker,String alcoholic, boolean is)
     {
         this.setTagID(tID);
         this.setFirstname(fN);
@@ -31,6 +32,15 @@ public class PatientDetails {
         this.setCurr_ward_name(cW);
         this.setSmoker(smoker);
         this.setAlcoholic(alcoholic);
+        this.setStaff(is);
+    }
+
+    public boolean isStaff() {
+        return isStaff;
+    }
+
+    public void setStaff(boolean staff) {
+        isStaff = staff;
     }
 
     public String getSmoker() {

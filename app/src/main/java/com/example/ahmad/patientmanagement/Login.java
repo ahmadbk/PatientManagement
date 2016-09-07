@@ -375,7 +375,7 @@ public class Login extends AppCompatActivity {
                                 cname = JO.getString("current_ward");
                                 smoker = JO.getString("smoker");
                                 alcoholic = JO.getString("alcoholic");
-                                StaffLogin.patientDetails = new PatientDetails(Integer.parseInt(tag_id), firstname,surname,dob,dA,eC,g,pN,a,cname,smoker,alcoholic);
+                                StaffLogin.patientDetails = new PatientDetails(Integer.parseInt(tag_id), firstname,surname,dob,dA,eC,g,pN,a,cname,smoker,alcoholic,false);
                                 count++;
                             }
                         } catch (JSONException e) {
@@ -513,7 +513,7 @@ public class Login extends AppCompatActivity {
                             jsonArray = jsonObject.getJSONArray("server_response");
 
                             int count = 0;
-                            String sD,eD,docFN,docLN,mN,q,f,s;
+                            String sD,eD,docFN,docLN,mN,quantity,s,morning,afternoon,evening,mealRelation;
                             while (count<jsonArray.length())
                             {
                                 JSONObject JO = jsonArray.getJSONObject(count);
@@ -522,11 +522,15 @@ public class Login extends AppCompatActivity {
                                 docFN = JO.getString("doc_first_name");
                                 docLN = JO.getString("doc_last_name");
                                 mN = JO.getString("medName");
-                                q = JO.getString("quantity_per_day");
-                                f = JO.getString("frequency_per_day");
+                                quantity = JO.getString("quantity_per_dosage");
                                 s = JO.getString("status");
 
-                                Prescriptions prescriptions = new Prescriptions(sD,eD,docFN+" "+docLN,mN,q,f,s);
+                                morning = JO.getString("morning");
+                                afternoon = JO.getString("afternoon");
+                                evening = JO.getString("evening");
+                                mealRelation = JO.getString("mealRelation");
+
+                                Prescriptions prescriptions = new Prescriptions(sD,eD,docFN+" "+docLN,mN,quantity,s,morning,afternoon,evening,mealRelation);
                                 prescriptionsArrayList.add(prescriptions);
                                 count++;
                             }

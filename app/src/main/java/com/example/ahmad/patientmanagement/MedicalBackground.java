@@ -45,11 +45,13 @@ public class MedicalBackground extends Fragment {
         smokerView.setText(StaffLogin.patientDetails.getSmoker());
         alcoholicView.setText(StaffLogin.patientDetails.getAlcoholic());
 
-        if(StaffLogin.staffDetails.getRole().equalsIgnoreCase("doctor")){
-            AddAllergyFragment fragment = new AddAllergyFragment();
-            fragTransaction = getFragmentManager().beginTransaction();
-            fragTransaction.replace(R.id.addAllergy, fragment, "fragment");
-            fragTransaction.commit();
+        if(!StaffLogin.patientDetails.isStaff()) {
+            if (StaffLogin.staffDetails.getRole().equalsIgnoreCase("doctor")) {
+                AddAllergyFragment fragment = new AddAllergyFragment();
+                fragTransaction = getFragmentManager().beginTransaction();
+                fragTransaction.replace(R.id.addAllergy, fragment, "fragment");
+                fragTransaction.commit();
+            }
         }
 
 

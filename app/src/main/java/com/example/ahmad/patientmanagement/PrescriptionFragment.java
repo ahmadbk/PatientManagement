@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 
@@ -30,10 +31,23 @@ public class PrescriptionFragment extends Fragment {
             medView.setText("Med Name : " + prescriptions[1]);
 
             TextView quanView = (TextView) view.findViewById(R.id.quantity);
-            quanView.setText("Quantity : " + prescriptions[2] + " " + prescriptions[3]);
+            quanView.setText("Quantity : " + prescriptions[2]);
 
             TextView statusView = (TextView) view.findViewById(R.id.status);
-            statusView.setText("Status : " + prescriptions[4]);
+            statusView.setText("Status : " + prescriptions[3]);
+
+            CheckBox morningCheck = (CheckBox)view.findViewById(R.id.morningCheckBox);
+            morningCheck.setChecked(prescriptions[4].equals("true") ? true : false);
+
+            CheckBox noonCheck = (CheckBox)view.findViewById(R.id.noonCheckBox);
+            noonCheck.setChecked(prescriptions[5].equals("true") ? true : false);
+
+            CheckBox eveningCheck = (CheckBox)view.findViewById(R.id.eveningCheckBox);
+            eveningCheck.setChecked(prescriptions[6].equals("true") ? true : false);
+
+            TextView mealRelation = (TextView)view.findViewById(R.id.mealRelationTextView);
+            String temp = prescriptions[7].equals("BeforeMeal") ? "before" : "after";
+            mealRelation.setText("Medicine to be taken "+temp+" meals");
         }
         catch(Exception e){
             e.printStackTrace();
