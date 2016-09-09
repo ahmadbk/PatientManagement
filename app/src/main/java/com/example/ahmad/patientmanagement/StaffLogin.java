@@ -48,13 +48,11 @@ public class StaffLogin extends AppCompatActivity {
     //private NfcAdapter nfcAdapter;
     private NfcAdapter mNfcAdapter;
 
-    String JSON_STRING;
     String jsonPersonal;
     JSONObject jsonObject;
     JSONArray jsonArray;
     public static StaffDetails staffDetails;
 
-    String send;
     String tag_id = "";
 
     String staff_login_url = "http://"+serverAdd+"/staffLogin.php";
@@ -73,7 +71,6 @@ public class StaffLogin extends AppCompatActivity {
 
 
     String details_url = "http://"+serverAdd+"/viewPatient.php";
-    String login_url = "http://"+serverAdd+"/login.php";
     String diagnostics_url = "http://"+serverAdd+"/Diagnostics.php";
     String observations_url = "http://"+serverAdd+"/Observations.php";
     String prescriptions_url = "http://"+serverAdd+"/Prescriptions.php";
