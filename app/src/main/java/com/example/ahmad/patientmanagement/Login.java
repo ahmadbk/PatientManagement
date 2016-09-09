@@ -163,7 +163,6 @@ public class Login extends AppCompatActivity {
     private void handleIntent(Intent intent) {
         String action = intent.getAction();
         if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)) {
-            System.out.println("ACTION NDEF ");
 
             String type = intent.getType();
             if (MIME_TEXT_PLAIN.equals(type)) {
@@ -175,7 +174,6 @@ public class Login extends AppCompatActivity {
                 Log.d(TAG, "Wrong mime type: " + type);
             }
         } else if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)) {
-            System.out.println("ACTION TECH ");
 
             // In case we would still use the Tech Discovered Intent
             Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
@@ -219,7 +217,6 @@ public class Login extends AppCompatActivity {
                     tempH += Integer.valueOf(tagInfo,16);
                 }
                 String tempp = Integer.toString(tempH);
-                System.out.println(tempp);
                 tag_id = tempp;
 
 //------------------------------------------------------------------------------------------------
@@ -548,7 +545,6 @@ public class Login extends AppCompatActivity {
                                 JSONObject JO = jsonArray.getJSONObject(count);
                                 t = JO.getString("medicine_name");
                                 medArray[count] = t;
-                                System.out.println(t);
                                 count++;
                             }
                         } catch (JSONException e) {
@@ -591,7 +587,6 @@ public class Login extends AppCompatActivity {
                                 JSONObject JO = jsonArray.getJSONObject(count);
                                 time_stamp = JO.getString("time_stamp");
                                 ward_name = JO.getString("ward_name");
-                                System.out.println(ward_name);
                                 Location location = new Location(time_stamp,ward_name);
 
                                 locationArrayList.add(location);
