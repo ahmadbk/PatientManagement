@@ -1,5 +1,9 @@
 package com.example.ahmad.patientmanagement;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -12,6 +16,7 @@ import android.view.MenuItem;
 import android.view.TextureView;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -19,6 +24,9 @@ import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.io.File;
+import java.io.IOException;
 
 public class PatientManager extends AppCompatActivity {
     DrawerLayout mDrawerLayout;
@@ -180,4 +188,60 @@ public class PatientManager extends AppCompatActivity {
         System.out.println("administered " + medicine);
     }
 
+    public void openFileButtonClick(View view){
+        String fileName = ((Spinner)findViewById(R.id.fileSpinner)).getSelectedItem().toString();
+        new DownloadFile().execute("http://"+StaffLogin.serverAdd+"/"+fileName,"/sdcard/"+fileName);
+    }
+
+    @Override
+    protected void onDestroy(){
+
+        int size = StaffLogin.patientDetails.getReportArrayList().size();
+        for(int i = 0; i < size; i++){
+            String fileName = StaffLogin.patientDetails.getReportArrayList().get(i).getNameOfFile();
+            File file = new File("/sdcard/"+fileName);
+            if(file.exists()){
+                if(file.delete())
+                    System.out.println(file.getAbsolutePath()+" deleted");
+            }
+        }
+        super.onDestroy();
+    }
+    //-----------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------
+    private class DownloadFile extends AsyncTask<String, Void, String> {
+
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            String fileUrl = strings[0];
+            String fileName = strings[1];
+
+            File pdfFile = new File(fileName);
+
+            try{
+                pdfFile.createNewFile();
+            }catch (IOException e){e.printStackTrace();}
+
+            FileDownloader.downloadFile(fileUrl, pdfFile);
+            return fileName;
+        }
+
+        @Override
+        protected void onPostExecute(String fileName){
+            File file = new File(fileName);
+
+            if(file.exists()){
+                Uri path = Uri.fromFile(file);
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setDataAndType(path, "application/pdf");
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                try{
+                    startActivity(intent);
+                }catch(ActivityNotFoundException e){e.printStackTrace();}
+            }
+        }
+    }
 }

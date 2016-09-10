@@ -71,15 +71,15 @@ public class TabFragment extends Fragment {
                 case 0 : return new MedicalBackground();
                 case 1 : return new DiagnosticsFragmentLister();
                 case 2 :
-                    if(StaffLogin.patientStaff) return new OneFragment();
+                    if(StaffLogin.patientStaff) return new LabFragment();
                     else if(StaffLogin.isDoctor) return new PrescriptionListerFragment();
                     else return new NextDosageListerFragment();
                 case 3 :
                     if(StaffLogin.isDoctor) return new NextDosageListerFragment();
                     else return new ObservationsListerFragment();
                 case 4 : if(StaffLogin.isDoctor) return new ObservationsListerFragment();
-                    else return new OneFragment();
-                case 5: return new OneFragment();
+                    else return new LabFragment();
+                case 5: return new LabFragment();
                 case 6: return new LocationListerFragment();
             }
             return null;
