@@ -40,7 +40,6 @@ public class Login extends AppCompatActivity {
 
     public static final String MIME_TEXT_PLAIN = "text/plain";
     public static final String TAG = "NfcDemo";
-    //public static String serverAdd = "192.168.1.66";
 
     private NfcAdapter mNfcAdapter;
 
@@ -50,12 +49,7 @@ public class Login extends AppCompatActivity {
 
     String tag_id = "";
 
-    String get_role_url = "http://"+StaffLogin.serverAdd+"/getRole.php";
 
-    //public static PatientDetails patientDetails;
-    //Change server address here
-    public static String medArray[] = new String[100];
-    boolean flag = false;
     ArrayList<Diagnostics> diagnosticsArrayList = new ArrayList<Diagnostics>();
     ArrayList<Observations> observationsArrayList = new ArrayList<Observations>();
     ArrayList<Prescriptions> prescriptionsArrayList = new ArrayList<Prescriptions>();
@@ -64,7 +58,7 @@ public class Login extends AppCompatActivity {
     ArrayList<NextDosage> nextDosageArrayList = new ArrayList<NextDosage>();
     ArrayList<Report> reportArrayList = new ArrayList<Report>();
 
-
+    String get_role_url = "http://"+StaffLogin.serverAdd+"/getRole.php";
     String details_url = "http://"+StaffLogin.serverAdd+"/viewPatient.php";
     String login_url = "http://"+StaffLogin.serverAdd+"/login.php";
     String diagnostics_url = "http://"+StaffLogin.serverAdd+"/Diagnostics.php";
@@ -323,6 +317,34 @@ public class Login extends AppCompatActivity {
                         }
 //----------------------------------------------------------------------------------------------------------------------
 
+                        //Next Dosage
+//----------------------------------------------------------------------------------------------------------------------
+                        jsonPersonal = getData(next_dosage_url,tag_id);
+
+                        try {
+                            jsonObject = new JSONObject(jsonPersonal);
+                            jsonArray = jsonObject.getJSONArray("server_response");
+
+                            int count = 0;
+                            String medName,quantity,mealRelation,pID;
+                            while (count<jsonArray.length())
+                            {
+                                JSONObject JO = jsonArray.getJSONObject(count);
+                                medName = JO.getString("medName");
+                                quantity = JO.getString("quantity_per_dosage");
+                                mealRelation = JO.getString("mealRelation");
+                                pID = JO.getString("prescription_id");
+
+                                NextDosage nextDosage = new NextDosage(medName,quantity,mealRelation,pID);
+                                nextDosageArrayList.add(nextDosage);
+                                count++;
+                            }
+                            StaffLogin.patientDetails.setNextDosageArrayList(nextDosageArrayList);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+//----------------------------------------------------------------------------------------------------------------------
+
                         //Prescriptions
 //----------------------------------------------------------------------------------------------------------------------
                         jsonPersonal = getData(prescriptions_url,tag_id);
@@ -398,7 +420,7 @@ public class Login extends AppCompatActivity {
                             {
                                 JSONObject JO = jsonArray.getJSONObject(count);
                                 t = JO.getString("medicine_name");
-                                medArray[count] = t;
+                                StaffLogin.medArray[count] = t;
                                 System.out.println(t);
                                 count++;
                             }

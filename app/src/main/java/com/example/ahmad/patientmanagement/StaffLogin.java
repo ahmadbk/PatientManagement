@@ -55,9 +55,6 @@ public class StaffLogin extends AppCompatActivity {
 
     String tag_id = "";
 
-    String staff_login_url = "http://"+serverAdd+"/staffLogin.php";
-    String get_role_url = "http://"+serverAdd+"/getRole.php";
-
     public static PatientDetails patientDetails;
     //Change server address here
     public static String medArray[] = new String[100];
@@ -68,8 +65,10 @@ public class StaffLogin extends AppCompatActivity {
     ArrayList<Allergies> allergiesArrayList = new ArrayList<Allergies>();
     ArrayList<Location> locationArrayList = new ArrayList<Location>();
     ArrayList<Report> reportArrayList = new ArrayList<Report>();
+    ArrayList<NextDosage> nextDosageArrayList = new ArrayList<NextDosage>();
 
-
+    String staff_login_url = "http://"+serverAdd+"/staffLogin.php";
+    String get_role_url = "http://"+serverAdd+"/getRole.php";
     String details_url = "http://"+serverAdd+"/viewPatient.php";
     String diagnostics_url = "http://"+serverAdd+"/Diagnostics.php";
     String observations_url = "http://"+serverAdd+"/Observations.php";
@@ -78,6 +77,8 @@ public class StaffLogin extends AppCompatActivity {
     String medicine_list_url = "http://"+serverAdd+"/MedicineList.php";
     String locations_url = "http://"+serverAdd+"/Locations.php";
     String reports_url = "http://"+serverAdd+"/Reports.php";
+    String next_dosage_url = "http://"+StaffLogin.serverAdd+"/NextDosage.php";
+
 
 
     @Override
@@ -388,6 +389,33 @@ public class StaffLogin extends AppCompatActivity {
                         }
 //----------------------------------------------------------------------------------------------------------------------
 
+                        //Get Next Dosage
+//----------------------------------------------------------------------------------------------------------------------
+                        jsonPersonal = getData(next_dosage_url,tag_id);
+
+                        try {
+                            jsonObject = new JSONObject(jsonPersonal);
+                            jsonArray = jsonObject.getJSONArray("server_response");
+
+                            int count = 0;
+                            String medName,quantity,mealRelation,pID;
+                            while (count<jsonArray.length())
+                            {
+                                JSONObject JO = jsonArray.getJSONObject(count);
+                                medName = JO.getString("medName");
+                                quantity = JO.getString("quantity_per_dosage");
+                                mealRelation = JO.getString("mealRelation");
+                                pID = JO.getString("prescription_id");
+
+                                NextDosage nextDosage = new NextDosage(medName,quantity,mealRelation,pID);
+                                nextDosageArrayList.add(nextDosage);
+                                count++;
+                            }
+                            patientDetails.setNextDosageArrayList(nextDosageArrayList);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+//----------------------------------------------------------------------------------------------------------------------
 
                         //Allergies
 //----------------------------------------------------------------------------------------------------------------------
@@ -510,6 +538,8 @@ public class StaffLogin extends AppCompatActivity {
                 if(result.equalsIgnoreCase("patient"))
                 {
                     patientStaff = true;
+                    System.out.println("Patient Staff: " + patientStaff);
+                    System.out.println("Is Doctor:" + isDoctor);
                     Intent intent = new Intent(context, PatientManager.class);
                     context.startActivity(intent);
                 }
@@ -521,13 +551,14 @@ public class StaffLogin extends AppCompatActivity {
                 else if(result.equalsIgnoreCase("doctor"))
                 {
                     isDoctor = true;
+                    System.out.println("Is Doctor:" + isDoctor);
+                    System.out.println("Patient Staff: " + patientStaff);
                     Intent intent = new Intent(context, Login.class);
                     context.startActivity(intent);
                 }
 
             }
         }
-
 
         public String getData(String link,String tag_id)
         {
