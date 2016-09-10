@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.TextureView;
 import android.view.View;
@@ -22,6 +23,10 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -42,6 +47,11 @@ public class PatientManager extends AppCompatActivity {
     PatientDetails patientDetails;
     private boolean tempDateSet = false;
     private String tempDate = "";
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
 
     @Override
@@ -54,7 +64,7 @@ public class PatientManager extends AppCompatActivity {
          */
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-        mNavigationView = (NavigationView) findViewById(R.id.shitstuff) ;
+        mNavigationView = (NavigationView) findViewById(R.id.shitstuff);
 
         /**
          * Lets inflate the very first fragment
@@ -87,7 +97,7 @@ public class PatientManager extends AppCompatActivity {
         mFragmentManager = getSupportFragmentManager();
         mFragmentTransaction = mFragmentManager.beginTransaction();
         Fragment tabFrags = new TabFragment();
-        mFragmentTransaction.replace(R.id.containerView,tabFrags).commit();
+        mFragmentTransaction.replace(R.id.containerView, tabFrags).commit();
 
         /**
          * Setup click events on the Navigation View Items.
@@ -99,12 +109,9 @@ public class PatientManager extends AppCompatActivity {
                 mDrawerLayout.closeDrawers();
 
 
-
-
-
                 if (menuItem.getItemId() == R.id.nav_item_inbox) {
                     FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-                    xfragmentTransaction.replace(R.id.containerView,new TabFragment()).commit();
+                    xfragmentTransaction.replace(R.id.containerView, new TabFragment()).commit();
                 }
 
                 return false;
@@ -116,23 +123,27 @@ public class PatientManager extends AppCompatActivity {
          * Setup Drawer Toggle of the Toolbar
          */
 
-        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
-        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this,mDrawerLayout, toolbar,R.string.app_name,
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.app_name,
                 R.string.app_name);
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         mDrawerToggle.syncState();
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
-    public void setDate(View v){
+    public void setDate(View v) {
         mDialogFragment = new DatePickerFragment();
         mDialogFragment.show(getSupportFragmentManager(), "timePicker");
     }
 
     String insertionType = "";
-    public void addAllergyButtonClick(View view){
-        EditText editText = (EditText)findViewById(R.id.allergyEditBox);
+
+    public void addAllergyButtonClick(View view) {
+        EditText editText = (EditText) findViewById(R.id.allergyEditBox);
         insertionType = "AddAllergy";
         String allergy = editText.getText().toString();
 
@@ -141,8 +152,8 @@ public class PatientManager extends AppCompatActivity {
 
     }
 
-    public void addDiagnosticButtonClick(View view){
-        EditText notesEdit = (EditText)findViewById(R.id.notesEditText);
+    public void addDiagnosticButtonClick(View view) {
+        EditText notesEdit = (EditText) findViewById(R.id.notesEditText);
         String notes = notesEdit.getText().toString();
 
 
@@ -150,70 +161,120 @@ public class PatientManager extends AppCompatActivity {
         insertBackgroundWorker.execute("AddDiagnostic", notes);
     }
 
-    public void addPrescriptionButtonClick(View view){
-        Spinner medsSpinner = (Spinner)findViewById(R.id.spinner);
+    public void addPrescriptionButtonClick(View view) {
+        Spinner medsSpinner = (Spinner) findViewById(R.id.spinner);
         String medicine = medsSpinner.getSelectedItem().toString();
 
-        EditText quanEdit = (EditText)findViewById(R.id.dosageQuantity);
+        EditText quanEdit = (EditText) findViewById(R.id.dosageQuantity);
         String quantity = quanEdit.getText().toString();
 
-        boolean isMorning = ((CheckBox)findViewById(R.id.addMorningCheckBox)).isChecked();
-        boolean isAfternoon = ((CheckBox)findViewById(R.id.addAfternoonCheckBox)).isChecked();
-        boolean isEvening = ((CheckBox)findViewById(R.id.addEveningCheckBox)).isChecked();
+        String isMorning = ((CheckBox) findViewById(R.id.addMorningCheckBox)).isChecked() ? "true" : "false";
+        String isAfternoon = ((CheckBox) findViewById(R.id.addAfternoonCheckBox)).isChecked() ? "true" : "false";
+        String isEvening = ((CheckBox) findViewById(R.id.addEveningCheckBox)).isChecked() ? "true" : "false";
 
-        Spinner mealSpinner = (Spinner)findViewById(R.id.mealRelationSpinner);
+        Spinner mealSpinner = (Spinner) findViewById(R.id.mealRelationSpinner);
         String mealRelation = mealSpinner.getSelectedItemPosition() == 0 ? "BeforeMeal" : "AfterMeal";
 
-        if(!tempDateSet){
+        if (!tempDateSet) {
             Toast.makeText(getBaseContext(), "Enter date", Toast.LENGTH_SHORT).show();
             return;
         }
 
         InsertBackgroundWorker insertBackgroundWorker = new InsertBackgroundWorker(this);
-        //insertBackgroundWorker.execute("AddPrescription", medicine, quantity,frequency, tempDate);
+        insertBackgroundWorker.execute("AddPrescription", medicine, quantity, tempDate, isMorning, isAfternoon, isEvening, mealRelation);
         tempDateSet = false;
     }
 
-    public void addObservationButtonCLick(View view){
-        String bpn = ((SeekBar)findViewById(R.id.seekBar1)).getProgress()+"";
-        String bpd = ((SeekBar)findViewById(R.id.seekBar2)).getProgress()+"";
-        String temp = ((SeekBar)findViewById(R.id.seekBar3)).getProgress()+"";
-        String pulse = ((SeekBar)findViewById(R.id.seekBar4)).getProgress()+"";
-        String weight = ((SeekBar)findViewById(R.id.seekBar5)).getProgress()+"";
+    public void addObservationButtonCLick(View view) {
+        String bpn = ((SeekBar) findViewById(R.id.seekBar1)).getProgress() + "";
+        String bpd = ((SeekBar) findViewById(R.id.seekBar2)).getProgress() + "";
+        String temp = ((SeekBar) findViewById(R.id.seekBar3)).getProgress() + "";
+        String pulse = ((SeekBar) findViewById(R.id.seekBar4)).getProgress() + "";
+        String weight = ((SeekBar) findViewById(R.id.seekBar5)).getProgress() + "";
 
         InsertBackgroundWorker insertBackgroundWorker = new InsertBackgroundWorker(this);
-        insertBackgroundWorker.execute("AddObservation", bpn, bpd,temp, pulse, weight);
+        insertBackgroundWorker.execute("AddObservation", bpn, bpd, temp, pulse, weight);
     }
-    public void setTempDate(String date){
+
+    public void setTempDate(String date) {
         tempDate = date;
         tempDateSet = true;
     }
 
-    public void nextDosageSubmitOnClick(View view){
-        String medicine = ((TextView)findViewById(R.id.nextDosageMedicineName)).getText().toString();
-        System.out.println("administered " + medicine);
+    public void nextDosageSubmitOnClick(View view) {
+       /* int size = StaffLogin.patientDetails.getNextDosageArrayList().size();
+        int j = 0;
+        for (int i = 0; i < size; i++) {
+            CheckBox box = (CheckBox)findViewById(NextDosageListerFragment.getCheckBoxId(i));
+            if(!box.isChecked()){
+                StaffLogin.patientDetails.removeFromDosageArrayList(j);
+                j--;
+            }
+            j++;
+        }*/
     }
 
-    public void openFileButtonClick(View view){
-        String fileName = ((Spinner)findViewById(R.id.fileSpinner)).getSelectedItem().toString();
-        new DownloadFile().execute("http://"+StaffLogin.serverAdd+"/"+fileName,"/sdcard/"+fileName);
+    public void openFileButtonClick(View view) {
+        String fileName = ((Spinner) findViewById(R.id.fileSpinner)).getSelectedItem().toString();
+        new DownloadFile().execute("http://" + StaffLogin.serverAdd + "/" + fileName, "/sdcard/" + fileName);
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
 
         int size = StaffLogin.patientDetails.getReportArrayList().size();
-        for(int i = 0; i < size; i++){
+        for (int i = 0; i < size; i++) {
             String fileName = StaffLogin.patientDetails.getReportArrayList().get(i).getNameOfFile();
-            File file = new File("/sdcard/"+fileName);
-            if(file.exists()){
-                if(file.delete())
-                    System.out.println(file.getAbsolutePath()+" deleted");
+            File file = new File("/sdcard/" + fileName);
+            if (file.exists()) {
+                if (file.delete())
+                    System.out.println(file.getAbsolutePath() + " deleted");
             }
         }
         StaffLogin.destroyPatient();
         super.onDestroy();
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "PatientManager Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://com.example.ahmad.patientmanagement/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "PatientManager Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://com.example.ahmad.patientmanagement/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
+    }
+
     //-----------------------------------------------------------------------------------------------
     //-----------------------------------------------------------------------------------------------
     private class DownloadFile extends AsyncTask<String, Void, String> {
@@ -227,27 +288,31 @@ public class PatientManager extends AppCompatActivity {
 
             File pdfFile = new File(fileName);
 
-            try{
+            try {
                 pdfFile.createNewFile();
-            }catch (IOException e){e.printStackTrace();}
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
             FileDownloader.downloadFile(fileUrl, pdfFile);
             return fileName;
         }
 
         @Override
-        protected void onPostExecute(String fileName){
+        protected void onPostExecute(String fileName) {
             File file = new File(fileName);
 
-            if(file.exists()){
+            if (file.exists()) {
                 Uri path = Uri.fromFile(file);
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setDataAndType(path, "application/pdf");
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-                try{
+                try {
                     startActivity(intent);
-                }catch(ActivityNotFoundException e){e.printStackTrace();}
+                } catch (ActivityNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

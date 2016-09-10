@@ -6,29 +6,93 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             tools:context="com.example.ahmad.patientmanagement.NextDosageListerFragment">
-            <FrameLayout
-                android:layout_width="100pt"
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/nextDosageView"></FrameLayout>
-            <FrameLayout
-                android:layout_width="100pt"
-                android:layout_height="wrap_content"
-                android:id="@+id/nextDosageView1"></FrameLayout>
-            <FrameLayout
-                android:layout_width="100pt"
-                android:layout_height="wrap_content"
-                android:id="@+id/nextDosageView2"></FrameLayout>
-            <FrameLayout
-                android:layout_width="100pt"
-                android:layout_height="wrap_content"
-                android:id="@+id/nextDosageView3"></FrameLayout>
-            <FrameLayout
-                android:layout_width="100pt"
-                android:layout_height="wrap_content"
-                android:id="@+id/nextDosageView4"></FrameLayout>
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_margin="16dp"
+                android:text="Next Dosage"/>
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="140pt">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <FrameLayout
+                    android:layout_width="100pt"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/nextDosageView"></FrameLayout>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:id="@+id/dosageCheckOne"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <FrameLayout
+                    android:layout_width="100pt"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/nextDosageView1"></FrameLayout>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:id="@+id/dosageCheckTwo"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <FrameLayout
+                    android:layout_width="100pt"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/nextDosageView2"></FrameLayout>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:id="@+id/dosageCheckThree"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <FrameLayout
+                    android:layout_width="100pt"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/nextDosageView3"></FrameLayout>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:id="@+id/dosageCheckFour"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <FrameLayout
+                    android:layout_width="100pt"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/nextDosageView4"></FrameLayout>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:id="@+id/dosageCheckFive"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Submit"
+        android:id="@+id/dealDosageButton"
         android:onClick="nextDosageSubmitOnClick"/>
-        </LinearLayout>
+</LinearLayout>

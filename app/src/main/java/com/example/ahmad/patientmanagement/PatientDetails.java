@@ -45,6 +45,10 @@ public class PatientDetails {
         this.dosageArrayList = dosageArrayList;
     }
 
+    public void removeFromDosageArrayList(int index){
+        this.dosageArrayList.remove(index);
+    }
+
     public ArrayList<Report> getReportArrayList() {
         return reportArrayList;
     }

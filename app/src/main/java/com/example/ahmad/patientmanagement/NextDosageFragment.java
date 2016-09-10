@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 
@@ -33,7 +34,7 @@ public class NextDosageFragment extends Fragment {
 
         TextView quantity = (TextView)view.findViewById(R.id.nextDosageQuantity);
         quantity.setText(nextDosage[1] + " " + (nextDosage[2].equalsIgnoreCase("beforemeal") ? "before meal" : "after meal"));
+
         return view;
     }
-
 }
