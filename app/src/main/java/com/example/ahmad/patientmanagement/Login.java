@@ -57,6 +57,7 @@ public class Login extends AppCompatActivity {
     ArrayList<Location> locationArrayList = new ArrayList<Location>();
     ArrayList<NextDosage> nextDosageArrayList = new ArrayList<NextDosage>();
     ArrayList<Report> reportArrayList = new ArrayList<Report>();
+    ArrayList<Dosage> dosageArrayList = new ArrayList<Dosage>();
 
     String get_role_url = "http://"+StaffLogin.serverAdd+"/getRole.php";
     String details_url = "http://"+StaffLogin.serverAdd+"/viewPatient.php";
@@ -69,6 +70,7 @@ public class Login extends AppCompatActivity {
     String locations_url = "http://"+StaffLogin.serverAdd+"/Locations.php";
     String next_dosage_url = "http://"+StaffLogin.serverAdd+"/NextDosage.php";
     String reports_url = "http://"+StaffLogin.serverAdd+"/Reports.php";
+    String dosages_url = "http://"+StaffLogin.serverAdd+"/Dosages.php";
 
 
 
@@ -488,6 +490,35 @@ public class Login extends AppCompatActivity {
                             e.printStackTrace();
                         }
 
+//-------------------------------------------------------------------------------------------------------------
+                        //Dosages
+//----------------------------------------------------------------------------------------------------------------------
+                        jsonPersonal = getData(reports_url,tag_id);
+                        System.out.println(jsonPersonal);
+
+                        try {
+                            jsonObject = new JSONObject(jsonPersonal);
+                            jsonArray = jsonObject.getJSONArray("server_response");
+
+                            int count = 0;
+                            String nurse,time,medName,quantity;
+                            while (count<jsonArray.length())
+                            {
+                                JSONObject JO = jsonArray.getJSONObject(count);
+                                nurse = JO.getString("nurse");
+                                time = JO.getString("time");
+                                medName = JO.getString("medName");
+                                quantity = JO.getString("quantity");
+
+                                Dosage dosage = new Dosage(nurse,time,medName,quantity);
+                                dosageArrayList.add(dosage);
+                                count++;
+                            }
+                            StaffLogin.patientDetails.setDosageArrayList(dosageArrayList);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
                         return "patient";
 
 //-------------------------------------------------------------------------------------------------------------
@@ -517,6 +548,7 @@ public class Login extends AppCompatActivity {
                 locationArrayList = new ArrayList<Location>();
                 nextDosageArrayList = new ArrayList<NextDosage>();
                 reportArrayList = new ArrayList<Report>();
+                dosageArrayList = new ArrayList<Dosage>();
 
             }
         }

@@ -69,7 +69,6 @@ public class InsertBackgroundWorker extends AsyncTask<String,Void,String> {
                         + URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode(allergy, "UTF-8");
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
-                ;
                 bufferedWriter.close();
                 outputStream.close();
                 InputStream inputStream = httpURLConnection.getInputStream();
@@ -108,7 +107,6 @@ public class InsertBackgroundWorker extends AsyncTask<String,Void,String> {
                         + URLEncoder.encode("description", "UTF-8") + "=" + URLEncoder.encode(description, "UTF-8");
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
-                ;
                 bufferedWriter.close();
                 outputStream.close();
                 InputStream inputStream = httpURLConnection.getInputStream();
@@ -132,13 +130,17 @@ public class InsertBackgroundWorker extends AsyncTask<String,Void,String> {
 //---------------------------------------------------------
 //---------------------------------------------------------
         else if(insertionType.equalsIgnoreCase("AddPrescription")){
+            //Fix These parameters to match yours
             String medicine_name =params[1];
             String qpd = params[2];
-            String fpd = params[3];
-            String end_date = params[4];
+            String end_date = params[3];
+            String morning = params[4];
+            String afternoon = params[5];
+            String evening = params[6];
+            String mealRelation = params[7];
 
-            //Prescriptions prescriptions = new Prescriptions(justDate,end_date,docName,medicine_name,qpd,fpd,"Active")
-            //StaffLogin.patientDetails.addToPrescriptionsArrayList(prescriptions);
+            Prescriptions prescriptions = new Prescriptions(justDate,end_date,docName,medicine_name,qpd,"Active",morning,afternoon,evening,mealRelation);
+            StaffLogin.patientDetails.addToPrescriptionsArrayList(prescriptions);
 
             try {
                 URL url = new URL(add_prescription_url);
@@ -150,12 +152,14 @@ public class InsertBackgroundWorker extends AsyncTask<String,Void,String> {
                 String post_data = URLEncoder.encode("tag_id", "UTF-8") + "=" + URLEncoder.encode("" + patient_tag, "UTF-8") + "&"
                         + URLEncoder.encode("doctor_tag", "UTF-8") + "=" + URLEncoder.encode("" + staff_tag, "UTF-8") + "&"
                         + URLEncoder.encode("medicine_name", "UTF-8") + "=" + URLEncoder.encode("" + medicine_name, "UTF-8") + "&"
-                        + URLEncoder.encode("quantity_per_day", "UTF-8") + "=" + URLEncoder.encode("" + qpd, "UTF-8") + "&"
-                        + URLEncoder.encode("frequency_per_day", "UTF-8") + "=" + URLEncoder.encode("" + fpd, "UTF-8") + "&"
-                        + URLEncoder.encode("end_date", "UTF-8") + "=" + URLEncoder.encode(end_date, "UTF-8");
+                        + URLEncoder.encode("quantity_per_dosage", "UTF-8") + "=" + URLEncoder.encode("" + qpd, "UTF-8") + "&"
+                        + URLEncoder.encode("end_date", "UTF-8") + "=" + URLEncoder.encode(end_date, "UTF-8")+ "&"
+                        + URLEncoder.encode("morning", "UTF-8") + "=" + URLEncoder.encode(morning, "UTF-8")+ "&"
+                        + URLEncoder.encode("afternoon", "UTF-8") + "=" + URLEncoder.encode(afternoon, "UTF-8")+ "&"
+                        + URLEncoder.encode("evening", "UTF-8") + "=" + URLEncoder.encode(evening, "UTF-8")+ "&"
+                        + URLEncoder.encode("mealRelation", "UTF-8") + "=" + URLEncoder.encode(mealRelation, "UTF-8");
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
-                ;
                 bufferedWriter.close();
                 outputStream.close();
                 InputStream inputStream = httpURLConnection.getInputStream();
@@ -204,7 +208,6 @@ public class InsertBackgroundWorker extends AsyncTask<String,Void,String> {
                         + URLEncoder.encode("weight", "UTF-8") + "=" + URLEncoder.encode(weight, "UTF-8");
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
-                ;
                 bufferedWriter.close();
                 outputStream.close();
                 InputStream inputStream = httpURLConnection.getInputStream();
@@ -225,6 +228,55 @@ public class InsertBackgroundWorker extends AsyncTask<String,Void,String> {
                 e.printStackTrace();
             }
         }
+//---------------------------------------------------------
+////---------------------------------------------------------
+//        else if(insertionType.equalsIgnoreCase("AddDosage")){
+//            //Fix these parameters
+//            String bpn =params[1];
+//            String bpd = params[2];
+//            String temperature = params[3];
+//            String pulse = params[4];
+//            String weight = params[5];
+//
+//            Observations observations = new Observations(timeStamp,docName,bpn,bpd,temperature,pulse,weight);
+//            StaffLogin.patientDetails.addToObservationsArrayList(observations);
+//
+//            try {
+//                URL url = new URL(add_observation_url);
+//                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+//                httpURLConnection.setDoOutput(true);
+//                httpURLConnection.setDoInput(true);
+//                OutputStream outputStream = httpURLConnection.getOutputStream();
+//                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+//                String post_data = URLEncoder.encode("tag_id", "UTF-8") + "=" + URLEncoder.encode("" + patient_tag, "UTF-8") + "&"
+//                        + URLEncoder.encode("doctor_tag", "UTF-8") + "=" + URLEncoder.encode("" + staff_tag, "UTF-8") + "&"
+//                        + URLEncoder.encode("bpn", "UTF-8") + "=" + URLEncoder.encode("" + bpn, "UTF-8") + "&"
+//                        + URLEncoder.encode("bpd", "UTF-8") + "=" + URLEncoder.encode("" + bpd, "UTF-8") + "&"
+//                        + URLEncoder.encode("temperature", "UTF-8") + "=" + URLEncoder.encode("" + temperature, "UTF-8") + "&"
+//                        + URLEncoder.encode("pulse", "UTF-8") + "=" + URLEncoder.encode("" + pulse, "UTF-8") + "&"
+//                        + URLEncoder.encode("weight", "UTF-8") + "=" + URLEncoder.encode(weight, "UTF-8");
+//                bufferedWriter.write(post_data);
+//                bufferedWriter.flush();
+//                bufferedWriter.close();
+//                outputStream.close();
+//                InputStream inputStream = httpURLConnection.getInputStream();
+//                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+//                String result = "";
+//                String line;
+//                while ((line = bufferedReader.readLine()) != null) {
+//                    result += line;
+//                }
+//                bufferedReader.close();
+//                inputStream.close();
+//                httpURLConnection.disconnect();
+//                return result;
+//
+//            } catch (MalformedURLException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
 //---------------------------------------------------------
 
 

@@ -17,6 +17,7 @@ public class PatientDetails {
     private ArrayList<Location> locationArrayList = new ArrayList<Location>();
     private ArrayList<NextDosage> nextDosageArrayList = new ArrayList<NextDosage>();
     private ArrayList<Report> reportArrayList = new ArrayList<Report>();
+    private ArrayList<Dosage> dosageArrayList = new ArrayList<Dosage>();
 
     public PatientDetails(){}
     public PatientDetails(int tID, String fN, String sN, String Dob, String dA, String eC, String g, String pN, String a, String cW, String smoker,String alcoholic, boolean is)
@@ -36,6 +37,14 @@ public class PatientDetails {
         this.setStaff(is);
     }
 
+    public ArrayList<Dosage> getDosageArrayList() {
+        return dosageArrayList;
+    }
+
+    public void setDosageArrayList(ArrayList<Dosage> dosageArrayList) {
+        this.dosageArrayList = dosageArrayList;
+    }
+
     public ArrayList<Report> getReportArrayList() {
         return reportArrayList;
     }
@@ -50,6 +59,11 @@ public class PatientDetails {
 
     public void setNextDosageArrayList(ArrayList<NextDosage> nextDosageArrayList) {
         this.nextDosageArrayList = nextDosageArrayList;
+    }
+
+    public void addToDosageArrayList(Dosage dosage)
+    {
+        dosageArrayList.add(0,dosage);
     }
 
     public void addToAllergyArrayList(Allergies allergy){
