@@ -57,8 +57,8 @@ public class ObservationsListerFragment extends Fragment {
             fragTransaction.commit();
         }
 
-        if(!StaffLogin.patientDetails.isStaff()) {
-            if (StaffLogin.staffDetails.getRole().equalsIgnoreCase("doctor")) {
+        if(!StaffLogin.patientStaff) {
+            if (StaffLogin.isDoctor) {
                 AddObservationFragment fragment = new AddObservationFragment();
                 fragTransaction = getFragmentManager().beginTransaction();
                 fragTransaction.replace(R.id.addObservation, fragment, "fragment");

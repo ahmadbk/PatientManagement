@@ -52,8 +52,8 @@ public class DiagnosticsFragmentLister extends Fragment {
             fragTransaction.replace(getId(i), fragment, "fragment" + i);
             fragTransaction.commit();
         }
-        if(!StaffLogin.patientDetails.isStaff()) {
-            if (StaffLogin.staffDetails.getRole().equalsIgnoreCase("doctor")) {
+        if(!StaffLogin.patientStaff) {
+            if (StaffLogin.isDoctor) {
                 AddDiagnosticFragment fragment = new AddDiagnosticFragment();
                 fragTransaction = getFragmentManager().beginTransaction();
                 fragTransaction.replace(R.id.addDiagnostic, fragment, "fragment");
