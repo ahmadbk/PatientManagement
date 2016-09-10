@@ -49,6 +49,8 @@
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:clickable="false"
+                android:layout_margin="@dimen/text_margin"
                 android:id="@+id/morningCheckBox" />
         </LinearLayout>
         <LinearLayout
@@ -65,6 +67,8 @@
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:clickable="false"
+                android:layout_margin="@dimen/text_margin"
                 android:id="@+id/noonCheckBox"/>
         </LinearLayout>
         <LinearLayout
@@ -81,6 +85,8 @@
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:clickable="false"
+                android:layout_margin="@dimen/text_margin"
                 android:id="@+id/eveningCheckBox"/>
         </LinearLayout>
     </LinearLayout>

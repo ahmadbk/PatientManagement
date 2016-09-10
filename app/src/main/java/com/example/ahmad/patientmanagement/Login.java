@@ -185,6 +185,12 @@ public class Login extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        StaffLogin.isDoctor = false;
+        StaffLogin.patientStaff = false;
+    }
 
     private class NdefReaderTask extends AsyncTask<Tag, Void, String> {
 

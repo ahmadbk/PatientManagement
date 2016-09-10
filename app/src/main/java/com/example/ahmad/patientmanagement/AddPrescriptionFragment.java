@@ -33,6 +33,13 @@ public class AddPrescriptionFragment extends Fragment {
         ArrayAdapter adapter = new ArrayAdapter<String>(this.getActivity(), R.layout.listview, medicines);
         spinner.setAdapter(adapter);
 
+
+        Spinner mealSpinner = (Spinner)view.findViewById(R.id.mealRelationSpinner);
+        String[] options = {"Yes","No"};
+
+        adapter = new ArrayAdapter<String>(this.getActivity(), R.layout.listview, options);
+        mealSpinner.setAdapter(adapter);
+
         return view;
     }
 

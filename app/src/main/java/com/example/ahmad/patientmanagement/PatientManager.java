@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.TextureView;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SeekBar;
@@ -156,8 +157,12 @@ public class PatientManager extends AppCompatActivity {
         EditText quanEdit = (EditText)findViewById(R.id.dosageQuantity);
         String quantity = quanEdit.getText().toString();
 
-        EditText freqEdit = (EditText)findViewById(R.id.dosageFrequency);
-        String frequency = freqEdit.getText().toString();
+        boolean isMorning = ((CheckBox)findViewById(R.id.addMorningCheckBox)).isChecked();
+        boolean isAfternoon = ((CheckBox)findViewById(R.id.addAfternoonCheckBox)).isChecked();
+        boolean isEvening = ((CheckBox)findViewById(R.id.addEveningCheckBox)).isChecked();
+
+        Spinner mealSpinner = (Spinner)findViewById(R.id.mealRelationSpinner);
+        String mealRelation = mealSpinner.getSelectedItemPosition() == 0 ? "BeforeMeal" : "AfterMeal";
 
         if(!tempDateSet){
             Toast.makeText(getBaseContext(), "Enter date", Toast.LENGTH_SHORT).show();
@@ -165,7 +170,7 @@ public class PatientManager extends AppCompatActivity {
         }
 
         InsertBackgroundWorker insertBackgroundWorker = new InsertBackgroundWorker(this);
-        insertBackgroundWorker.execute("AddPrescription", medicine, quantity,frequency, tempDate);
+        //insertBackgroundWorker.execute("AddPrescription", medicine, quantity,frequency, tempDate);
         tempDateSet = false;
     }
 

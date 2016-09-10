@@ -49,16 +49,37 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dosage Frequency : "/>
-            <EditText
-                android:layout_width="20pt"
+                android:text="Morning : "/>
+            <CheckBox
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:id="@+id/dosageFrequency"/>
+                android:id="@+id/addMorningCheckBox"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="200pt"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" per day"/>
+                android:text="Afternoon : "/>
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/addAfternoonCheckBox"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="200pt"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Evening : "/>
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/addEveningCheckBox"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="200pt"
@@ -75,6 +96,18 @@
                 android:src="@drawable/image"
                 android:scaleType="fitXY"
                 android:onClick="setDate"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Take before meal?"/>
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/mealRelationSpinner"></Spinner>
         </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
