@@ -27,20 +27,19 @@ public class MedicalBackground extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public void onResume(){
+        super.onResume();
+        System.out.println("Resuming");
         int size = StaffLogin.patientDetails.getAllergiesArrayList().size();
         StringArray = new String[size];
         for(int i = 0; i < size; i++)
             StringArray[i] = StaffLogin.patientDetails.getAllergiesArrayList().get(i).getType();
-        View view = inflater.inflate(R.layout.fragment_medical_background, container, false);
-        ListView listView = (ListView)view.findViewById(R.id.listView);
+        ListView listView = (ListView)getView().findViewById(R.id.listView);
         ArrayAdapter adapter = new ArrayAdapter<String>(this.getActivity(), R.layout.listview, StringArray);
         listView.setAdapter(adapter);
 
-        TextView smokerView = (TextView)view.findViewById(R.id.smokerId);
-        TextView alcoholicView = (TextView)view.findViewById((R.id.alcoholicId));
+        TextView smokerView = (TextView)getView().findViewById(R.id.smokerId);
+        TextView alcoholicView = (TextView)getView().findViewById((R.id.alcoholicId));
 
         smokerView.setText(StaffLogin.patientDetails.getSmoker());
         alcoholicView.setText(StaffLogin.patientDetails.getAlcoholic());
@@ -53,8 +52,14 @@ public class MedicalBackground extends Fragment {
                 fragTransaction.commit();
             }
         }
+    }
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
 
 
+        View view = inflater.inflate(R.layout.fragment_medical_background, container, false);
         return view;
     }
 }

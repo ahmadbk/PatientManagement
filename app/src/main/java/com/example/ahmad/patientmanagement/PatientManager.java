@@ -206,6 +206,7 @@ public class PatientManager extends AppCompatActivity {
                     System.out.println(file.getAbsolutePath()+" deleted");
             }
         }
+        StaffLogin.destroyPatient();
         super.onDestroy();
     }
     //-----------------------------------------------------------------------------------------------

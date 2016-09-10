@@ -16,6 +16,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by Ahmad on 2016/08/17.
@@ -40,11 +42,21 @@ public class InsertBackgroundWorker extends AsyncTask<String,Void,String> {
     @Override
     protected String doInBackground(String...params) {
 
+        Date dNow = new Date( );
+        SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String justDate = date.format(dNow);
+        String timeStamp = timestamp.format(dNow);
+        String docName = StaffLogin.staffDetails.getFirst_name() +" "+StaffLogin.staffDetails.getLast_name();
+
+
         String insertionType = params[0];
 
         if(insertionType.equalsIgnoreCase("AddAllergy")) {
 
             String allergy =params[1];
+            Allergies allergies = new Allergies(allergy);
+            StaffLogin.patientDetails.addToAllergyArrayList(allergies);
 //---------------------------------------------------------
             try {
                 URL url = new URL(add_allergy_url);
@@ -81,6 +93,9 @@ public class InsertBackgroundWorker extends AsyncTask<String,Void,String> {
 //---------------------------------------------------------
         else if(insertionType.equalsIgnoreCase("AddDiagnostic")){
             String description =params[1];
+            Diagnostics diagnostics = new Diagnostics(justDate,docName,description);
+            StaffLogin.patientDetails.addToDiagnosticsArrayList(diagnostics);
+
             try {
                 URL url = new URL(add_diagnostics_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -121,6 +136,10 @@ public class InsertBackgroundWorker extends AsyncTask<String,Void,String> {
             String qpd = params[2];
             String fpd = params[3];
             String end_date = params[4];
+
+            //Prescriptions prescriptions = new Prescriptions(justDate,end_date,docName,medicine_name,qpd,fpd,"Active")
+            //StaffLogin.patientDetails.addToPrescriptionsArrayList(prescriptions);
+
             try {
                 URL url = new URL(add_prescription_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -165,6 +184,10 @@ public class InsertBackgroundWorker extends AsyncTask<String,Void,String> {
             String temperature = params[3];
             String pulse = params[4];
             String weight = params[5];
+
+            Observations observations = new Observations(timeStamp,docName,bpn,bpd,temperature,pulse,weight);
+            StaffLogin.patientDetails.addToObservationsArrayList(observations);
+
             try {
                 URL url = new URL(add_observation_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();

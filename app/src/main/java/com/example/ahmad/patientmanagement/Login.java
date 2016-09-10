@@ -504,6 +504,13 @@ public class Login extends AppCompatActivity {
                     Intent intent = new Intent(context, PatientManager.class);
                     context.startActivity(intent);
                 }
+                diagnosticsArrayList = new ArrayList<Diagnostics>();
+                observationsArrayList = new ArrayList<Observations>();
+                prescriptionsArrayList = new ArrayList<Prescriptions>();
+                allergiesArrayList = new ArrayList<Allergies>();
+                locationArrayList = new ArrayList<Location>();
+                nextDosageArrayList = new ArrayList<NextDosage>();
+                reportArrayList = new ArrayList<Report>();
 
             }
         }

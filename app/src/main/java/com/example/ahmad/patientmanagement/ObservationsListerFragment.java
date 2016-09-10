@@ -26,7 +26,7 @@ public class ObservationsListerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_observations_lister, container, false);
-        mRowCount = StaffLogin.patientDetails.getNextDosageArrayList().size();
+        mRowCount = StaffLogin.patientDetails.getObservationsArrayList().size();
         observations = new String[mRowCount][7];
 
      /*   //temporary population of array

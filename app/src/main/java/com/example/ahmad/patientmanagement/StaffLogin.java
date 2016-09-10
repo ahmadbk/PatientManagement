@@ -194,6 +194,9 @@ public class StaffLogin extends AppCompatActivity {
         }
     }
 
+    public static void destroyPatient(){
+        patientDetails = null;
+    }
 
     private class NdefReaderTask extends AsyncTask<Tag, Void, String> {
 
@@ -598,5 +601,4 @@ public class StaffLogin extends AppCompatActivity {
         }
 
     }
-
 }

@@ -29,7 +29,7 @@ public class LocationListerFragment extends Fragment {
         mRowCount = StaffLogin.patientDetails.getLocationArrayList().size();
         locations = new String[mRowCount][2];
 
-        for(int i = 0; i < mRowCount; i++){
+        for(int i = 0; i < mRowCount && i < 5; i++){
             LocationFragment fragment = new LocationFragment();
             Bundle bundle = new Bundle();
             locations[i] = StaffLogin.patientDetails.getLocationArrayList().get(i).getArray();

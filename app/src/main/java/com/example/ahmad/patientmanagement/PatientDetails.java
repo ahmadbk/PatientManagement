@@ -18,6 +18,7 @@ public class PatientDetails {
     private ArrayList<NextDosage> nextDosageArrayList = new ArrayList<NextDosage>();
     private ArrayList<Report> reportArrayList = new ArrayList<Report>();
 
+    public PatientDetails(){}
     public PatientDetails(int tID, String fN, String sN, String Dob, String dA, String eC, String g, String pN, String a, String cW, String smoker,String alcoholic, boolean is)
     {
         this.setTagID(tID);
@@ -49,6 +50,26 @@ public class PatientDetails {
 
     public void setNextDosageArrayList(ArrayList<NextDosage> nextDosageArrayList) {
         this.nextDosageArrayList = nextDosageArrayList;
+    }
+
+    public void addToAllergyArrayList(Allergies allergy){
+        allergiesArrayList.add(0,allergy);
+    }
+
+    public void addToDiagnosticsArrayList(Diagnostics diagnostics){
+        diagnosticsArrayList.add(0,diagnostics);
+    }
+
+    public void addToObservationsArrayList(Observations observations){
+        observationsArrayList.add(0,observations);
+    }
+
+    public void addToPrescriptionsArrayList(Prescriptions prescriptions){
+        prescriptionsArrayList.add(0,prescriptions);
+    }
+
+    public void addToNextDosageArrayList(NextDosage nextDosage){
+        nextDosageArrayList.add(0,nextDosage);
     }
 
     public boolean isStaff() {
