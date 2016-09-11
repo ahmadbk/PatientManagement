@@ -42,7 +42,7 @@ public class DiagnosticsFragmentLister extends Fragment {
         diagnostics[2][2] = "i";*/
 
 
-        for(int i = 0; i < mRowCount; i++){
+        for(int i = 0; i < mRowCount && i < 5; i++){
             DiagnosticFragment fragment = new DiagnosticFragment();
             Bundle bundle = new Bundle();
             diagnostics[i] = StaffLogin.patientDetails.getDiagnosticsArrayList().get(i).getArray();

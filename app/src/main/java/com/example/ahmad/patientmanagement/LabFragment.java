@@ -40,7 +40,7 @@ public class LabFragment extends Fragment {
         int size = StaffLogin.patientDetails.getReportArrayList().size();
         String[] files = new String[size];
         for(int i = 0; i < size; i++)
-            files[i] = StaffLogin.patientDetails.getReportArrayList().get(i).getNameOfFile();
+            files[i] = StaffLogin.patientDetails.getReportArrayList().get(i).getType();
 
         ArrayAdapter adapter = new ArrayAdapter<String>(this.getActivity(), R.layout.listview, files);
         spinner.setAdapter(adapter);

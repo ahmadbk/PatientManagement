@@ -62,7 +62,14 @@ public class NextDosageListerFragment extends Fragment {
             cb.setVisibility(View.INVISIBLE);
         }
 
-
+        if(!StaffLogin.patientStaff) {
+            if (StaffLogin.isDoctor) {
+                DosageFragment fragment = new DosageFragment();
+                fragTransaction = getFragmentManager().beginTransaction();
+                fragTransaction.replace(R.id.dosagesFragment, fragment, "fragment");
+                fragTransaction.commit();
+            }
+        }
 
         return view;
     }

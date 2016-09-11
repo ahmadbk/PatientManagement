@@ -55,4 +55,10 @@ public class Dosage {
     public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
+
+    @Override
+    public String toString(){
+        String s = medicineName + ": " + quantity;
+        return s;
+    }
 }

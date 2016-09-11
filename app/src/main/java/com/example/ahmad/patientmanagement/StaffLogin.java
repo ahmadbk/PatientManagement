@@ -227,6 +227,7 @@ public class StaffLogin extends AppCompatActivity {
                 }
                 String tempp = Integer.toString(tempH);
                 tag_id = tempp;
+                System.out.println(tag_id);
 
 //------------------------------------------------------------------------------------------------
 
@@ -517,7 +518,7 @@ public class StaffLogin extends AppCompatActivity {
                                 count++;
                             }
                             patientDetails.setReportArrayList(reportArrayList);
-                            System.out.println(patientDetails.getReportArrayList().get(0).getLink());
+//                            System.out.println(patientDetails.getReportArrayList().get(0).getLink());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

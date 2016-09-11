@@ -14,6 +14,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -194,6 +195,10 @@ public class Login extends AppCompatActivity {
         StaffLogin.patientStaff = false;
     }
 
+    public void searchPatientOnClick(View view){
+
+    }
+
     private class NdefReaderTask extends AsyncTask<Tag, Void, String> {
 
         Context context;
@@ -222,6 +227,7 @@ public class Login extends AppCompatActivity {
                 }
                 String tempp = Integer.toString(tempH);
                 tag_id = tempp;
+                System.out.println(tag_id);
 
 //------------------------------------------------------------------------------------------------
 
