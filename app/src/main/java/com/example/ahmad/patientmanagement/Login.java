@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -72,6 +73,12 @@ public class Login extends AppCompatActivity {
     String next_dosage_url = "http://"+StaffLogin.serverAdd+"/NextDosage.php";
     String reports_url = "http://"+StaffLogin.serverAdd+"/Reports.php";
     String dosages_url = "http://"+StaffLogin.serverAdd+"/Dosages.php";
+    String getTag_url = "http://"+StaffLogin.serverAdd+"/getTagID.php";
+
+    String firstName = "";
+    String lastName = "";
+
+    boolean searchByName = false;
 
 
 
@@ -197,6 +204,12 @@ public class Login extends AppCompatActivity {
 
     public void searchPatientOnClick(View view){
 
+        firstName = ((EditText)findViewById(R.id.firstNameEditText)).getText().toString();
+        lastName = ((EditText)findViewById(R.id.surnameEditText)).getText().toString();
+        searchByName = true;
+        Tag tag = null;
+        new NdefReaderTask(Login.this).execute(tag);
+
     }
 
     private class NdefReaderTask extends AsyncTask<Tag, Void, String> {
@@ -210,24 +223,69 @@ public class Login extends AppCompatActivity {
         protected String doInBackground(Tag... params) {
             Tag tag = params[0];
 
-            Ndef ndef = Ndef.get(tag);
-            if (ndef == null) {
-                // NDEF is not supported by this Tag.
-                return null;
+            if(!searchByName) {
+                Ndef ndef = Ndef.get(tag);
+                if (ndef == null) {
+                    // NDEF is not supported by this Tag.
+                    return null;
+                }
             }
 
-            if(tag == null){
-            }else{
-                int tempH = 0;
-                String tagInfo = "";
-                byte[] tagId = tag.getId();
-                for(int i=0; i<tagId.length; i++){
-                    tagInfo = Integer.toHexString(tagId[0] & 0xFF);
-                    tempH += Integer.valueOf(tagInfo,16);
-                }
-                String tempp = Integer.toString(tempH);
-                tag_id = tempp;
-                System.out.println(tag_id);
+                if (tag == null && !searchByName) {}
+                else
+                {
+                    if(!searchByName) {
+                        int tempH = 0;
+                        String tagInfo = "";
+                        byte[] tagId = tag.getId();
+                        for (int i = 0; i < tagId.length; i++) {
+                            tagInfo = Integer.toHexString(tagId[0] & 0xFF);
+                            tempH += Integer.valueOf(tagInfo, 16);
+                        }
+                        String tempp = Integer.toString(tempH);
+                        tag_id = tempp;
+                    }
+                    else
+                    {
+                        String data = "";
+                        String jsonString = "";
+
+                        System.out.println("First Name: " + firstName);
+                        System.out.println("Last Name: " + lastName);
+
+                        try {
+                            URL url = new URL(getTag_url);
+                            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                            httpURLConnection.setDoOutput(true);
+                            httpURLConnection.setDoInput(true);
+                            OutputStream outputStream = httpURLConnection.getOutputStream();
+                            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                            String post_data = URLEncoder.encode("first_name", "UTF-8") + "=" + URLEncoder.encode(firstName, "UTF-8") + "&"
+                                    + URLEncoder.encode("last_name", "UTF-8") + "=" + URLEncoder.encode(lastName, "UTF-8");
+                            bufferedWriter.write(post_data);
+                            bufferedWriter.flush();
+                            bufferedWriter.close();
+                            outputStream.close();
+                            InputStream inputStream = httpURLConnection.getInputStream();
+                            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+                            StringBuilder stringBuilder = new StringBuilder();
+                            while ((jsonString = bufferedReader.readLine()) != null) {
+                                stringBuilder.append(jsonString + "\n");
+                            }
+                            bufferedReader.close();
+                            inputStream.close();
+                            httpURLConnection.disconnect();
+                            data = stringBuilder.toString().trim();
+                        }
+                        catch (MalformedURLException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        tag_id = data;
+                        System.out.println("TagID Received: " + tag_id);
+                    }
+
 
 //------------------------------------------------------------------------------------------------
 

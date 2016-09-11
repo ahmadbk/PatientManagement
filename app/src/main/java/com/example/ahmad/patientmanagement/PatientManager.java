@@ -219,7 +219,17 @@ public class PatientManager extends AppCompatActivity {
 
     public void openFileButtonClick(View view) {
         String fileName = ((Spinner) findViewById(R.id.fileSpinner)).getSelectedItem().toString();
-        new DownloadFile().execute("http://" + StaffLogin.serverAdd + "/" + fileName, "/sdcard/" + fileName);
+        String ttt = "";
+
+        for(int i =0;i<StaffLogin.patientDetails.getReportArrayList().size();i++)
+        {
+            String fN = StaffLogin.patientDetails.getReportArrayList().get(i).getType();
+            if(fN.equalsIgnoreCase(fileName))
+            {
+                ttt = StaffLogin.patientDetails.getReportArrayList().get(i).getNameOfFile();
+            }
+        }
+        new DownloadFile().execute("http://" + StaffLogin.serverAdd + "/" + ttt, "/sdcard/" + ttt);
     }
 
     @Override
