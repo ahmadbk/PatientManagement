@@ -202,16 +202,19 @@ public class PatientManager extends AppCompatActivity {
     }
 
     public void nextDosageSubmitOnClick(View view) {
-       /* int size = StaffLogin.patientDetails.getNextDosageArrayList().size();
+        int size = StaffLogin.patientDetails.getNextDosageArrayList().size();
         int j = 0;
         for (int i = 0; i < size; i++) {
             CheckBox box = (CheckBox)findViewById(NextDosageListerFragment.getCheckBoxId(i));
-            if(!box.isChecked()){
-                StaffLogin.patientDetails.removeFromDosageArrayList(j);
+            if(box.isChecked()){
+                StaffLogin.tempDosageArrayList.add(StaffLogin.patientDetails.getNextDosageArrayList().get(j));
+                StaffLogin.patientDetails.removeFromNextDosageArrayList(j);
                 j--;
             }
             j++;
-        }*/
+        }
+        InsertBackgroundWorker insertBackgroundWorker = new InsertBackgroundWorker(this);
+        insertBackgroundWorker.execute("AddDosage");
     }
 
     public void openFileButtonClick(View view) {

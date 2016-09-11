@@ -44,6 +44,7 @@ public class StaffLogin extends AppCompatActivity {
     public static String serverAdd = "192.168.1.66";
     public static boolean patientStaff = false;
     public static boolean isDoctor = false;
+    public static ArrayList<NextDosage> tempDosageArrayList = new ArrayList<NextDosage>();
 
     //private NfcAdapter nfcAdapter;
     private NfcAdapter mNfcAdapter;
