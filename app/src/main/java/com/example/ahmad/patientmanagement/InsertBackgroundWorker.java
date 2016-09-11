@@ -47,8 +47,13 @@ public class InsertBackgroundWorker extends AsyncTask<String,Void,String> {
         Date dNow = new Date( );
         SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat curHour = new SimpleDateFormat("HH");
+
         String justDate = date.format(dNow);
         String timeStamp = timestamp.format(dNow);
+        String hour = curHour.format(dNow);
+        int current_hour = Integer.parseInt(hour);
+
         String docName = StaffLogin.staffDetails.getFirst_name() +" "+StaffLogin.staffDetails.getLast_name();
 
 
@@ -236,9 +241,17 @@ public class InsertBackgroundWorker extends AsyncTask<String,Void,String> {
             int size = StaffLogin.tempDosageArrayList.size();
             for(int i=0;i<size;i++)
             {
+                String period = "";
+                if(current_hour > -1 && current_hour < 11)
+                    period = "morning";
+                else if(current_hour > 10 && current_hour < 18)
+                    period = "afternoon";
+                else if(current_hour > 17 && current_hour < 24)
+                    period = "evening";
+
                 Dosage dosage = new Dosage(StaffLogin.staffDetails.getFirst_name()+" "+StaffLogin.staffDetails.getLast_name(),
                         timeStamp,StaffLogin.tempDosageArrayList.get(i).getMedName(),
-                        StaffLogin.tempDosageArrayList.get(i).getQuantity());
+                        StaffLogin.tempDosageArrayList.get(i).getQuantity(),period);
                 StaffLogin.patientDetails.addToDosageArrayList(dosage);
 
                 try {

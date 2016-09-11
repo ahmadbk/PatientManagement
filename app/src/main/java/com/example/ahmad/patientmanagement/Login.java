@@ -493,15 +493,14 @@ public class Login extends AppCompatActivity {
 //-------------------------------------------------------------------------------------------------------------
                         //Dosages
 //----------------------------------------------------------------------------------------------------------------------
-                        jsonPersonal = getData(reports_url,tag_id);
-                        System.out.println(jsonPersonal);
+                        jsonPersonal = getData(dosages_url,tag_id);
 
                         try {
                             jsonObject = new JSONObject(jsonPersonal);
                             jsonArray = jsonObject.getJSONArray("server_response");
 
                             int count = 0;
-                            String nurse,time,medName,quantity;
+                            String nurse,time,medName,quantity,period;
                             while (count<jsonArray.length())
                             {
                                 JSONObject JO = jsonArray.getJSONObject(count);
@@ -509,8 +508,9 @@ public class Login extends AppCompatActivity {
                                 time = JO.getString("time");
                                 medName = JO.getString("medName");
                                 quantity = JO.getString("quantity");
+                                period = JO.getString("period");
 
-                                Dosage dosage = new Dosage(nurse,time,medName,quantity);
+                                Dosage dosage = new Dosage(nurse,time,medName,quantity,period);
                                 dosageArrayList.add(dosage);
                                 count++;
                             }

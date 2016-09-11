@@ -5,14 +5,23 @@ package com.example.ahmad.patientmanagement;
  */
 public class Dosage {
 
-    String nurse, time, medicineName, quantity;
+    String nurse, time, medicineName, quantity,period;
 
-    Dosage(String nurse, String time, String medicineName, String quantity)
+    Dosage(String nurse, String time, String medicineName, String quantity,String period)
     {
         this.setQuantity(quantity);
         this.setMedicineName(medicineName);
         this.setNurse(nurse);
         this.setTime(time);
+        this.setPeriod(period);
+    }
+
+    public String getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(String period) {
+        this.period = period;
     }
 
     public String getNurse() {
