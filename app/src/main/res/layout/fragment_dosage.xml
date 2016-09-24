@@ -4,32 +4,116 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.ahmad.patientmanagement.DosageFragment">
-
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Dosages Administered" />
-    <ListView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/dosageListView"></ListView>
-    <ListView
+        android:text="Dosages Administered"
+        android:textSize="20dp"
+        android:layout_margin="16dp"
+        android:textStyle="bold"/>
+    <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:nestedScrollingEnabled="true">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/border">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dosageGroupText"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:layout_margin="@dimen/text_margin"/>
+                    <ListView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:id="@+id/dosageListView"></ListView>
 
-        android:id="@+id/dosageListView1"></ListView>
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/dosageListView2"></ListView>
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/dosageListView3"></ListView>
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/dosageListView4"></ListView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dosageGroupText1"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:layout_margin="@dimen/text_margin"/>
+                <ListView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:id="@+id/dosageListView1"></ListView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dosageGroupText2"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:layout_margin="@dimen/text_margin"/>
+                <ListView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:id="@+id/dosageListView2"></ListView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dosageGroupText3"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:layout_margin="@dimen/text_margin"/>
+                <ListView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:id="@+id/dosageListView3"></ListView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dosageGroupText4"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:layout_margin="@dimen/text_margin"/>
+                <ListView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:id="@+id/dosageListView4"></ListView>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

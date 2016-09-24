@@ -7,7 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -63,8 +65,13 @@ public class DosageFragment extends Fragment {
                     if(groupCount > 5)return view;
                 }
 
+                TextView textView = (TextView)view.findViewById(getTextViewId(groupCount-1));
+                textView.setText(timeStamp + ": " +
+                        StaffLogin.patientDetails.getDosageArrayList().get(counter).getPeriod());
+
                 System.out.println("Group-------------------"+groupCount);//Each group here
                 int s = tempArr.size();
+               // System.out.println((groupCount-1)+" id");
                 String[] StringArray = new String[s];
                 for(int i = 0; i < s; i++){
                     StringArray[i] = tempArr.get(i).toString();
@@ -72,6 +79,19 @@ public class DosageFragment extends Fragment {
                 ListView listView = (ListView)view.findViewById(getId(groupCount-1));
                 ArrayAdapter adapter = new ArrayAdapter<String>(this.getActivity(), R.layout.listview, StringArray);
                 listView.setAdapter(adapter);
+
+                ListAdapter listAdapter = listView.getAdapter();
+                int totalHeight = 0;
+                for (int i = 0; i < listAdapter.getCount(); i++) {
+                    View listItem = listAdapter.getView(i, null, listView);
+                    listItem.measure(0, 0);
+                    totalHeight += listItem.getMeasuredHeight();
+                }
+
+                ViewGroup.LayoutParams params = listView.getLayoutParams();
+                params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+                listView.setLayoutParams(params);
+                listView.requestLayout();
 
                 while (tempArr.size() > 0) {
                     System.out.println(tempArr.get(0).getMedicineName() + " : " + tempArr.get(0).getTime());
@@ -93,6 +113,17 @@ public class DosageFragment extends Fragment {
             case 4: return R.id.dosageListView4;
         }
         return R.id.dosageListView4;
+    }
+
+    private int getTextViewId(int index){
+        switch(index){
+            case 0: return R.id.dosageGroupText;
+            case 1: return R.id.dosageGroupText1;
+            case 2: return R.id.dosageGroupText2;
+            case 3: return R.id.dosageGroupText3;
+            case 4: return R.id.dosageGroupText4;
+        }
+        return R.id.dosageGroupText;
     }
 
     private String timeStampToDate(String ts){

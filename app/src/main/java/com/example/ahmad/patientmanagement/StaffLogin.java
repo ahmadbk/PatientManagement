@@ -92,6 +92,8 @@ public class StaffLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_staff_login);
 
+        patientStaff = false;
+        isDoctor = false;
         //Setting the NFC Adapter
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if(mNfcAdapter == null){
