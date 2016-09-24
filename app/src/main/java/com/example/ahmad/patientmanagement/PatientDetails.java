@@ -9,7 +9,7 @@ public class PatientDetails {
 
     boolean isStaff = false;
     private int tagID;
-    private String firstname, surname, DOB, dateAdmitted, emergencyContact,gender,phone_num,address, curr_ward_name, smoker, alcoholic;
+    private String firstname, surname, DOB, dateAdmitted, emergencyContact,gender,phone_num,address, curr_ward_name, smoker, alcoholic,imageName;
     private ArrayList<Diagnostics> diagnosticsArrayList = new ArrayList<Diagnostics>();
     private ArrayList<Observations> observationsArrayList = new ArrayList<Observations>();
     private ArrayList<Prescriptions> prescriptionsArrayList = new ArrayList<Prescriptions>();
@@ -20,7 +20,8 @@ public class PatientDetails {
     private ArrayList<Dosage> dosageArrayList = new ArrayList<Dosage>();
 
     public PatientDetails(){}
-    public PatientDetails(int tID, String fN, String sN, String Dob, String dA, String eC, String g, String pN, String a, String cW, String smoker,String alcoholic, boolean is)
+    
+    public PatientDetails(int tID, String fN, String sN, String Dob, String dA, String eC, String g, String pN, String a, String cW, String smoker,String alcoholic, boolean is,String imageName)
     {
         this.setTagID(tID);
         this.setFirstname(fN);
@@ -35,6 +36,16 @@ public class PatientDetails {
         this.setSmoker(smoker);
         this.setAlcoholic(alcoholic);
         this.setStaff(is);
+        this.setImageName(imageName);
+    }
+
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 
     public ArrayList<Dosage> getDosageArrayList() {

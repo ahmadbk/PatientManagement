@@ -212,6 +212,12 @@ public class PatientManager extends AppCompatActivity {
                     System.out.println(file.getAbsolutePath() + " deleted");
             }
         }
+
+        File file = new File("/sdcard/" + StaffLogin.patientDetails.getImageName());
+        if (file.exists()) {
+            if (file.delete())
+                System.out.println(file.getAbsolutePath() + " deleted");
+        }
         StaffLogin.destroyPatient();
         super.onDestroy();
     }

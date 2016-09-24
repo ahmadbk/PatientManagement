@@ -26,6 +26,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -92,6 +93,8 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+
 
         if(!StaffLogin.isDoctor){
             EditText firstEdit = (EditText)findViewById(R.id.surnameEditText);
@@ -302,6 +305,13 @@ public class Login extends AppCompatActivity {
 
 //------------------------------------------------------------------------------------------------
 
+                    diagnosticsArrayList = new ArrayList<Diagnostics>();
+                    observationsArrayList = new ArrayList<Observations>();
+                    prescriptionsArrayList = new ArrayList<Prescriptions>();
+                    allergiesArrayList = new ArrayList<Allergies>();
+                    locationArrayList = new ArrayList<Location>();
+                    reportArrayList = new ArrayList<Report>();
+                    nextDosageArrayList = new ArrayList<NextDosage>();
 //-------------------------------------------------------------------------------
                     String output = getData(get_role_url,tag_id);
 
@@ -320,7 +330,7 @@ public class Login extends AppCompatActivity {
                             jsonArray = jsonObject.getJSONArray("server_response");
 
                             int count = 0;
-                            String firstname, surname, dob, dA, eC,g,pN,a,cname,smoker,alcoholic;
+                            String firstname, surname, dob, dA, eC,g,pN,a,cname,smoker,alcoholic,image;
                             while (count<jsonArray.length())
                             {
                                 JSONObject JO = jsonArray.getJSONObject(count);
@@ -335,12 +345,23 @@ public class Login extends AppCompatActivity {
                                 cname = JO.getString("current_ward");
                                 smoker = JO.getString("smoker");
                                 alcoholic = JO.getString("alcoholic");
-                                StaffLogin.patientDetails = new PatientDetails(Integer.parseInt(tag_id), firstname,surname,dob,dA,eC,g,pN,a,cname,smoker,alcoholic,true);
+                                image = JO.getString("image");
+                                StaffLogin.patientDetails = new PatientDetails(Integer.parseInt(tag_id), firstname,surname,dob,dA,eC,g,pN,a,cname,smoker,alcoholic,true,image);
                                 count++;
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
+                        String iN = StaffLogin.patientDetails.getImageName();
+                        File tempFile = new File("/sdcard/" + iN);
+
+                        try {
+                            tempFile.createNewFile();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        FileDownloader.downloadFile("http://" + StaffLogin.serverAdd + "/" + iN,tempFile);
 
                         //Get Diagnostics
 //----------------------------------------------------------------------------------------------------------------------
