@@ -32,11 +32,11 @@ public class AddObservationFragment extends Fragment {
         //dateView = (TextView)view.findViewById(R.id.obsDate);
         final TextView view1 = (TextView)view.findViewById(R.id.bpn);
         SeekBar seekBar1 = (SeekBar)view.findViewById(R.id.seekBar1);
-        view1.setText(seekBar1.getProgress()+"");
+        view1.setText(80+"");
         seekBar1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                view1.setText(i+"");
+                view1.setText((i+80)+"");
             }
 
             @Override
@@ -52,11 +52,11 @@ public class AddObservationFragment extends Fragment {
 
         final TextView view2 = (TextView)view.findViewById(R.id.bpd);
         SeekBar seekBar2 = (SeekBar)view.findViewById(R.id.seekBar2);
-        view2.setText(seekBar2.getProgress()+"");
+        view2.setText(60+"");
         seekBar2.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                view2.setText(i+"");
+                view2.setText((i+60)+"");
             }
 
             @Override
@@ -72,11 +72,11 @@ public class AddObservationFragment extends Fragment {
 
         final TextView view3 = (TextView)view.findViewById(R.id.temp);
         SeekBar seekBar3 = (SeekBar)view.findViewById(R.id.seekBar3);
-        view3.setText(seekBar3.getProgress()+""+(char) 0x00B0 + "C");
+        view3.setText(20+""+(char) 0x00B0 + "C");
         seekBar3.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                view3.setText(i+" "+(char) 0x00B0 + "C");
+                view3.setText((i+20)+" "+(char) 0x00B0 + "C");
             }
 
             @Override
@@ -92,11 +92,11 @@ public class AddObservationFragment extends Fragment {
 
         final TextView view4 = (TextView)view.findViewById(R.id.pulse);
         SeekBar seekBar4 = (SeekBar)view.findViewById(R.id.seekBar4);
-        view4.setText(seekBar4.getProgress()+" BPM");
+        view4.setText(40+" BPM");
         seekBar4.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                view4.setText(i+" BPM");
+                view4.setText((i+40)+" BPM");
             }
 
             @Override
@@ -112,7 +112,7 @@ public class AddObservationFragment extends Fragment {
 
         final TextView view5 = (TextView)view.findViewById(R.id.weight);
         SeekBar seekBar5 = (SeekBar)view.findViewById(R.id.seekBar5);
-        view5.setText(seekBar5.getProgress()+" kg");
+        view5.setText(0+" kg");
         seekBar5.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {

@@ -46,6 +46,7 @@ public class PatientManager extends AppCompatActivity {
     PatientDetails patientDetails;
     private boolean tempDateSet = false;
     private String tempDate = "";
+    private boolean isPDF = false;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -191,6 +192,9 @@ public class PatientManager extends AppCompatActivity {
             if(fN.equalsIgnoreCase(fileName))
             {
                 ttt = StaffLogin.patientDetails.getReportArrayList().get(i).getNameOfFile();
+                String docType = ttt.substring(ttt.length()-3);
+                if(docType.equalsIgnoreCase("pdf"))isPDF = true;
+                else isPDF = false;
             }
         }
         new DownloadFile().execute("http://" + StaffLogin.serverAdd + "/" + ttt, "/sdcard/" + ttt);
@@ -216,17 +220,11 @@ public class PatientManager extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         client.connect();
         Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "PatientManager Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
+                Action.TYPE_VIEW,
+                "PatientManager Page",
                 Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
                 Uri.parse("android-app://com.example.ahmad.patientmanagement/http/host/path")
         );
         AppIndex.AppIndexApi.start(client, viewAction);
@@ -278,11 +276,11 @@ public class PatientManager extends AppCompatActivity {
         @Override
         protected void onPostExecute(String fileName) {
             File file = new File(fileName);
-
+            String appType = isPDF ? "application/pdf" : "image/*";
             if (file.exists()) {
                 Uri path = Uri.fromFile(file);
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setDataAndType(path, "application/pdf");
+                intent.setDataAndType(path, appType);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
                 try {

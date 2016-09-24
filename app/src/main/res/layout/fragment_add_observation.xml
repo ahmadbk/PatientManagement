@@ -20,16 +20,16 @@
             android:orientation="horizontal"
             android:layout_marginTop="20dp">
             <TextView
-                android:layout_width="50pt"
+                android:layout_width="25pt"
                 android:layout_height="wrap_content"
                 android:text="BPN : "/>
             <SeekBar
                 android:id="@+id/seekBar1"
-                android:layout_width="75pt"
+                android:layout_width="110pt"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:max="10"/>
+                android:max="120"/>
             <TextView
                 android:layout_width="25pt"
                 android:layout_height="wrap_content"
@@ -41,16 +41,16 @@
             android:orientation="horizontal"
             android:layout_marginTop="20dp">
             <TextView
-                android:layout_width="50pt"
+                android:layout_width="25pt"
                 android:layout_height="wrap_content"
                 android:text="BPD : "/>
             <SeekBar
                 android:id="@+id/seekBar2"
-                android:layout_width="75pt"
+                android:layout_width="110pt"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:max="10"/>
+                android:max="70"/>
             <TextView
                 android:layout_width="25pt"
                 android:layout_height="wrap_content"
@@ -62,16 +62,16 @@
             android:orientation="horizontal"
             android:layout_marginTop="20dp">
             <TextView
-                android:layout_width="50pt"
+                android:layout_width="25pt"
                 android:layout_height="wrap_content"
                 android:text="Temp : "/>
             <SeekBar
                 android:id="@+id/seekBar3"
-                android:layout_width="75pt"
+                android:layout_width="110pt"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:max="10"/>
+                android:max="30"/>
             <TextView
                 android:layout_width="25pt"
                 android:layout_height="wrap_content"
@@ -83,16 +83,16 @@
             android:orientation="horizontal"
             android:layout_marginTop="20dp">
             <TextView
-                android:layout_width="50pt"
+                android:layout_width="25pt"
                 android:layout_height="wrap_content"
                 android:text="Pulse : "/>
             <SeekBar
                 android:id="@+id/seekBar4"
-                android:layout_width="75pt"
+                android:layout_width="110pt"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:max="10"/>
+                android:max="160"/>
             <TextView
                 android:layout_width="25pt"
                 android:layout_height="wrap_content"
@@ -104,16 +104,16 @@
             android:orientation="horizontal"
             android:layout_marginTop="20dp">
             <TextView
-                android:layout_width="50pt"
+                android:layout_width="25pt"
                 android:layout_height="wrap_content"
                 android:text="Weight : "/>
             <SeekBar
                 android:id="@+id/seekBar5"
-                android:layout_width="75pt"
+                android:layout_width="110pt"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:max="10"/>
+                android:max="160"/>
             <TextView
                 android:layout_width="25pt"
                 android:layout_height="wrap_content"

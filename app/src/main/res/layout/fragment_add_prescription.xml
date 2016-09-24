@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="50pt"
+                android:layout_width="100pt"
                 android:layout_height="wrap_content"
                 android:text="Medicine Name: "/>
             <Spinner
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="100pt"
                 android:layout_height="wrap_content"
                 android:text="Dosage Quantity : "/>
             <EditText
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="100pt"
                 android:layout_height="wrap_content"
                 android:text="Morning : "/>
             <CheckBox
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="100pt"
                 android:layout_height="wrap_content"
                 android:text="Afternoon : "/>
             <CheckBox
@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="100pt"
                 android:layout_height="wrap_content"
                 android:text="Evening : "/>
             <CheckBox
@@ -87,13 +87,13 @@
             android:orientation="horizontal">
             <TextView
                 android:layout_width="100pt"
-                android:layout_height="20pt"
+                android:layout_height="wrap_content"
                 android:text="End Date : "
                 android:id="@+id/endDatePrescription"/>
-            <ImageButton
-                android:layout_width="20pt"
-                android:layout_height="20pt"
-                android:src="@drawable/image"
+            <ImageView
+                android:layout_width="18pt"
+                android:layout_height="15pt"
+                android:src="@drawable/calendar"
                 android:scaleType="fitXY"
                 android:onClick="setDate"/>
         </LinearLayout>
@@ -101,7 +101,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="100pt"
                 android:layout_height="wrap_content"
                 android:text="Take before meal?"/>
             <Spinner
@@ -109,10 +109,20 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/mealRelationSpinner"></Spinner>
         </LinearLayout>
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="200pt"
             android:layout_height="wrap_content"
-            android:text="Status : Active"/>
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="100pt"
+                android:layout_height="wrap_content"
+                android:text="Status:"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Active"/>
+        </LinearLayout>
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
