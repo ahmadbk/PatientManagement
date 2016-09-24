@@ -18,4 +18,16 @@
         android:textStyle="bold"
         android:layout_centerInParent="true"/>
 
+    <EditText
+        android:layout_width="50pt"
+        android:layout_height="wrap_content"
+        android:hint="Server address"
+        android:id="@+id/serverAddressEditText"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="submit"
+        android:onClick="changeAddressOnClick"/>
+
 </LinearLayout>

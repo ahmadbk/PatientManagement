@@ -14,6 +14,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -199,6 +201,29 @@ public class StaffLogin extends AppCompatActivity {
 
     public static void destroyPatient(){
         patientDetails = null;
+    }
+
+    public void changeAddressOnClick(View view){
+        EditText eText = (EditText)findViewById(R.id.serverAddressEditText);
+        String text = eText.getText().toString();
+        setAddress(text);
+
+        staff_login_url = "http://"+serverAdd+"/staffLogin.php";
+        get_role_url = "http://"+serverAdd+"/getRole.php";
+        details_url = "http://"+serverAdd+"/viewPatient.php";
+        diagnostics_url = "http://"+serverAdd+"/Diagnostics.php";
+        observations_url = "http://"+serverAdd+"/Observations.php";
+        prescriptions_url = "http://"+serverAdd+"/Prescriptions.php";
+        allergies_url = "http://"+serverAdd+"/Allergies.php";
+        medicine_list_url = "http://"+serverAdd+"/MedicineList.php";
+        locations_url = "http://"+serverAdd+"/Locations.php";
+        reports_url = "http://"+serverAdd+"/Reports.php";
+        next_dosage_url = "http://"+StaffLogin.serverAdd+"/NextDosage.php";
+    }
+
+    public static void setAddress(String s){
+        StaffLogin.serverAdd = s;
+        System.out.println(StaffLogin.serverAdd);
     }
 
     private class NdefReaderTask extends AsyncTask<Tag, Void, String> {

@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -92,6 +93,18 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        if(!StaffLogin.isDoctor){
+            EditText firstEdit = (EditText)findViewById(R.id.surnameEditText);
+            EditText secondEdit = (EditText)findViewById(R.id.firstNameEditText);
+            Button button = (Button)findViewById(R.id.loginButton);
+
+            firstEdit.setVisibility(View.INVISIBLE);
+            firstEdit.setEnabled(false);
+            secondEdit.setVisibility(View.INVISIBLE);
+            secondEdit.setEnabled(false);
+            button.setVisibility(View.INVISIBLE);
+            button.setEnabled(false);
+        }
         //Setting the NFC Adapter
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if(mNfcAdapter == null){
