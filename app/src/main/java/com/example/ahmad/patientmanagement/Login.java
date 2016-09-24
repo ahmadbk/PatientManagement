@@ -305,20 +305,15 @@ public class Login extends AppCompatActivity {
 
 //------------------------------------------------------------------------------------------------
 
-                    diagnosticsArrayList = new ArrayList<Diagnostics>();
-                    observationsArrayList = new ArrayList<Observations>();
-                    prescriptionsArrayList = new ArrayList<Prescriptions>();
-                    allergiesArrayList = new ArrayList<Allergies>();
-                    locationArrayList = new ArrayList<Location>();
-                    reportArrayList = new ArrayList<Report>();
-                    nextDosageArrayList = new ArrayList<NextDosage>();
 //-------------------------------------------------------------------------------
                     String output = getData(get_role_url,tag_id);
 
 //-------------------------------------------------------------------------------
 
                     if(output.equalsIgnoreCase("doctor") || output.equalsIgnoreCase("nurse"))
-                    {}
+                    {
+                        return "failed";
+                    }
                     else if(output.equalsIgnoreCase("patient"))
                     {
                         //Get Basic Details
@@ -351,6 +346,8 @@ public class Login extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
+
+                            return "failed";
                         }
 
                         String iN = StaffLogin.patientDetails.getImageName();

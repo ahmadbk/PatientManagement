@@ -36,6 +36,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -95,8 +96,7 @@ public class StaffLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_staff_login);
 
-        patientStaff = false;
-        isDoctor = false;
+
         //Setting the NFC Adapter
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if(mNfcAdapter == null){
@@ -209,6 +209,7 @@ public class StaffLogin extends AppCompatActivity {
         String text = eText.getText().toString();
         setAddress(text);
 
+        Toast.makeText(StaffLogin.this,"Server address changed",Toast.LENGTH_LONG).show();
         staff_login_url = "http://"+serverAdd+"/staffLogin.php";
         get_role_url = "http://"+serverAdd+"/getRole.php";
         details_url = "http://"+serverAdd+"/viewPatient.php";
@@ -264,6 +265,8 @@ public class StaffLogin extends AppCompatActivity {
                 locationArrayList = new ArrayList<Location>();
                 reportArrayList = new ArrayList<Report>();
                 nextDosageArrayList = new ArrayList<NextDosage>();
+                patientStaff = false;
+                isDoctor = false;
 //------------------------------------------------------------------------------------------------
 
                     //get Who tagged in first
@@ -641,8 +644,10 @@ public class StaffLogin extends AppCompatActivity {
             }
             catch (MalformedURLException e) {
             e.printStackTrace();
+
             } catch (IOException e) {
             e.printStackTrace();
+                Toast.makeText(context,"Could not connect to server",Toast.LENGTH_LONG).show();
             }
 
             return data;
