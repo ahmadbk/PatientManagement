@@ -41,7 +41,7 @@ public class StaffLogin extends AppCompatActivity {
 
     public static final String MIME_TEXT_PLAIN = "text/plain";
     public static final String TAG = "NfcDemo";
-    public static String serverAdd = "192.168.1.66";
+    public static String serverAdd = "192.168.1.68";
     public static boolean patientStaff = false;
     public static boolean isDoctor = false;
     public static ArrayList<NextDosage> tempDosageArrayList = new ArrayList<NextDosage>();

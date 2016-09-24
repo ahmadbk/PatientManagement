@@ -549,7 +549,6 @@ public class Login extends AppCompatActivity {
                                 count++;
                             }
                             StaffLogin.patientDetails.setReportArrayList(reportArrayList);
-                            System.out.println(StaffLogin.patientDetails.getReportArrayList().get(0).getLink());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
