@@ -46,6 +46,8 @@ public class StaffLogin extends AppCompatActivity {
     public static final String MIME_TEXT_PLAIN = "text/plain";
     public static final String TAG = "NfcDemo";
     public static String serverAdd = "192.168.1.68";
+    public static String uniqueNumber= "12345678";
+    public static String symmetricKey = "";
     public static boolean patientStaff = false;
     public static boolean isDoctor = false;
     public static ArrayList<NextDosage> tempDosageArrayList = new ArrayList<NextDosage>();
@@ -72,6 +74,7 @@ public class StaffLogin extends AppCompatActivity {
     ArrayList<Report> reportArrayList = new ArrayList<Report>();
     ArrayList<NextDosage> nextDosageArrayList = new ArrayList<NextDosage>();
 
+    String handshake_url = "http://"+serverAdd+"/handshake.php";
     String staff_login_url = "http://"+serverAdd+"/staffLogin.php";
     String get_role_url = "http://"+serverAdd+"/getRole.php";
     String details_url = "http://"+serverAdd+"/viewPatient.php";
@@ -210,6 +213,7 @@ public class StaffLogin extends AppCompatActivity {
         setAddress(text);
 
         Toast.makeText(StaffLogin.this,"Server address changed",Toast.LENGTH_LONG).show();
+        handshake_url = "http://"+serverAdd+"/staffLogin.php";
         staff_login_url = "http://"+serverAdd+"/staffLogin.php";
         get_role_url = "http://"+serverAdd+"/getRole.php";
         details_url = "http://"+serverAdd+"/viewPatient.php";
@@ -268,6 +272,14 @@ public class StaffLogin extends AppCompatActivity {
                 patientStaff = false;
                 isDoctor = false;
 //------------------------------------------------------------------------------------------------
+
+                //Time for a handshake with the server
+//------------------------------------------------------------------------------------------------
+                //String encryptedUniqueKey;
+                //String initialRecv = getData(handshake_url,encryptedUniqueKey);
+//------------------------------------------------------------------------------------------------
+
+
 
                     //get Who tagged in first
 //-------------------------------------------------------------------------------

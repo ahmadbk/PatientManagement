@@ -11,14 +11,14 @@ import javax.crypto.spec.SecretKeySpec;
  */
 
 public class AES {
-    private String algorithm = "AES";
-    private byte[] keyValue;//=new byte[] {'a','b','c','d','e','f','g','h','a','b','c','d','e','f','g','h'};// your key
+    private static String algorithm = "AES";
+    private static byte[] keyValue;//=new byte[] {'a','b','c','d','e','f','g','h','a','b','c','d','e','f','g','h'};// your key
 
-    public AES(String key){
-        this.keyValue = key.getBytes();
-    }
+   public static void setKey(String key){
+       keyValue = Base64.decode(key, Base64.DEFAULT);
+   }
 
-    public String encrypt(String plainText) throws Exception
+    public static String encrypt(String plainText) throws Exception
     {
         Key key = generateKey();
         Cipher chiper = Cipher.getInstance(algorithm);
@@ -29,7 +29,7 @@ public class AES {
     }
 
     // Performs decryption
-    public String decrypt(String encryptedText) throws Exception
+    public static String decrypt(String encryptedText) throws Exception
     {
         // generate key
         Key key = generateKey();
@@ -42,7 +42,7 @@ public class AES {
     }
 
     //generateKey() is used to generate a secret key for AES algorithm
-    private Key generateKey() throws Exception
+    private static Key generateKey() throws Exception
     {
         Key key = new SecretKeySpec(keyValue, algorithm);
         return key;
