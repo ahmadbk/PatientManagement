@@ -65,7 +65,6 @@ public class Login extends AppCompatActivity {
 
     String get_role_url = "http://"+StaffLogin.serverAdd+"/getRole.php";
     String details_url = "http://"+StaffLogin.serverAdd+"/viewPatient.php";
-    String login_url = "http://"+StaffLogin.serverAdd+"/login.php";
     String diagnostics_url = "http://"+StaffLogin.serverAdd+"/Diagnostics.php";
     String observations_url = "http://"+StaffLogin.serverAdd+"/Observations.php";
     String prescriptions_url = "http://"+StaffLogin.serverAdd+"/Prescriptions.php";
@@ -318,7 +317,12 @@ public class Login extends AppCompatActivity {
                     {
                         //Get Basic Details
 //----------------------------------------------------------------------------------------------------------------------
-                        jsonPersonal = getData(details_url,tag_id);
+                        String dummy = getData(details_url,tag_id);
+                        try {
+                            jsonPersonal = AES.decrypt(dummy);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
                         try {
                             jsonObject = new JSONObject(jsonPersonal);
@@ -362,7 +366,13 @@ public class Login extends AppCompatActivity {
 
                         //Get Diagnostics
 //----------------------------------------------------------------------------------------------------------------------
-                        jsonPersonal = getData(diagnostics_url,tag_id);
+                        dummy = getData(diagnostics_url,tag_id);
+
+                        try {
+                            jsonPersonal = AES.decrypt(dummy);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
                         try {
                             jsonObject = new JSONObject(jsonPersonal);
@@ -389,8 +399,14 @@ public class Login extends AppCompatActivity {
 
                         //Observations
 //----------------------------------------------------------------------------------------------------------------------
-                        jsonPersonal = getData(observations_url,tag_id);
-                        System.out.println(jsonPersonal);
+                        dummy = getData(observations_url,tag_id);
+                        try {
+                            jsonPersonal = AES.decrypt(dummy);
+                            System.out.println(jsonPersonal);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
 
                         try {
                             jsonObject = new JSONObject(jsonPersonal);
@@ -422,7 +438,12 @@ public class Login extends AppCompatActivity {
 
                         //Next Dosage
 //----------------------------------------------------------------------------------------------------------------------
-                        jsonPersonal = getData(next_dosage_url,tag_id);
+                        dummy = getData(next_dosage_url,tag_id);
+                        try {
+                            jsonPersonal = AES.decrypt(dummy);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
                         try {
                             jsonObject = new JSONObject(jsonPersonal);
@@ -450,7 +471,12 @@ public class Login extends AppCompatActivity {
 
                         //Prescriptions
 //----------------------------------------------------------------------------------------------------------------------
-                        jsonPersonal = getData(prescriptions_url,tag_id);
+                        dummy = getData(prescriptions_url,tag_id);
+                        try {
+                            jsonPersonal = AES.decrypt(dummy);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
                         try {
                             jsonObject = new JSONObject(jsonPersonal);
@@ -486,7 +512,12 @@ public class Login extends AppCompatActivity {
 
                         //Allergies
 //----------------------------------------------------------------------------------------------------------------------
-                        jsonPersonal = getData(allergies_url,tag_id);
+                        dummy = getData(allergies_url,tag_id);
+                        try {
+                            jsonPersonal = AES.decrypt(dummy);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
                         try {
                             jsonObject = new JSONObject(jsonPersonal);
@@ -511,7 +542,12 @@ public class Login extends AppCompatActivity {
 //----------------------------------------------------------------------------------------------------------------------
                         //Medicine List
 //----------------------------------------------------------------------------------------------------------------------
-                        jsonPersonal = getData(medicine_list_url,tag_id);
+                        dummy = getData(medicine_list_url,tag_id);
+                        try {
+                            jsonPersonal = AES.decrypt(dummy);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
                         try {
                             jsonObject = new JSONObject(jsonPersonal);
@@ -533,7 +569,12 @@ public class Login extends AppCompatActivity {
 //----------------------------------------------------------------------------------------------------------------------
                         //Locations
 //----------------------------------------------------------------------------------------------------------------------
-                        jsonPersonal = getData(locations_url,tag_id);
+                        dummy = getData(locations_url,tag_id);
+                        try {
+                            jsonPersonal = AES.decrypt(dummy);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
                         try {
                             jsonObject = new JSONObject(jsonPersonal);
@@ -559,8 +600,14 @@ public class Login extends AppCompatActivity {
 
                         //Reports
 //----------------------------------------------------------------------------------------------------------------------
-                        jsonPersonal = getData(reports_url,tag_id);
-                        System.out.println(jsonPersonal);
+                        dummy = getData(reports_url,tag_id);
+                        try {
+                            jsonPersonal = AES.decrypt(dummy);
+                            System.out.println(jsonPersonal);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
 
                         try {
                             jsonObject = new JSONObject(jsonPersonal);
@@ -587,7 +634,12 @@ public class Login extends AppCompatActivity {
 //-------------------------------------------------------------------------------------------------------------
                         //Dosages
 //----------------------------------------------------------------------------------------------------------------------
-                        jsonPersonal = getData(dosages_url,tag_id);
+                        dummy = getData(dosages_url,tag_id);
+                        try {
+                            jsonPersonal = AES.decrypt(dummy);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
                         try {
                             jsonObject = new JSONObject(jsonPersonal);

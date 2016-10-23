@@ -15,7 +15,7 @@ public class AES {
     private static byte[] keyValue;//=new byte[] {'a','b','c','d','e','f','g','h','a','b','c','d','e','f','g','h'};// your key
 
    public static void setKey(String key){
-       keyValue = Base64.decode(key, Base64.DEFAULT);
+       keyValue = key.getBytes();
    }
 
     public static String encrypt(String plainText) throws Exception

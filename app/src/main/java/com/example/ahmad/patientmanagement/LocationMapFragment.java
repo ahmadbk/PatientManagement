@@ -110,7 +110,12 @@ public class LocationMapFragment extends Fragment {
 
             //Locations
 //----------------------------------------------------------------------------------------------------------------------
-            jsonPersonal = getData(locations_url,""+StaffLogin.patientDetails.getTagID());
+            String dummy = getData(locations_url,""+StaffLogin.patientDetails.getTagID());
+            try {
+                jsonPersonal = AES.decrypt(dummy);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             try {
                 jsonObject = new JSONObject(jsonPersonal);

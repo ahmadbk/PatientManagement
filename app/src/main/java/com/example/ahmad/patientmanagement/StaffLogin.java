@@ -45,9 +45,8 @@ public class StaffLogin extends AppCompatActivity {
 
     public static final String MIME_TEXT_PLAIN = "text/plain";
     public static final String TAG = "NfcDemo";
-    public static String serverAdd = "192.168.1.68";
+    public static String serverAdd = "192.168.1.4";
     public static String uniqueNumber= "12345678";
-    public static String symmetricKey = "";
     public static boolean patientStaff = false;
     public static boolean isDoctor = false;
     public static ArrayList<NextDosage> tempDosageArrayList = new ArrayList<NextDosage>();
@@ -213,7 +212,7 @@ public class StaffLogin extends AppCompatActivity {
         setAddress(text);
 
         Toast.makeText(StaffLogin.this,"Server address changed",Toast.LENGTH_LONG).show();
-        handshake_url = "http://"+serverAdd+"/staffLogin.php";
+        handshake_url = "http://"+serverAdd+"/handshake.php";
         staff_login_url = "http://"+serverAdd+"/staffLogin.php";
         get_role_url = "http://"+serverAdd+"/getRole.php";
         details_url = "http://"+serverAdd+"/viewPatient.php";
@@ -274,9 +273,10 @@ public class StaffLogin extends AppCompatActivity {
 //------------------------------------------------------------------------------------------------
 
                 //Time for a handshake with the server
-//------------------------------------------------------------------------------------------------
-                //String encryptedUniqueKey;
-                //String initialRecv = getData(handshake_url,encryptedUniqueKey);
+//-----------------------------------------------------------------------------------------------
+                String encryptedUniqueNumber = RSA.encrypt(uniqueNumber);
+                String hello1 = getData(handshake_url,encryptedUniqueNumber);
+                AES.setKey(RSA.decrypt(hello1));
 //------------------------------------------------------------------------------------------------
 
 
@@ -288,9 +288,13 @@ public class StaffLogin extends AppCompatActivity {
 //-------------------------------------------------------------------------------
                     if(output.equalsIgnoreCase("doctor") || output.equalsIgnoreCase("nurse"))
                     {
-                        jsonPersonal = getData(staff_login_url,tag_id);
-
-                            try {
+                        String temp = getData(staff_login_url,tag_id);
+                        try {
+                            jsonPersonal = AES.decrypt(temp);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        try {
                                 jsonObject = new JSONObject(jsonPersonal);
                                 jsonArray = jsonObject.getJSONArray("server_response");
 
@@ -320,8 +324,13 @@ public class StaffLogin extends AppCompatActivity {
 
                         //Get Basic Details
 //----------------------------------------------------------------------------------------------------------------------
-                        jsonPersonal = getData(details_url,tag_id);
+                        String dummy = getData(details_url,tag_id);
 
+                        try {
+                            jsonPersonal = AES.decrypt(dummy);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                         try {
                             jsonObject = new JSONObject(jsonPersonal);
                             jsonArray = jsonObject.getJSONArray("server_response");
@@ -362,8 +371,12 @@ public class StaffLogin extends AppCompatActivity {
 
                         //Get Diagnostics
 //----------------------------------------------------------------------------------------------------------------------
-                          jsonPersonal = getData(diagnostics_url,tag_id);
-
+                          dummy = getData(diagnostics_url,tag_id);
+                        try {
+                            jsonPersonal = AES.decrypt(dummy);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                         try {
                             jsonObject = new JSONObject(jsonPersonal);
                             jsonArray = jsonObject.getJSONArray("server_response");
@@ -389,8 +402,14 @@ public class StaffLogin extends AppCompatActivity {
 
                         //Observations
 //----------------------------------------------------------------------------------------------------------------------
-                        jsonPersonal = getData(observations_url,tag_id);
-                        System.out.println(jsonPersonal);
+                        dummy = getData(observations_url,tag_id);
+                        try {
+                            jsonPersonal = AES.decrypt(dummy);
+                            System.out.println(jsonPersonal);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
 
                         try {
                             jsonObject = new JSONObject(jsonPersonal);
@@ -422,7 +441,12 @@ public class StaffLogin extends AppCompatActivity {
 
                         //Prescriptions
 //----------------------------------------------------------------------------------------------------------------------
-                        jsonPersonal = getData(prescriptions_url,tag_id);
+                        dummy = getData(prescriptions_url,tag_id);
+                        try {
+                            jsonPersonal = AES.decrypt(dummy);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
                         try {
                             jsonObject = new JSONObject(jsonPersonal);
@@ -457,7 +481,12 @@ public class StaffLogin extends AppCompatActivity {
 
                         //Get Next Dosage
 //----------------------------------------------------------------------------------------------------------------------
-                        jsonPersonal = getData(next_dosage_url,tag_id);
+                        dummy = getData(next_dosage_url,tag_id);
+                        try {
+                            jsonPersonal = AES.decrypt(dummy);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
                         try {
                             jsonObject = new JSONObject(jsonPersonal);
@@ -485,7 +514,12 @@ public class StaffLogin extends AppCompatActivity {
 
                         //Allergies
 //----------------------------------------------------------------------------------------------------------------------
-                        jsonPersonal = getData(allergies_url,tag_id);
+                        dummy = getData(allergies_url,tag_id);
+                        try {
+                            jsonPersonal = AES.decrypt(dummy);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
                         try {
                             jsonObject = new JSONObject(jsonPersonal);
@@ -510,7 +544,12 @@ public class StaffLogin extends AppCompatActivity {
 //----------------------------------------------------------------------------------------------------------------------
                         //Medicine List
 //----------------------------------------------------------------------------------------------------------------------
-                        jsonPersonal = getData(medicine_list_url,tag_id);
+                        dummy = getData(medicine_list_url,tag_id);
+                        try {
+                            jsonPersonal = AES.decrypt(dummy);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
                         try {
                             jsonObject = new JSONObject(jsonPersonal);
@@ -532,7 +571,12 @@ public class StaffLogin extends AppCompatActivity {
 //----------------------------------------------------------------------------------------------------------------------
                         //Locations
 //----------------------------------------------------------------------------------------------------------------------
-                        jsonPersonal = getData(locations_url,tag_id);
+                        dummy = getData(locations_url,tag_id);
+                        try {
+                            jsonPersonal = AES.decrypt(dummy);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
                         try {
                             jsonObject = new JSONObject(jsonPersonal);
@@ -558,8 +602,14 @@ public class StaffLogin extends AppCompatActivity {
 
                         //Reports
 //----------------------------------------------------------------------------------------------------------------------
-                        jsonPersonal = getData(reports_url,tag_id);
-                        System.out.println(jsonPersonal);
+                        dummy = getData(reports_url,tag_id);
+                        try {
+                            jsonPersonal = AES.decrypt(dummy);
+                            System.out.println(jsonPersonal);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
 
                         try {
                             jsonObject = new JSONObject(jsonPersonal);
