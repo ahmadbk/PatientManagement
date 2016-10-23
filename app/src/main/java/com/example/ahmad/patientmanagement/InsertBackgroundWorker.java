@@ -5,6 +5,9 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -64,6 +67,21 @@ public class InsertBackgroundWorker extends AsyncTask<String,Void,String> {
             String allergy =params[1];
             Allergies allergies = new Allergies(allergy);
             StaffLogin.patientDetails.addToAllergyArrayList(allergies);
+            JSONObject object = new JSONObject();
+            try {
+                object.put("tag_id",patient_tag);
+                object.put("type",allergy);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            String dummy = "";
+            try {
+                dummy = AES.encrypt(object.toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
 //---------------------------------------------------------
             try {
                 URL url = new URL(add_allergy_url);
@@ -72,8 +90,8 @@ public class InsertBackgroundWorker extends AsyncTask<String,Void,String> {
                 httpURLConnection.setDoInput(true);
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String post_data = URLEncoder.encode("tag_id", "UTF-8") + "=" + URLEncoder.encode("" + patient_tag, "UTF-8") + "&"
-                        + URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode(allergy, "UTF-8");
+
+                String post_data = URLEncoder.encode("client_response", "UTF-8") + "=" + URLEncoder.encode("" + dummy, "UTF-8");
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -102,6 +120,21 @@ public class InsertBackgroundWorker extends AsyncTask<String,Void,String> {
             Diagnostics diagnostics = new Diagnostics(justDate,docName,description);
             StaffLogin.patientDetails.addToDiagnosticsArrayList(diagnostics);
 
+            JSONObject object = new JSONObject();
+            try {
+                object.put("tag_id",patient_tag);
+                object.put("doctor_tag",staff_tag);
+                object.put("description",description);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            String dummy = "";
+            try {
+                dummy = AES.encrypt(object.toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
             try {
                 URL url = new URL(add_diagnostics_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -109,9 +142,7 @@ public class InsertBackgroundWorker extends AsyncTask<String,Void,String> {
                 httpURLConnection.setDoInput(true);
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String post_data = URLEncoder.encode("tag_id", "UTF-8") + "=" + URLEncoder.encode("" + patient_tag, "UTF-8") + "&"
-                        + URLEncoder.encode("doctor_tag", "UTF-8") + "=" + URLEncoder.encode("" + staff_tag, "UTF-8") + "&"
-                        + URLEncoder.encode("description", "UTF-8") + "=" + URLEncoder.encode(description, "UTF-8");
+                String post_data = URLEncoder.encode("client_response", "UTF-8") + "=" + URLEncoder.encode("" + dummy, "UTF-8");
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -149,6 +180,27 @@ public class InsertBackgroundWorker extends AsyncTask<String,Void,String> {
             Prescriptions prescriptions = new Prescriptions(justDate,end_date,docName,medicine_name,qpd,"Active",morning,afternoon,evening,mealRelation);
             StaffLogin.patientDetails.addToPrescriptionsArrayList(prescriptions);
 
+            JSONObject object = new JSONObject();
+            try {
+                object.put("tag_id",patient_tag);
+                object.put("doctor_tag",staff_tag);
+                object.put("medicine_name",medicine_name);
+                object.put("quantity_per_dosage",qpd);
+                object.put("end_date",end_date);
+                object.put("morning",morning);
+                object.put("afternoon",afternoon);
+                object.put("evening",evening);
+                object.put("mealRelation",mealRelation);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            String dummy = "";
+            try {
+                dummy = AES.encrypt(object.toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
             try {
                 URL url = new URL(add_prescription_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -156,15 +208,7 @@ public class InsertBackgroundWorker extends AsyncTask<String,Void,String> {
                 httpURLConnection.setDoInput(true);
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String post_data = URLEncoder.encode("tag_id", "UTF-8") + "=" + URLEncoder.encode("" + patient_tag, "UTF-8") + "&"
-                        + URLEncoder.encode("doctor_tag", "UTF-8") + "=" + URLEncoder.encode("" + staff_tag, "UTF-8") + "&"
-                        + URLEncoder.encode("medicine_name", "UTF-8") + "=" + URLEncoder.encode("" + medicine_name, "UTF-8") + "&"
-                        + URLEncoder.encode("quantity_per_dosage", "UTF-8") + "=" + URLEncoder.encode("" + qpd, "UTF-8") + "&"
-                        + URLEncoder.encode("end_date", "UTF-8") + "=" + URLEncoder.encode(end_date, "UTF-8")+ "&"
-                        + URLEncoder.encode("morning", "UTF-8") + "=" + URLEncoder.encode(morning, "UTF-8")+ "&"
-                        + URLEncoder.encode("afternoon", "UTF-8") + "=" + URLEncoder.encode(afternoon, "UTF-8")+ "&"
-                        + URLEncoder.encode("evening", "UTF-8") + "=" + URLEncoder.encode(evening, "UTF-8")+ "&"
-                        + URLEncoder.encode("mealRelation", "UTF-8") + "=" + URLEncoder.encode(mealRelation, "UTF-8");
+                String post_data = URLEncoder.encode("client_response", "UTF-8") + "=" + URLEncoder.encode("" + dummy, "UTF-8");
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -199,6 +243,25 @@ public class InsertBackgroundWorker extends AsyncTask<String,Void,String> {
             Observations observations = new Observations(timeStamp,docName,bpn,bpd,temperature,pulse,weight);
             StaffLogin.patientDetails.addToObservationsArrayList(observations);
 
+            JSONObject object = new JSONObject();
+            try {
+                object.put("tag_id",patient_tag);
+                object.put("doctor_tag",staff_tag);
+                object.put("bpn",bpn);
+                object.put("bpd",bpd);
+                object.put("temperature",temperature);
+                object.put("pulse",pulse);
+                object.put("weight",weight);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            String dummy = "";
+            try {
+                dummy = AES.encrypt(object.toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
             try {
                 URL url = new URL(add_observation_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -206,13 +269,7 @@ public class InsertBackgroundWorker extends AsyncTask<String,Void,String> {
                 httpURLConnection.setDoInput(true);
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String post_data = URLEncoder.encode("tag_id", "UTF-8") + "=" + URLEncoder.encode("" + patient_tag, "UTF-8") + "&"
-                        + URLEncoder.encode("doctor_tag", "UTF-8") + "=" + URLEncoder.encode("" + staff_tag, "UTF-8") + "&"
-                        + URLEncoder.encode("bpn", "UTF-8") + "=" + URLEncoder.encode("" + bpn, "UTF-8") + "&"
-                        + URLEncoder.encode("bpd", "UTF-8") + "=" + URLEncoder.encode("" + bpd, "UTF-8") + "&"
-                        + URLEncoder.encode("temperature", "UTF-8") + "=" + URLEncoder.encode("" + temperature, "UTF-8") + "&"
-                        + URLEncoder.encode("pulse", "UTF-8") + "=" + URLEncoder.encode("" + pulse, "UTF-8") + "&"
-                        + URLEncoder.encode("weight", "UTF-8") + "=" + URLEncoder.encode(weight, "UTF-8");
+                String post_data = URLEncoder.encode("client_response", "UTF-8") + "=" + URLEncoder.encode("" + dummy, "UTF-8");
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -254,6 +311,22 @@ public class InsertBackgroundWorker extends AsyncTask<String,Void,String> {
                         StaffLogin.tempDosageArrayList.get(i).getQuantity(),period);
                 StaffLogin.patientDetails.addToDosageArrayList(dosage);
 
+                JSONObject object = new JSONObject();
+                try {
+                    object.put("tag_id",patient_tag);
+                    object.put("doctor_tag",staff_tag);
+                    object.put("time",timeStamp);
+                    object.put("prescription_id",StaffLogin.tempDosageArrayList.get(i).getPrescription_id());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                String dummy = "";
+                try {
+                    dummy = AES.encrypt(object.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
                 try {
                     URL url = new URL(add_dosage_url);
                     HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -261,10 +334,7 @@ public class InsertBackgroundWorker extends AsyncTask<String,Void,String> {
                     httpURLConnection.setDoInput(true);
                     OutputStream outputStream = httpURLConnection.getOutputStream();
                     BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                    String post_data = URLEncoder.encode("tag_id", "UTF-8") + "=" + URLEncoder.encode("" + patient_tag, "UTF-8") + "&"
-                            + URLEncoder.encode("nurse_tag", "UTF-8") + "=" + URLEncoder.encode("" + staff_tag, "UTF-8") + "&"
-                            + URLEncoder.encode("time", "UTF-8") + "=" + URLEncoder.encode(timeStamp, "UTF-8") + "&"
-                            + URLEncoder.encode("prescription_id", "UTF-8") + "=" + URLEncoder.encode(StaffLogin.tempDosageArrayList.get(i).getPrescription_id(), "UTF-8");
+                    String post_data = URLEncoder.encode("client_response", "UTF-8") + "=" + URLEncoder.encode("" + dummy, "UTF-8");
                     bufferedWriter.write(post_data);
                     bufferedWriter.flush();
                     bufferedWriter.close();
