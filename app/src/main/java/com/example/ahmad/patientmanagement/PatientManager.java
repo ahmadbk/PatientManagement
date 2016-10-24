@@ -29,10 +29,23 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Date;
 
 public class PatientManager extends AppCompatActivity {
@@ -47,6 +60,8 @@ public class PatientManager extends AppCompatActivity {
     private boolean tempDateSet = false;
     private String tempDate = "";
     private boolean isPDF = false;
+    String getFile_url = "http://"+StaffLogin.serverAdd+"/EncryptFile.php";
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -185,19 +200,36 @@ public class PatientManager extends AppCompatActivity {
     public void openFileButtonClick(View view) {
         String fileName = ((Spinner) findViewById(R.id.fileSpinner)).getSelectedItem().toString();
         String ttt = "";
+        String dummy = "";
 
         for(int i =0;i<StaffLogin.patientDetails.getReportArrayList().size();i++)
         {
             String fN = StaffLogin.patientDetails.getReportArrayList().get(i).getType();
             if(fN.equalsIgnoreCase(fileName))
             {
+                String typeOfFile = StaffLogin.patientDetails.getReportArrayList().get(i).getType();
+                String tagNum = ""+StaffLogin.patientDetails.getTagID();
+
+                JSONObject object = new JSONObject();
+                try {
+                    object.put("tag_id",tagNum);
+                    object.put("typeOfFile",typeOfFile);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    dummy = AES.encrypt(object.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
                 ttt = StaffLogin.patientDetails.getReportArrayList().get(i).getNameOfFile();
                 String docType = ttt.substring(ttt.length()-3);
                 if(docType.equalsIgnoreCase("pdf"))isPDF = true;
                 else isPDF = false;
             }
         }
-        new DownloadFile().execute("http://" + StaffLogin.serverAdd + "/" + ttt, "/sdcard/" + ttt);
+        new DownloadFile().execute(getFile_url, "/sdcard/" + ttt,dummy);
     }
 
     @Override
@@ -263,19 +295,28 @@ public class PatientManager extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {
+            String fileUrl = strings[0];  //getfile php link --> dont need it, new filename received from the server changed later
+            String fileName = strings[1]; //Path and name to be saved on the tablet with extension
+            String toSend = strings[2];  //json object with tagID and type of file needed (encrypted)
 
-            String fileUrl = strings[0];
-            String fileName = strings[1];
+            String recvdFileName = getData(fileUrl,toSend); //receive file name as a string from server which is encrypted
 
-            File pdfFile = new File(fileName);
+            fileUrl = "http://"+StaffLogin.serverAdd+"/"+recvdFileName;
+
+            String encryptFileName = "/sdcard/encrypt.enc"; //We are creating an encrypted file temporarily
+            File encFile = new File(encryptFileName);
 
             try {
-                pdfFile.createNewFile();
+                encFile.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            FileDownloader.downloadFile(fileUrl, pdfFile);
+            downloadFile(fileUrl, encFile); //download the contents of the file on the server and put it in the temp file
+            try {
+                AES.decryptFile(encryptFileName,fileName);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             return fileName;
         }
 
@@ -297,4 +338,65 @@ public class PatientManager extends AppCompatActivity {
             }
         }
     }
+    public String getData(String link,String jsonObject)
+    {
+        String data = "";
+        String jsonString = "";
+        try {
+            URL url = new URL(link);
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setDoOutput(true);
+            httpURLConnection.setDoInput(true);
+            OutputStream outputStream = httpURLConnection.getOutputStream();
+            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+            String post_data = URLEncoder.encode("client_response", "UTF-8") + "=" + URLEncoder.encode(jsonObject, "UTF-8");
+            bufferedWriter.write(post_data);
+            bufferedWriter.flush();
+
+            bufferedWriter.close();
+            outputStream.close();
+            InputStream inputStream = httpURLConnection.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+            StringBuilder stringBuilder = new StringBuilder();
+            while ((jsonString = bufferedReader.readLine()) != null) {
+                stringBuilder.append(jsonString + "\n");
+            }
+            bufferedReader.close();
+            inputStream.close();
+            httpURLConnection.disconnect();
+            data = stringBuilder.toString().trim();
+        }
+        catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return data;
+    }
+
+    private static final int MEGABYTE = 1024*1024;
+
+    public void downloadFile(String fileUrl, File directory){
+        try{
+            URL url = new URL(fileUrl);
+            HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
+            urlConnection.connect();
+
+            InputStream inputStream = urlConnection.getInputStream();
+            FileOutputStream fileOutputStream = new FileOutputStream(directory);
+
+            byte[] buffer = new byte[MEGABYTE];
+            int bufferLength = 0;
+            String newBuffer = "";
+            while((bufferLength = inputStream.read(buffer)) > 0){
+                fileOutputStream.write(buffer, 0, bufferLength);
+            }
+            fileOutputStream.close();
+        }
+        catch (FileNotFoundException e) {e.printStackTrace();}
+        catch (MalformedURLException e) {e.printStackTrace();}
+        catch (IOException e) {e.printStackTrace();}
+    }
+
 }

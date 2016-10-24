@@ -1,9 +1,12 @@
 package com.example.ahmad.patientmanagement;
 import android.util.Base64;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.security.Key;
 
 import javax.crypto.Cipher;
+import javax.crypto.CipherInputStream;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
@@ -39,6 +42,29 @@ public class AES {
         byte[] decValue = chiper.doFinal(decordedValue);
         String decryptedValue = new String(decValue);
         return decryptedValue;
+    }
+
+    // Performs decryption
+    public static void decryptFile(String fileURL, String newFileURL) throws Exception
+    {
+        // generate key
+        Key key = generateKey();
+        Cipher chiper = Cipher.getInstance(algorithm);
+        chiper.init(Cipher.DECRYPT_MODE, key);
+        FileInputStream fis = new FileInputStream(fileURL);
+        FileOutputStream fos = new FileOutputStream(newFileURL);
+        CipherInputStream input = new CipherInputStream(fis, chiper);
+
+        final byte[] decryptedData = new byte[4096];
+        int decryptedRead;
+        while ((decryptedRead = input.read(decryptedData)) >= 0) {
+            fos.write(decryptedData, 0, decryptedRead);
+        }
+        fos.flush();
+        fos.close();
+        input.close();
+        fis.close();
+
     }
 
     //generateKey() is used to generate a secret key for AES algorithm
