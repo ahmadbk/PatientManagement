@@ -1,36 +1,92 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="150pt"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:orientation="horizontal"
 
-    android:background="@drawable/border"
+
     tools:context="com.example.ahmad.patientmanagement.PrescriptionFragment">
 
     <TextView
-        android:id="@+id/doctor"
-        android:layout_width="wrap_content"
+        android:layout_width="10pt"
+        android:layout_height="match_parent" />
+    <LinearLayout
+    android:layout_width="125pt"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+        android:background="@drawable/border2">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+        android:layout_width="40pt"
         android:layout_height="wrap_content"
         android:textSize="15dp"
         android:textStyle="bold"
         android:layout_margin="@dimen/text_margin"
-        android:text="Doctor : "/>
+        android:text="Doctor "/>
+        <TextView
+            android:id="@+id/doctor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="Doctor "/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/medicine"
-        android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="40pt"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:text="Medicine "
+            android:layout_margin="@dimen/text_margin" />
+        <TextView
+            android:id="@+id/medicine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="15dp"
-        android:textStyle="bold"
-        android:text="Medicine Name : "
-        android:layout_margin="@dimen/text_margin" />
-    <TextView
-        android:id="@+id/quantity"
-        android:layout_width="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="40pt"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:layout_margin="@dimen/text_margin"
+            android:text="Quantity"/>
+        <TextView
+            android:id="@+id/quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="15dp"
-        android:textStyle="bold"
-        android:layout_margin="@dimen/text_margin"/>
+        android:orientation="horizontal">
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,55 +94,61 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+
+            android:layout_marginLeft="@dimen/text_margin"
+            android:layout_marginRight="@dimen/text_margin"
+            android:layout_marginTop="@dimen/text_margin">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="48pt"
                 android:layout_height="wrap_content"
-                android:text="Morning : "
+                android:text="Morning"
                 android:textSize="15dp"
-                android:textStyle="bold"
-                android:layout_margin="@dimen/text_margin"/>
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:textStyle="bold"/>
+            <ImageView
+                android:layout_width="8pt"
+                android:layout_height="8pt"
+                android:scaleType="fitCenter"
                 android:clickable="false"
-                android:layout_margin="@dimen/text_margin"
                 android:id="@+id/morningCheckBox" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/text_margin"
+            android:layout_marginRight="@dimen/text_margin">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="48pt"
                 android:layout_height="wrap_content"
-                android:text="Afternoon : "
+                android:text="Afternoon"
                 android:textSize="15dp"
-                android:textStyle="bold"
-                android:layout_margin="@dimen/text_margin"/>
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:textStyle="bold"/>
+            <ImageView
+                android:layout_width="8pt"
+                android:layout_height="8pt"
+                android:scaleType="fitCenter"
                 android:clickable="false"
-                android:layout_margin="@dimen/text_margin"
                 android:id="@+id/noonCheckBox"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/text_margin"
+            android:layout_marginRight="@dimen/text_margin"
+            android:layout_marginBottom="@dimen/text_margin">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="48pt"
                 android:layout_height="wrap_content"
-                android:text="Evening : "
+                android:text="Evening"
                 android:textSize="15dp"
-                android:textStyle="bold"
-                android:layout_margin="@dimen/text_margin"/>
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:textStyle="bold"/>
+            <ImageView
+                android:layout_width="8pt"
+                android:layout_height="8pt"
+                android:scaleType="fitCenter"
                 android:clickable="false"
-                android:layout_margin="@dimen/text_margin"
                 android:id="@+id/eveningCheckBox"/>
         </LinearLayout>
     </LinearLayout>
@@ -111,3 +173,4 @@
 
 </LinearLayout>
 
+</LinearLayout>

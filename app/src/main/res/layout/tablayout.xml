@@ -12,8 +12,8 @@
         app:tabGravity="fill"
         app:tabMode="scrollable"
         android:background="@color/material_blue_grey_800"
-        app:tabIndicatorColor="@color/windowBackground"
-        app:tabSelectedTextColor="@color/textColorPrimary"
+        app:tabIndicatorColor="@color/red"
+        app:tabSelectedTextColor="@color/windowBackground"
         app:tabTextColor="@color/textColorPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

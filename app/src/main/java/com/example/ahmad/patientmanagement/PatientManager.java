@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -49,13 +50,9 @@ import java.net.URLEncoder;
 import java.util.Date;
 
 public class PatientManager extends AppCompatActivity {
-    NavigationView mNavigationView;
     FragmentManager mFragmentManager;
     FragmentTransaction mFragmentTransaction;
     DatePickerFragment mDialogFragment;
-    String json_string;
-    JSONObject jsonObject;
-    JSONArray jsonArray;
     PatientDetails patientDetails;
     private boolean tempDateSet = false;
     private String tempDate = "";
@@ -73,6 +70,17 @@ public class PatientManager extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_manager);
+
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        if(!StaffLogin.patientStaff) {
+            if (StaffLogin.isDoctor)
+                toolbar.setBackgroundResource(R.color.maroon);
+            else
+                toolbar.setBackgroundResource(R.color.green);
+            toolbar.setSubtitle("Logged in as " + StaffLogin.staffDetails.getFirst_name() + " " + StaffLogin.staffDetails.getLast_name());
+        }
+        else
+            toolbar.setSubtitle("Logged in as " + StaffLogin.patientDetails.getFirstname() + " " + StaffLogin.patientDetails.getSurname());
 
         /**
          *Setup the DrawerLayout and NavigationView
@@ -92,18 +100,7 @@ public class PatientManager extends AppCompatActivity {
                 return;
             }
 
-            // Create a new Fragment to be placed in the activity layout
             PatientInfo firstFragment = new PatientInfo();
-           /* Bundle bundle = new Bundle();
-            bundle.putString("First Name", patientDetails.getFirstname());
-            bundle.putString("Last Name", patientDetails.getSurname());
-            bundle.putString("Date of Birth", patientDetails.getDOB());
-            bundle.putString("Date Admitted", patientDetails.getDateAdmitted());
-            bundle.putString("Emergency Contact", patientDetails.getEmergencyContact());
-            firstFragment.setArguments(bundle);*/
-
-
-            // Add the fragment to the 'fragment_container' FrameLayout
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.patientView, firstFragment).commit();
         }
@@ -111,6 +108,8 @@ public class PatientManager extends AppCompatActivity {
         mFragmentTransaction = mFragmentManager.beginTransaction();
         Fragment tabFrags = new TabFragment();
         mFragmentTransaction.replace(R.id.containerView, tabFrags).commit();
+
+
 
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }

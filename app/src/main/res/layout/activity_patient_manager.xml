@@ -14,7 +14,7 @@
         android:background="@color/colorPrimary"
         android:id="@+id/toolbar"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:title="Patient Management" />
+        app:title="Patient Management"/>
 
 
     <LinearLayout

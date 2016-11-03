@@ -3,25 +3,28 @@
     android:layout_width="140pt"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/black"
     tools:context="com.example.ahmad.patientmanagement.PatientInfo">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="45pt"
-                android:layout_height="wrap_content" />
             <ImageView
                 android:id="@+id/image"
+                android:layout_marginTop="5pt"
+                android:layout_marginBottom="5pt"
+                android:layout_marginLeft="45pt"
                 android:layout_width="50pt"
                 android:layout_height="50pt"
-                android:src="@drawable/image"
                 android:scaleType="fitXY"/>
-        </LinearLayout>
-
+<LinearLayout
+    android:layout_width="120pt"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10pt"
+    android:layout_marginTop="15pt"
+    android:layout_marginBottom="15pt"
+    android:background="@drawable/border2"
+    android:orientation="vertical">
     <TextView
         android:layout_width="wrap_content"
+        android:layout_marginTop="@dimen/text_margin"
         android:layout_height="wrap_content"
         android:text="Name:"
         android:id="@+id/firstName"
@@ -54,5 +57,7 @@
         android:id="@+id/emergCon"
         android:textSize="20dp"
         android:layout_margin="@dimen/text_margin"/>
+</LinearLayout>
+
 </LinearLayout>
 

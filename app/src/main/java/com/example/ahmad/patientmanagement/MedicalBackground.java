@@ -29,7 +29,6 @@ public class MedicalBackground extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
-        System.out.println("Resuming");
         int size = StaffLogin.patientDetails.getAllergiesArrayList().size();
         StringArray = new String[size];
         for(int i = 0; i < size; i++)

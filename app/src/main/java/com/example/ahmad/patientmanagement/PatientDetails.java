@@ -24,15 +24,15 @@ public class PatientDetails {
     public PatientDetails(int tID, String fN, String sN, String Dob, String dA, String eC, String g, String pN, String a, String cW, String smoker,String alcoholic, boolean is,String imageName)
     {
         this.setTagID(tID);
-        this.setFirstname(fN);
-        this.setSurname(sN);
+        this.setFirstname(makeHeading(fN));
+        this.setSurname(makeHeading(sN));
         this.setDOB(Dob);
         this.setDateAdmitted(dA);
         this.setEmergencyContact(eC);
-        this.setGender(g);
+        this.setGender(makeHeading(g));
         this.setPhone_num(pN);
         this.setAddress(a);
-        this.setCurr_ward_name(cW);
+        this.setCurr_ward_name(makeHeading(cW));
         this.setSmoker(smoker);
         this.setAlcoholic(alcoholic);
         this.setStaff(is);
@@ -245,5 +245,11 @@ public class PatientDetails {
 
     public void setLocationArrayList(ArrayList<Location> locationArrayList) {
         this.locationArrayList = locationArrayList;
+    }
+
+    private String makeHeading(String text){
+       char c = text.charAt(0);
+        c = Character.toUpperCase(c);
+        return c + text.substring(1);
     }
 }

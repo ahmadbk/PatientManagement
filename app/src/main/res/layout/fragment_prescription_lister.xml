@@ -1,36 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.ahmad.patientmanagement.PrescriptionListerFragment"
     android:layout_height="match_parent"
     android:layout_width="200pt"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="@color/black">
     <ScrollView
         android:layout_width="150pt"
         android:layout_height="match_parent">
         <LinearLayout
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="150pt"
+
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:id="@+id/linearLayout"
-            tools:context="com.example.ahmad.patientmanagement.PrescriptionListerFragment">
+            >
             <FrameLayout
-                android:layout_width="150pt"
+                android:layout_marginTop="3pt"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/prescriptionsView"></FrameLayout>
             <FrameLayout
-                android:layout_width="150pt"
+                android:layout_width="match_parent"
+                android:layout_marginTop="3pt"
                 android:layout_height="wrap_content"
                 android:id="@+id/prescriptionsView1"></FrameLayout>
             <FrameLayout
-                android:layout_width="150pt"
+                android:layout_marginTop="3pt"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/prescriptionsView2"></FrameLayout>
             <FrameLayout
-                android:layout_width="150pt"
+                android:layout_marginTop="3pt"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/prescriptionsView3"></FrameLayout>
             <FrameLayout
-                android:layout_width="150pt"
+                android:layout_marginTop="3pt"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/prescriptionsView4"></FrameLayout>
         </LinearLayout>

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -25,29 +26,29 @@ public class PrescriptionFragment extends Fragment {
         prescriptions = getArguments().getStringArray("prescriptions");
         try {
             TextView doctorView = (TextView) view.findViewById(R.id.doctor);
-            doctorView.setText("Doctor : " + prescriptions[0]);
+            doctorView.setText(prescriptions[0]);
 
             TextView medView = (TextView) view.findViewById(R.id.medicine);
-            medView.setText("Med Name : " + prescriptions[1]);
+            medView.setText(prescriptions[1]);
 
             TextView quanView = (TextView) view.findViewById(R.id.quantity);
-            quanView.setText("Quantity : " + prescriptions[2]);
+            quanView.setText(prescriptions[2]);
 
             TextView statusView = (TextView) view.findViewById(R.id.status);
-            statusView.setText("Status : " + prescriptions[3]);
+            statusView.setText(prescriptions[3]);
 
-            CheckBox morningCheck = (CheckBox)view.findViewById(R.id.morningCheckBox);
-            morningCheck.setChecked(prescriptions[4].equals("true") ? true : false);
+            ImageView morningCheck = (ImageView) view.findViewById(R.id.morningCheckBox);
+            morningCheck.setImageResource(prescriptions[4].equals("true") ? R.drawable.tick : R.drawable.cross);
 
-            CheckBox noonCheck = (CheckBox)view.findViewById(R.id.noonCheckBox);
-            noonCheck.setChecked(prescriptions[5].equals("true") ? true : false);
+            ImageView noonCheck = (ImageView)view.findViewById(R.id.noonCheckBox);
+            noonCheck.setImageResource(prescriptions[5].equals("true") ? R.drawable.tick : R.drawable.cross);
 
-            CheckBox eveningCheck = (CheckBox)view.findViewById(R.id.eveningCheckBox);
-            eveningCheck.setChecked(prescriptions[6].equals("true") ? true : false);
+            ImageView eveningCheck = (ImageView)view.findViewById(R.id.eveningCheckBox);
+            eveningCheck.setImageResource(prescriptions[6].equals("true") ? R.drawable.tick : R.drawable.cross);
 
             TextView mealRelation = (TextView)view.findViewById(R.id.mealRelationTextView);
-            String temp = prescriptions[7].equals("BeforeMeal") ? "before" : "after";
-            mealRelation.setText("Medicine to be taken "+temp+" meals");
+            String temp = prescriptions[7].equals("BeforeMeal") ? "Before" : "After";
+            mealRelation.setText(temp+" Meal");
         }
         catch(Exception e){
             e.printStackTrace();

@@ -1,41 +1,52 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="200pt"
     android:layout_height="match_parent"
+    android:layout_marginTop="3pt"
+    android:layout_marginBottom="3pt"
     android:id="@+id/addPrescription"
     tools:context="com.example.ahmad.patientmanagement.AddPrescriptionFragment">
 
     <LinearLayout
-        android:layout_width="200pt"
+        android:layout_width="125pt"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_marginLeft="5pt"
+        android:orientation="vertical"
+        android:background="@drawable/border2">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:textStyle="bold"
+            android:layout_margin="@dimen/text_margin"
             android:text="Add a new Prescription"/>
         <LinearLayout
-            android:layout_width="200pt"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="100pt"
+                android:layout_width="75pt"
                 android:layout_height="wrap_content"
-                android:text="Medicine Name: "/>
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:text="Medicine Name"/>
             <Spinner
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/spinner"/>
         </LinearLayout>
         <LinearLayout
-            android:layout_width="200pt"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="100pt"
+                android:layout_width="75pt"
                 android:layout_height="wrap_content"
-                android:text="Dosage Quantity : "/>
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:text="Dosage Quantity"/>
             <EditText
                 android:layout_width="20pt"
                 android:layout_height="wrap_content"
@@ -43,52 +54,69 @@
                 android:id="@+id/dosageQuantity"/>
         </LinearLayout>
         <LinearLayout
-            android:layout_width="200pt"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/text_margin"
+            android:layout_marginRight="@dimen/text_margin"
+            android:layout_marginTop="@dimen/text_margin"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="100pt"
+                android:layout_width="75pt"
                 android:layout_height="wrap_content"
-                android:text="Morning : "/>
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:text="Morning"/>
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/addMorningCheckBox"/>
         </LinearLayout>
         <LinearLayout
-            android:layout_width="200pt"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/text_margin"
+            android:layout_marginRight="@dimen/text_margin"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="100pt"
+                android:layout_width="75pt"
                 android:layout_height="wrap_content"
-                android:text="Afternoon : "/>
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:text="Afternoon"/>
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/addAfternoonCheckBox"/>
         </LinearLayout>
         <LinearLayout
-            android:layout_width="200pt"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/text_margin"
+            android:layout_marginRight="@dimen/text_margin"
+            android:layout_marginBottom="@dimen/text_margin"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="100pt"
+                android:layout_width="75pt"
                 android:layout_height="wrap_content"
-                android:text="Evening : "/>
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:text="Evening"/>
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/addEveningCheckBox"/>
         </LinearLayout>
         <LinearLayout
-            android:layout_width="200pt"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="100pt"
+                android:layout_width="75pt"
                 android:layout_height="wrap_content"
-                android:text="End Date : "
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:text="End Date"
                 android:id="@+id/endDatePrescription"/>
             <ImageView
                 android:layout_width="18pt"
@@ -99,34 +127,26 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin">
             <TextView
-                android:layout_width="100pt"
+                android:layout_width="75pt"
                 android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:textStyle="bold"
                 android:text="Take before meal?"/>
             <Spinner
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/mealRelationSpinner"></Spinner>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="200pt"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="100pt"
-                android:layout_height="wrap_content"
-                android:text="Status:"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Active"/>
-        </LinearLayout>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add"
+        <ImageView
+            android:layout_width="20pt"
+            android:layout_height="20pt"
+            android:src="@drawable/add"
+            android:scaleType="fitCenter"
+            android:layout_marginLeft="80pt"
             android:onClick="addPrescriptionButtonClick"/>
     </LinearLayout>
 
