@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -32,6 +33,7 @@ public class DosageFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_dosage, container, false);
         int size = StaffLogin.patientDetails.getDosageArrayList().size();
+        LinearLayout layout = (LinearLayout)view.findViewById(R.id.dosageLinearLayout);
         boolean[] flags = new boolean[size];
         for(boolean b: flags)b = false;
 

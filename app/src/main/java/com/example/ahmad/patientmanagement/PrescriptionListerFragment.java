@@ -6,10 +6,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 
 public class PrescriptionListerFragment extends Fragment {
-    private int mRowCount = 1;
+    private int mRowCount;
     private String[][] prescriptions;
     private FragmentTransaction fragTransaction;
 
@@ -29,32 +31,21 @@ public class PrescriptionListerFragment extends Fragment {
         mRowCount = StaffLogin.patientDetails.getPrescriptionsArrayList().size();
         prescriptions = new String[mRowCount][5];
 
-       /* //temporary population of array
-        prescriptions[0][0] = "a";
-        prescriptions[0][1] = "b";
-        prescriptions[0][2] = "2";
-        prescriptions[0][3] = "3";
-        prescriptions[0][4] = "e";
-        prescriptions[1][0] = "f";
-        prescriptions[1][1] = "g";
-        prescriptions[1][2] = "1";
-        prescriptions[1][3] = "1";
-        prescriptions[1][4] = "j";
-        prescriptions[2][0] = "k";
-        prescriptions[2][1] = "l";
-        prescriptions[2][2] = "3";
-        prescriptions[2][3] = "2";
-        prescriptions[2][4] = "o";*/
-
+        LinearLayout layout = (LinearLayout)view.findViewById(R.id.prescriptionLinearLayout);
 
         for(int i = 0; i < mRowCount; i++){
+
+            FrameLayout frame = new FrameLayout(this.getContext());
+            frame.setId(View.generateViewId());
+            layout.addView(frame);
+
             PrescriptionFragment fragment = new PrescriptionFragment();
             Bundle bundle = new Bundle();
             prescriptions[i]=StaffLogin.patientDetails.getPrescriptionsArrayList().get(i).getArray();
             bundle.putStringArray("prescriptions", prescriptions[i]);
             fragment.setArguments(bundle);
             fragTransaction = getFragmentManager().beginTransaction();
-            fragTransaction.replace(getId(i), fragment, "fragment" + i);
+            fragTransaction.replace(frame.getId(), fragment, "fragment" + i);
             fragTransaction.commit();
         }
 
@@ -68,16 +59,5 @@ public class PrescriptionListerFragment extends Fragment {
         }
 
         return view;
-    }
-
-    private int getId(int index) {
-        switch(index){
-            case 0: return R.id.prescriptionsView;
-            case 1: return R.id.prescriptionsView1;
-            case 2: return R.id.prescriptionsView2;
-            case 3: return R.id.prescriptionsView3;
-            case 4: return R.id.prescriptionsView4;
-        }
-        return R.id.prescriptionsView;
     }
 }

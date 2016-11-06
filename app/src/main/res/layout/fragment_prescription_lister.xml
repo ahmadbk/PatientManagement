@@ -14,32 +14,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:id="@+id/prescriptionLinearLayout"
             >
-            <FrameLayout
-                android:layout_marginTop="3pt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/prescriptionsView"></FrameLayout>
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_marginTop="3pt"
-                android:layout_height="wrap_content"
-                android:id="@+id/prescriptionsView1"></FrameLayout>
-            <FrameLayout
-                android:layout_marginTop="3pt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/prescriptionsView2"></FrameLayout>
-            <FrameLayout
-                android:layout_marginTop="3pt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/prescriptionsView3"></FrameLayout>
-            <FrameLayout
-                android:layout_marginTop="3pt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/prescriptionsView4"></FrameLayout>
         </LinearLayout>
     </ScrollView>
     <FrameLayout

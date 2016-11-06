@@ -2,37 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
     android:layout_width="200pt"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.ahmad.patientmanagement.DiagnosticsFragmentLister"
     android:orientation="horizontal">
     <ScrollView
         android:layout_width="100pt"
         android:layout_height="match_parent">
         <LinearLayout
-        xmlns:tools="http://schemas.android.com/tools"
+
         android:layout_width="100pt"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:id="@+id/linearLayout"
-        tools:context="com.example.ahmad.patientmanagement.DiagnosticsFragmentLister">
-        <FrameLayout
-            android:layout_width="100pt"
-            android:layout_height="wrap_content"
-            android:id="@+id/diagnosticsView"></FrameLayout>
-        <FrameLayout
-            android:layout_width="100pt"
-            android:layout_height="wrap_content"
-            android:id="@+id/diagnosticsView1"></FrameLayout>
-        <FrameLayout
-            android:layout_width="100pt"
-            android:layout_height="wrap_content"
-            android:id="@+id/diagnosticsView2"></FrameLayout>
-        <FrameLayout
-            android:layout_width="100pt"
-            android:layout_height="wrap_content"
-            android:id="@+id/diagnosticsView3"></FrameLayout>
-        <FrameLayout
-            android:layout_width="100pt"
-            android:layout_height="wrap_content"
-            android:id="@+id/diagnosticsView4"></FrameLayout>
+        android:id="@+id/diagnosticLinearLayout">
         </LinearLayout>
     </ScrollView>
     <FrameLayout
