@@ -10,7 +10,7 @@ public class NextDosage {
     public NextDosage(String mN, String q, String mR, String pID){
 
         this.setMealRelation(mR);
-        this.setMedName(mN);
+        this.setMedName(StaffLogin.makeHeading(mN));
         this.setQuantity(q);
         this.setPrescription_id(pID);
 

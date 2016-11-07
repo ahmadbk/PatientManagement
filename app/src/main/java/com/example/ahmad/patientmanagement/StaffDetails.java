@@ -12,9 +12,9 @@ public class StaffDetails {
     {
         this.setTag(t);
         this.setRole(r);
-        this.setFirst_name(f);
-        this.setLast_name(l);
-        this.setWard_name(w);
+        this.setFirst_name(StaffLogin.makeHeading(f));
+        this.setLast_name(StaffLogin.makeHeading(l));
+        this.setWard_name(StaffLogin.makeHeading(w));
     }
 
     public int getTag() {
@@ -56,4 +56,6 @@ public class StaffDetails {
     public void setWard_name(String ward_name) {
         this.ward_name = ward_name;
     }
+
+
 }

@@ -1,8 +1,10 @@
 package com.example.ahmad.patientmanagement;
 
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,10 +66,22 @@ public class DosageFragment extends Fragment {
                     tempArr.add(0, StaffLogin.patientDetails.getDosageArrayList().get(counter));
                     flags[counter] = true;
                     groupCount++;
-                    if(groupCount > 5)return view;
+                    //if(groupCount > 5)return view;
                 }
 
-                TextView textView = (TextView)view.findViewById(getTextViewId(groupCount-1));
+                LinearLayout frame = new LinearLayout(getContext());
+                frame.setOrientation(LinearLayout.VERTICAL);
+                frame.setBackgroundResource(R.drawable.border);
+                frame.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+
+                TextView textView = new TextView(this.getContext());//(TextView)view.findViewById(getTextViewId(groupCount-1));
+                textView.setId(View.generateViewId());
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                params.setMargins(8,8,8,8);
+
+                textView.setLayoutParams(params);
+                textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
+                textView.setTypeface(null, Typeface.BOLD);
                 textView.setText(timeStamp + ": " +
                         StaffLogin.patientDetails.getDosageArrayList().get(counter).getPeriod());
 
@@ -78,7 +92,10 @@ public class DosageFragment extends Fragment {
                 for(int i = 0; i < s; i++){
                     StringArray[i] = tempArr.get(i).toString();
                 }
-                ListView listView = (ListView)view.findViewById(getId(groupCount-1));
+                ListView listView = new ListView(getContext());//(ListView)view.findViewById(getId(groupCount-1));
+                listView.setId(View.generateViewId());
+                params.setMargins(16,16,16,16);
+                listView.setLayoutParams(params);
                 ArrayAdapter adapter = new ArrayAdapter<String>(this.getActivity(), R.layout.listview, StringArray);
                 listView.setAdapter(adapter);
 
@@ -90,10 +107,14 @@ public class DosageFragment extends Fragment {
                     totalHeight += listItem.getMeasuredHeight();
                 }
 
-                ViewGroup.LayoutParams params = listView.getLayoutParams();
+                params = (LinearLayout.LayoutParams)listView.getLayoutParams();
                 params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
                 listView.setLayoutParams(params);
                 listView.requestLayout();
+
+                frame.addView(textView);
+                frame.addView(listView);
+                layout.addView(frame);
 
                 while (tempArr.size() > 0) {
                     System.out.println(tempArr.get(0).getMedicineName() + " : " + tempArr.get(0).getTime());
@@ -101,31 +122,10 @@ public class DosageFragment extends Fragment {
                 }
             }
             counter++;
+            if(groupCount > size) break;
         }
 
         return view;
-    }
-
-    private int getId(int index) {
-        switch(index){
-            case 0: return R.id.dosageListView;
-            case 1: return R.id.dosageListView1;
-            case 2: return R.id.dosageListView2;
-            case 3: return R.id.dosageListView3;
-            case 4: return R.id.dosageListView4;
-        }
-        return R.id.dosageListView4;
-    }
-
-    private int getTextViewId(int index){
-        switch(index){
-            case 0: return R.id.dosageGroupText;
-            case 1: return R.id.dosageGroupText1;
-            case 2: return R.id.dosageGroupText2;
-            case 3: return R.id.dosageGroupText3;
-            case 4: return R.id.dosageGroupText4;
-        }
-        return R.id.dosageGroupText;
     }
 
     private String timeStampToDate(String ts){

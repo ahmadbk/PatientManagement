@@ -10,8 +10,8 @@ public class Diagnostics {
     Diagnostics(String date, String doctor, String descrip)
     {
         this.setDate(date);
-        this.setDoctor_name(doctor);
-        this.setDescription(descrip);
+        this.setDoctor_name(StaffLogin.makeHeading(doctor));
+        this.setDescription(StaffLogin.makeHeading(descrip));
     }
 
     public String getDate() {

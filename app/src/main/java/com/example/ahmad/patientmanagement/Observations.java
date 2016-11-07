@@ -10,7 +10,7 @@ public class Observations {
     Observations(String d, String dN, String bpn, String bpd, String t, String p, String w)
     {
         this.setDate(d);
-        this.setDoc_name(dN);
+        this.setDoc_name(StaffLogin.makeHeading(dN));
         this.setBpn(bpn);
         this.setBpd(bpd);
         this.setTemperature(t);

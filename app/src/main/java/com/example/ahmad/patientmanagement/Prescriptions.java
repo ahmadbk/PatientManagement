@@ -12,10 +12,10 @@ public class Prescriptions {
     {
         this.setStart_date(sD);
         this.setEnd_date(eD);
-        this.setDoctor_name(makeHeading(dN));
-        this.setMedicine_name(makeHeading(mN));
+        this.setDoctor_name(StaffLogin.makeHeading(dN));
+        this.setMedicine_name(StaffLogin.makeHeading(mN));
         this.setQuantity_per_dosage(q);
-        this.setStatus(makeHeading(s));
+        this.setStatus(StaffLogin.makeHeading(s));
         this.setMorning(mor);
         this.setEvening(eve);
         this.setAfternoon(aft);
@@ -117,26 +117,5 @@ public class Prescriptions {
         return array;
     }
 
-    private String makeHeading(String text){
-        int numSpaces = 0;
-        ArrayList<Integer>indices = new ArrayList<>();
-        for(int i = 0; i < text.length(); i++){
-            if(text.charAt(i) == ' '){
-                numSpaces++;
-                indices.add(i);
-            }
-        }
-        if(numSpaces > 0) {
-            String[] words = new String[numSpaces + 1];
-            for (int i = 0; i < numSpaces + 1; i++)
-                words[i] = makeHeading(i == 0 ? text.substring(0, indices.get(i)) : (i == numSpaces ? text.substring(indices.get(i-1) + 1) : text.substring(indices.get(i-1)+1, indices.get(i))));
-            String output = "";
-            for(int i = 0; i < numSpaces + 1; i++)
-                output = output + words[i] + " ";
-            return output;
-        }
-        char c = text.charAt(0);
-        c = Character.toUpperCase(c);
-        return c + text.substring(1);
-    }
+
 }

@@ -34,6 +34,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 /**
@@ -132,6 +133,7 @@ public class LocationMapFragment extends Fragment {
                     locationArrayList.add(location);
                     count++;
                 }
+                Collections.sort(locationArrayList);
                 StaffLogin.patientDetails.setLocationArrayList(locationArrayList);
             } catch (JSONException e) {
                 e.printStackTrace();

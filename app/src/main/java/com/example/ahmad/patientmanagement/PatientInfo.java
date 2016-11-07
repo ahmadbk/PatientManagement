@@ -56,6 +56,10 @@ public class PatientInfo extends Fragment {
         String contact = StaffLogin.patientDetails.getEmergencyContact();
         emergency.setText(contact);
 
+        TextView bloodType = (TextView)view.findViewById(R.id.bloodType);
+        String blood = StaffLogin.patientDetails.getBloodGroup();
+        bloodType.setText(blood);
+
         if(!StaffLogin.patientDetails.getImageName().equalsIgnoreCase("default")){
             ImageView image = (ImageView)view.findViewById(R.id.image);
             Bitmap bmp = BitmapFactory.decodeFile("/sdcard/"+StaffLogin.patientDetails.getImageName());

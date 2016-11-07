@@ -8,7 +8,7 @@ public class Allergies {
     String type;
 
     Allergies(String t){
-        this.setType(t);
+        this.setType(StaffLogin.makeHeading(t));
     }
 
     public String getType() {

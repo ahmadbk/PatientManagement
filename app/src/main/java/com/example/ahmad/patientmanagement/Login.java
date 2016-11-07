@@ -329,7 +329,7 @@ public class Login extends AppCompatActivity {
                             jsonArray = jsonObject.getJSONArray("server_response");
 
                             int count = 0;
-                            String firstname, surname, dob, dA, eC,g,pN,a,cname,smoker,alcoholic,image;
+                            String firstname, surname, dob, dA, eC,g,pN,a,cname,smoker,alcoholic,image,bG;
                             while (count<jsonArray.length())
                             {
                                 JSONObject JO = jsonArray.getJSONObject(count);
@@ -345,7 +345,8 @@ public class Login extends AppCompatActivity {
                                 smoker = JO.getString("smoker");
                                 alcoholic = JO.getString("alcoholic");
                                 image = JO.getString("image");
-                                StaffLogin.patientDetails = new PatientDetails(Integer.parseInt(tag_id), firstname,surname,dob,dA,eC,g,pN,a,cname,smoker,alcoholic,true,image);
+                                bG = JO.getString("bloodGroup");
+                                StaffLogin.patientDetails = new PatientDetails(Integer.parseInt(tag_id), firstname,surname,dob,dA,eC,g,pN,a,cname,smoker,alcoholic,true,image,bG);
                                 count++;
                             }
                         } catch (JSONException e) {

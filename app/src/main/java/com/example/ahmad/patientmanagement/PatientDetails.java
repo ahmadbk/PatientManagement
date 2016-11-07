@@ -9,7 +9,7 @@ public class PatientDetails {
 
     boolean isStaff = false;
     private int tagID;
-    private String firstname, surname, DOB, dateAdmitted, emergencyContact,gender,phone_num,address, curr_ward_name, smoker, alcoholic,imageName;
+    private String firstname, surname, DOB, dateAdmitted, emergencyContact,gender,phone_num,address, curr_ward_name, smoker, alcoholic,imageName,bloodGroup;
     private ArrayList<Diagnostics> diagnosticsArrayList = new ArrayList<Diagnostics>();
     private ArrayList<Observations> observationsArrayList = new ArrayList<Observations>();
     private ArrayList<Prescriptions> prescriptionsArrayList = new ArrayList<Prescriptions>();
@@ -21,22 +21,23 @@ public class PatientDetails {
 
     public PatientDetails(){}
     
-    public PatientDetails(int tID, String fN, String sN, String Dob, String dA, String eC, String g, String pN, String a, String cW, String smoker,String alcoholic, boolean is,String imageName)
+    public PatientDetails(int tID, String fN, String sN, String Dob, String dA, String eC, String g, String pN, String a, String cW, String smoker,String alcoholic, boolean is,String imageName,String bG)
     {
         this.setTagID(tID);
-        this.setFirstname(makeHeading(fN));
-        this.setSurname(makeHeading(sN));
+        this.setFirstname(StaffLogin.makeHeading(fN));
+        this.setSurname(StaffLogin.makeHeading(sN));
         this.setDOB(Dob);
         this.setDateAdmitted(dA);
         this.setEmergencyContact(eC);
-        this.setGender(makeHeading(g));
+        this.setGender(StaffLogin.makeHeading(g));
         this.setPhone_num(pN);
         this.setAddress(a);
-        this.setCurr_ward_name(makeHeading(cW));
+        this.setCurr_ward_name(StaffLogin.makeHeading(cW));
         this.setSmoker(smoker);
         this.setAlcoholic(alcoholic);
         this.setStaff(is);
         this.setImageName(imageName);
+        this.setBloodGroup(bG);
     }
 
 
@@ -66,6 +67,14 @@ public class PatientDetails {
 
     public void setReportArrayList(ArrayList<Report> reportArrayList) {
         this.reportArrayList = reportArrayList;
+    }
+
+    public String getBloodGroup() {
+        return bloodGroup;
+    }
+
+    public void setBloodGroup(String bloodGroup) {
+        this.bloodGroup = bloodGroup;
     }
 
     public ArrayList<NextDosage> getNextDosageArrayList() {
@@ -245,11 +254,18 @@ public class PatientDetails {
 
     public void setLocationArrayList(ArrayList<Location> locationArrayList) {
         this.locationArrayList = locationArrayList;
+        int size = this.locationArrayList.size();
+        for(int i = 0; i < size; i++){
+            for(int j = i+1; j < size; j++){
+                if(this.locationArrayList.get(i).getTime_stamp().equals(this.locationArrayList.get(j).getTime_stamp()))
+                    if(this.locationArrayList.get(i).getWard_name().equals(this.locationArrayList.get(j).getWard_name())){
+                        this.locationArrayList.remove(j);
+                        j--;
+                        size--;
+                    }
+            }
+        }
+
     }
 
-    private String makeHeading(String text){
-       char c = text.charAt(0);
-        c = Character.toUpperCase(c);
-        return c + text.substring(1);
-    }
 }

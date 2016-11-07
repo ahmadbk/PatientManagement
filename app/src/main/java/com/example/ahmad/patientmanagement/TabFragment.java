@@ -80,8 +80,8 @@ public class TabFragment extends Fragment {
                 case 4 : if(StaffLogin.isDoctor) return new ObservationsListerFragment();
                     else return new LabFragment();
                 case 5: return new LabFragment();
-                case 6: return new LocationListerFragment();
-                case 7: return new LocationMapFragment();
+                case 6: return new LocationMapFragment();
+                case 7: return new LocationListerFragment();
             }
             return null;
         }
@@ -130,8 +130,8 @@ public class TabFragment extends Fragment {
                 case 5:
                     return "Lab";
                 case 6:
-                    return "Location";
-                case 7: return "Map";
+                    return "Map";
+                case 7: return "Locations";
             }
             return null;
         }

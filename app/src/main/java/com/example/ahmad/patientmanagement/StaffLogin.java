@@ -336,7 +336,7 @@ public class StaffLogin extends AppCompatActivity {
                             jsonArray = jsonObject.getJSONArray("server_response");
 
                             int count = 0;
-                            String firstname, surname, dob, dA, eC,g,pN,a,cname,smoker,alcoholic,image;
+                            String firstname, surname, dob, dA, eC,g,pN,a,cname,smoker,alcoholic,image,bG;
                             while (count<jsonArray.length())
                             {
                                 JSONObject JO = jsonArray.getJSONObject(count);
@@ -352,7 +352,9 @@ public class StaffLogin extends AppCompatActivity {
                                 smoker = JO.getString("smoker");
                                 alcoholic = JO.getString("alcoholic");
                                 image = JO.getString("image");
-                                patientDetails = new PatientDetails(Integer.parseInt(tag_id), firstname,surname,dob,dA,eC,g,pN,a,cname,smoker,alcoholic,true,image);
+                                bG = JO.getString("bloodGroup");
+
+                                patientDetails = new PatientDetails(Integer.parseInt(tag_id), firstname,surname,dob,dA,eC,g,pN,a,cname,smoker,alcoholic,true,image,bG);
                                 count++;
                             }
                         } catch (JSONException e) {
@@ -715,5 +717,30 @@ public class StaffLogin extends AppCompatActivity {
             return data;
         }
 
+    }
+
+    public static String makeHeading(String text){
+        int numSpaces = 0;
+        ArrayList<Integer>indices = new ArrayList<>();
+        for(int i = 0; i < text.length(); i++){
+            if(text.charAt(i) == ' '){
+                numSpaces++;
+                indices.add(i);
+            }
+        }
+        if(numSpaces > 0) {
+            String[] words = new String[numSpaces + 1];
+            for (int i = 0; i < numSpaces + 1; i++)
+                words[i] = makeHeading(i == 0 ? text.substring(0, indices.get(i)) : (i == numSpaces ? text.substring(indices.get(i-1) + 1) : text.substring(indices.get(i-1)+1, indices.get(i))));
+            String output = "";
+            for(int i = 0; i < numSpaces + 1; i++)
+                output = output + words[i] + (i < numSpaces ? " " : "");
+            return output;
+        }
+
+        char c = text.charAt(0);
+        c = Character.toUpperCase(c);
+
+            return c + text.substring(1);
     }
 }

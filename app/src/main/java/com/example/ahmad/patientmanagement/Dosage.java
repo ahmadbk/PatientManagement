@@ -10,10 +10,10 @@ public class Dosage {
     Dosage(String nurse, String time, String medicineName, String quantity,String period)
     {
         this.setQuantity(quantity);
-        this.setMedicineName(medicineName);
-        this.setNurse(nurse);
+        this.setMedicineName(StaffLogin.makeHeading(medicineName));
+        this.setNurse(StaffLogin.makeHeading(nurse));
         this.setTime(time);
-        this.setPeriod(period);
+        this.setPeriod(StaffLogin.makeHeading(period));
     }
 
     public String getPeriod() {
