@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/border"
+    android:layout_margin="@dimen/text_margin"
     tools:context="com.example.ahmad.patientmanagement.NextDosageFragment">
 
     <TextView

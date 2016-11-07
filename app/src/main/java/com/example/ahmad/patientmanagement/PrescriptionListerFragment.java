@@ -37,6 +37,7 @@ public class PrescriptionListerFragment extends Fragment {
 
             FrameLayout frame = new FrameLayout(this.getContext());
             frame.setId(View.generateViewId());
+            frame.setPadding(frame.getPaddingLeft(), frame.getPaddingTop()+4, frame.getPaddingRight(), frame.getPaddingBottom()+4);
             layout.addView(frame);
 
             PrescriptionFragment fragment = new PrescriptionFragment();

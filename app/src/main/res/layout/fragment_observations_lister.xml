@@ -2,16 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
+    android:background="@color/white"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     tools:context="com.example.ahmad.patientmanagement.ObservationsListerFragment">
     <ScrollView
         android:layout_width="125pt"
+        android:layout_marginTop="3pt"
         android:layout_height="match_parent">
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="100pt"
             android:layout_height="match_parent"
             android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/darkRed"
+                android:text="Past Observations"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

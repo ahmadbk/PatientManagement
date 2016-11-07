@@ -1,6 +1,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_marginLeft="5pt"
     android:layout_height="match_parent"
     tools:context="com.example.ahmad.patientmanagement.AddObservationFragment">
 
@@ -11,118 +12,137 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/darkRed"
             android:textSize="20dp"
+            android:layout_marginTop="3pt"
             android:textStyle="bold"
             android:text="Add a new Observation"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp">
+            android:layout_margin="8dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="130pt"
+                android:layout_height="wrap_content"
+                android:text="Blood Pressure"
+                android:layout_marginTop="20dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <SeekBar
+                    android:id="@+id/seekBar1"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="130pt"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:max="120"/>
+
+                <TextView
+                    android:layout_width="25pt"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/bpn"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <SeekBar
+                    android:id="@+id/seekBar2"
+                    android:layout_width="130pt"
+                    android:layout_marginLeft="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:max="70"/>
+                <TextView
+                    android:layout_width="25pt"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/bpd"/>
+            </LinearLayout>
             <TextView
                 android:layout_width="25pt"
                 android:layout_height="wrap_content"
-                android:text="BPN : "/>
-            <SeekBar
-                android:id="@+id/seekBar1"
-                android:layout_width="110pt"
+                android:text="Temp"
+                android:layout_marginTop="20dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:max="120"/>
+                android:orientation="horizontal">
+
+                <SeekBar
+                    android:id="@+id/seekBar3"
+                    android:layout_width="130pt"
+                    android:layout_marginLeft="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:max="30"/>
+                <TextView
+                    android:layout_width="25pt"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/temp"/>
+            </LinearLayout>
             <TextView
                 android:layout_width="25pt"
                 android:layout_height="wrap_content"
-                android:id="@+id/bpn"/>
+                android:text="Pulse"
+                android:layout_marginTop="20dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <SeekBar
+                    android:id="@+id/seekBar4"
+                    android:layout_width="130pt"
+                    android:layout_marginLeft="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:max="160"/>
+                <TextView
+                    android:layout_width="25pt"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/pulse"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="25pt"
+                android:layout_height="wrap_content"
+                android:text="Weight"
+                android:layout_marginTop="20dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <SeekBar
+                    android:id="@+id/seekBar5"
+                    android:layout_width="130pt"
+                    android:layout_marginLeft="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:max="160"/>
+                <TextView
+                    android:layout_width="25pt"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/weight"/>
+            </LinearLayout>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp">
-            <TextView
-                android:layout_width="25pt"
-                android:layout_height="wrap_content"
-                android:text="BPD : "/>
-            <SeekBar
-                android:id="@+id/seekBar2"
-                android:layout_width="110pt"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:max="70"/>
-            <TextView
-                android:layout_width="25pt"
-                android:layout_height="wrap_content"
-                android:id="@+id/bpd"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp">
-            <TextView
-                android:layout_width="25pt"
-                android:layout_height="wrap_content"
-                android:text="Temp : "/>
-            <SeekBar
-                android:id="@+id/seekBar3"
-                android:layout_width="110pt"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:max="30"/>
-            <TextView
-                android:layout_width="25pt"
-                android:layout_height="wrap_content"
-                android:id="@+id/temp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp">
-            <TextView
-                android:layout_width="25pt"
-                android:layout_height="wrap_content"
-                android:text="Pulse : "/>
-            <SeekBar
-                android:id="@+id/seekBar4"
-                android:layout_width="110pt"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:max="160"/>
-            <TextView
-                android:layout_width="25pt"
-                android:layout_height="wrap_content"
-                android:id="@+id/pulse"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp">
-            <TextView
-                android:layout_width="25pt"
-                android:layout_height="wrap_content"
-                android:text="Weight : "/>
-            <SeekBar
-                android:id="@+id/seekBar5"
-                android:layout_width="110pt"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:max="160"/>
-            <TextView
-                android:layout_width="25pt"
-                android:layout_height="wrap_content"
-                android:id="@+id/weight"/>
-        </LinearLayout>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add"
+
+        <ImageView
+            android:layout_width="20pt"
+            android:layout_height="20pt"
+            android:src="@drawable/add"
+            android:scaleType="fitCenter"
+            android:layout_marginLeft="70pt"
             android:onClick="addObservationButtonCLick"/>
     </LinearLayout>
 

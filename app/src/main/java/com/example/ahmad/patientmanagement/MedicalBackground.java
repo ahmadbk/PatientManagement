@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -37,11 +38,11 @@ public class MedicalBackground extends Fragment {
         ArrayAdapter adapter = new ArrayAdapter<String>(this.getActivity(), R.layout.listview, StringArray);
         listView.setAdapter(adapter);
 
-        TextView smokerView = (TextView)getView().findViewById(R.id.smokerId);
-        TextView alcoholicView = (TextView)getView().findViewById((R.id.alcoholicId));
+        ImageView smokerView = (ImageView) getView().findViewById(R.id.smokerId);
+        ImageView alcoholicView = (ImageView) getView().findViewById((R.id.alcoholicId));
 
-        smokerView.setText(StaffLogin.patientDetails.getSmoker());
-        alcoholicView.setText(StaffLogin.patientDetails.getAlcoholic());
+        smokerView.setImageResource(StaffLogin.patientDetails.getSmoker().equalsIgnoreCase("yes") ? R.drawable.tick : R.drawable.cross);
+        alcoholicView.setImageResource(StaffLogin.patientDetails.getAlcoholic().equalsIgnoreCase("yes") ? R.drawable.tick : R.drawable.cross);
 
         if(!StaffLogin.patientStaff) {
             if (StaffLogin.isDoctor) {

@@ -1,34 +1,44 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="200pt"
     android:layout_height="match_parent"
+    android:layout_marginTop="3pt"
+    android:layout_marginBottom="3pt"
+    android:layout_marginLeft="5pt"
     android:id="@+id/addDiagnostic"
     tools:context="com.example.ahmad.patientmanagement.AddDiagnosticFragment">
 
     <LinearLayout
-        android:layout_width="200pt"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
+            android:layout_marginTop="3pt"
+            android:textColor="@color/darkRed"
             android:textStyle="bold"
             android:text="Add a new diagnostic"/>
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Enter Diagnostic Notes"/>
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
-            android:hint="Tap to start typing"
-            android:id="@+id/notesEditText"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add"
-            android:onClick="addDiagnosticButtonClick"/>
+            android:layout_margin="8dp"
+            android:orientation="horizontal">
+            <EditText
+                android:layout_width="70pt"
+                android:layout_height="wrap_content"
+                android:hint="Enter Diagnostic Notes"
+                android:id="@+id/notesEditText"/>
+            <ImageView
+                android:layout_width="20pt"
+                android:layout_height="20pt"
+                android:src="@drawable/add"
+                android:scaleType="fitCenter"
+                android:layout_marginLeft="10pt"
+                android:onClick="addDiagnosticButtonClick"/>
+        </LinearLayout>
+
     </LinearLayout>
 
 </FrameLayout>

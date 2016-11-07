@@ -8,11 +8,13 @@
             tools:context="com.example.ahmad.patientmanagement.NextDosageListerFragment">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:orientation="horizontal">
         <LinearLayout
             android:layout_width="150pt"
+            android:layout_marginTop="3pt"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
@@ -20,11 +22,12 @@
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:textStyle="bold"
-                android:layout_margin="16dp"
+                android:textColor="@color/darkRed"
+                android:layout_margin="8dp"
                 android:text="Next Dosage"/>
             <ScrollView
                 android:layout_width="wrap_content"
-                android:layout_height="140pt">
+                android:layout_height="wrap_content">
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -106,7 +109,7 @@
                 android:onClick="nextDosageSubmitOnClick"/>
         </LinearLayout>
         <FrameLayout
-            android:layout_width="wrap_content"
+            android:layout_width="200pt"
             android:layout_height="wrap_content"
             android:id="@+id/dosagesFragment"></FrameLayout>
     </LinearLayout>

@@ -2,18 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
     android:layout_width="200pt"
+    android:background="@color/white"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.ahmad.patientmanagement.DiagnosticsFragmentLister"
     android:orientation="horizontal">
     <ScrollView
-        android:layout_width="100pt"
+        android:layout_width="150pt"
         android:layout_height="match_parent">
         <LinearLayout
 
         android:layout_width="100pt"
+            android:layout_marginTop="3pt"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:id="@+id/diagnosticLinearLayout">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/darkRed"
+                android:layout_margin="8dp"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:text="Past Diagnostics"/>
         </LinearLayout>
     </ScrollView>
     <FrameLayout

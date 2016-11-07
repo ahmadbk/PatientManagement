@@ -11,4 +11,10 @@
     <color name="red">#FF0000</color>
     <color name="maroon">#660033</color>
     <color name="green">#336600</color>
+    <color name="white">#FFFFFF</color>
+    <color name="pastelGreen">#77DD77</color>
+    <color name="mintGreen">#98FF98</color>
+    <color name="darkRed">#8B0000</color>
+    <color name="lightGrey">#F6F6F6</color>
+    <color name="darkGray">#A9A9A9</color>
 </resources>

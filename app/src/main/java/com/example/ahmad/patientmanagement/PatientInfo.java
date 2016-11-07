@@ -30,10 +30,10 @@ public class PatientInfo extends Fragment {
         String lastname = StaffLogin.patientDetails.getSurname();
 
         TextView nameView = (TextView)view.findViewById(R.id.firstName);
-        nameView.setText("First Name : " + firstName);
+        nameView.setText(firstName);
 
         TextView surnameView = (TextView)view.findViewById(R.id.lastName);
-        surnameView.setText("Last Names : " + lastname);
+        surnameView.setText(lastname);
 
         TextView dobView = (TextView)view.findViewById(R.id.dob);
         String id = StaffLogin.patientDetails.getDOB();
@@ -46,15 +46,15 @@ public class PatientInfo extends Fragment {
         String m = month+"";
         if(month<10)m="0"+m;
         String dob = year + "-" + m + "-" + date;
-        dobView.setText("Date of Birth : " + dob);
+        dobView.setText(dob);
 
         TextView admittedView = (TextView)view.findViewById(R.id.dateAdmitted);
         String admitted = StaffLogin.patientDetails.getDateAdmitted();
-        admittedView.setText("Date Admitted: " + admitted);
+        admittedView.setText(admitted);
 
         TextView emergency = (TextView)view.findViewById(R.id.emergCon);
         String contact = StaffLogin.patientDetails.getEmergencyContact();
-        emergency.setText("Contact : " + contact);
+        emergency.setText(contact);
 
         if(!StaffLogin.patientDetails.getImageName().equalsIgnoreCase("default")){
             ImageView image = (ImageView)view.findViewById(R.id.image);
