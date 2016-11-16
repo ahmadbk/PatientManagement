@@ -3,40 +3,29 @@ package com.example.ahmad.patientmanagement;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.nfc.NfcAdapter;
-import android.nfc.Tag;
-import android.nfc.tech.Ndef;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.TextureView;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -54,7 +43,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.Date;
 
 public class PatientManager extends AppCompatActivity {
     FragmentManager mFragmentManager;
@@ -75,10 +63,16 @@ public class PatientManager extends AppCompatActivity {
      */
     private GoogleApiClient client;
 
+    @Override
+    public Context getApplicationContext() {
+        return super.getApplicationContext();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SessionThread sessionThread = new SessionThread();
+        sessionThread.execute();
 
         setContentView(R.layout.activity_patient_manager);
 
@@ -137,6 +131,7 @@ public class PatientManager extends AppCompatActivity {
         }
 
         handleIntent(getIntent());
+
     }
 
     @Override
@@ -322,6 +317,13 @@ public class PatientManager extends AppCompatActivity {
         new DownloadFile().execute(getFile_url, "/sdcard/" + ttt,dummy);
     }
 
+    public void destroy()
+    {
+        onDestroy();
+        //Intent intent = new Intent(PatientManager.this, Login.class);
+        //PatientManager.this.startActivity(intent);
+    }
+
     @Override
     protected void onDestroy() {
 
@@ -428,6 +430,37 @@ public class PatientManager extends AppCompatActivity {
             }
         }
     }
+
+    private class SessionThread extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            for(int i = 0; i<10;i++)
+            {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(10-(i+1));
+
+
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            destroy();
+            super.onPostExecute(aVoid);
+        }
+    }
+
+
+
+
+
     public String getData(String link,String jsonObject)
     {
         String data = "";
