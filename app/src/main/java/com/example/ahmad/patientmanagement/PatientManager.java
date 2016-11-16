@@ -1,8 +1,14 @@
 package com.example.ahmad.patientmanagement;
 
+import android.app.Activity;
+import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
+import android.nfc.NfcAdapter;
+import android.nfc.Tag;
+import android.nfc.tech.Ndef;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -14,6 +20,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.TextureView;
 import android.view.View;
@@ -53,6 +60,9 @@ public class PatientManager extends AppCompatActivity {
     FragmentManager mFragmentManager;
     FragmentTransaction mFragmentTransaction;
     DatePickerFragment mDialogFragment;
+    private NfcAdapter mNfcAdapter;
+    public static final String MIME_TEXT_PLAIN = "text/plain";
+    public static final String TAG = "NfcDemo";
     PatientDetails patientDetails;
     private boolean tempDateSet = false;
     private String tempDate = "";
@@ -69,6 +79,7 @@ public class PatientManager extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_patient_manager);
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
@@ -109,10 +120,90 @@ public class PatientManager extends AppCompatActivity {
         Fragment tabFrags = new TabFragment();
         mFragmentTransaction.replace(R.id.containerView, tabFrags).commit();
 
-
-
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
+        //Setting the NFC Adapter
+        mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        if(mNfcAdapter == null){
+            Toast.makeText(this,
+                    "NFC NOT supported on this devices!",
+                    Toast.LENGTH_LONG).show();
+            finish();
+        }else if(!mNfcAdapter.isEnabled()){
+            Toast.makeText(this,
+                    "NFC NOT Enabled!",
+                    Toast.LENGTH_LONG).show();
+            finish();
+        }
+
+        handleIntent(getIntent());
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        setupForegroundDispatch(this, mNfcAdapter);
+
+    }
+
+    @Override
+    protected void onPause() {
+        /**
+         * Call this before onPause, otherwise an IllegalArgumentException is thrown as well.
+         */
+        stopForegroundDispatch(this, mNfcAdapter);
+
+        super.onPause();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        /**
+         * This method gets called, when a new Intent gets associated with the current activity instance.
+         * Instead of creating a new activity, onNewIntent will be called. For more information have a look
+         * at the documentation.
+         *
+         * In our case this method gets called, when the user attaches a Tag to the device.
+         */
+        handleIntent(intent);
+    }
+
+    public static void setupForegroundDispatch(final Activity activity, NfcAdapter adapter) {
+        final Intent intent = new Intent(activity.getApplicationContext(), activity.getClass());
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
+        final PendingIntent pendingIntent = PendingIntent.getActivity(activity.getApplicationContext(), 0, intent, 0);
+
+        IntentFilter[] filters = new IntentFilter[1];
+        String[][] techList = new String[][]{};
+
+        // Notice that this is the same filter as in our manifest.
+        filters[0] = new IntentFilter();
+        filters[0].addAction(NfcAdapter.ACTION_NDEF_DISCOVERED);
+        filters[0].addCategory(Intent.CATEGORY_DEFAULT);
+        try {
+            filters[0].addDataType(MIME_TEXT_PLAIN);
+        } catch (IntentFilter.MalformedMimeTypeException e) {
+            throw new RuntimeException("Check your mime type.");
+        }
+
+        adapter.enableForegroundDispatch(activity, pendingIntent, filters, techList);
+    }
+
+    public static void stopForegroundDispatch(final Activity activity, NfcAdapter adapter) {
+        adapter.disableForegroundDispatch(activity);
+    }
+
+    private void handleIntent(Intent intent) {
+        String action = intent.getAction();
+        if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)) {
+
+        } else if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)) {
+
+        }
+    }
+
 
     public void setDate(View v) {
         mDialogFragment = new DatePickerFragment();

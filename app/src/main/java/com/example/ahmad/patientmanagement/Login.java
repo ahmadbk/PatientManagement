@@ -46,6 +46,7 @@ public class Login extends AppCompatActivity {
     public static final String TAG = "NfcDemo";
 
     private NfcAdapter mNfcAdapter;
+    boolean checkNFC = false;
 
     String jsonPersonal;
     JSONObject jsonObject;
@@ -92,8 +93,6 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-
 
         if(!StaffLogin.isDoctor){
             EditText firstEdit = (EditText)findViewById(R.id.surnameEditText);
@@ -183,7 +182,8 @@ public class Login extends AppCompatActivity {
 
     private void handleIntent(Intent intent) {
         String action = intent.getAction();
-        if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)) {
+        if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action) && !checkNFC) {
+            checkNFC = true;
 
             String type = intent.getType();
             if (MIME_TEXT_PLAIN.equals(type)) {
@@ -194,7 +194,8 @@ public class Login extends AppCompatActivity {
             } else {
                 Log.d(TAG, "Wrong mime type: " + type);
             }
-        } else if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)) {
+        } else if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(action) && !checkNFC) {
+            checkNFC = false;
 
             // In case we would still use the Tech Discovered Intent
             Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
@@ -698,6 +699,7 @@ public class Login extends AppCompatActivity {
                 dosageArrayList = new ArrayList<Dosage>();
 
             }
+            checkNFC = false;
         }
 
         public String getData(String link,String tag_id)

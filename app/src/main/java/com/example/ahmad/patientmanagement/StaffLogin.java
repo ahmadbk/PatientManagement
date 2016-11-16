@@ -49,6 +49,7 @@ public class StaffLogin extends AppCompatActivity {
     public static String uniqueNumber= "12345678";
     public static boolean patientStaff = false;
     public static boolean isDoctor = false;
+    boolean checkNFCFlag = false;
     public static ArrayList<NextDosage> tempDosageArrayList = new ArrayList<NextDosage>();
 
     //private NfcAdapter nfcAdapter;
@@ -175,8 +176,8 @@ public class StaffLogin extends AppCompatActivity {
 
     private void handleIntent(Intent intent) {
         String action = intent.getAction();
-        if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)) {
-
+        if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action) && !checkNFCFlag) {
+            checkNFCFlag = true;
             String type = intent.getType();
             if (MIME_TEXT_PLAIN.equals(type)) {
 
@@ -186,8 +187,8 @@ public class StaffLogin extends AppCompatActivity {
             } else {
                 Log.d(TAG, "Wrong mime type: " + type);
             }
-        } else if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)) {
-
+        } else if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(action) && !checkNFCFlag) {
+            checkNFCFlag = true;
             // In case we would still use the Tech Discovered Intent
             Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
             String[] techList = tag.getTechList();
@@ -223,7 +224,7 @@ public class StaffLogin extends AppCompatActivity {
         medicine_list_url = "http://"+serverAdd+"/MedicineList.php";
         locations_url = "http://"+serverAdd+"/Locations.php";
         reports_url = "http://"+serverAdd+"/Reports.php";
-        next_dosage_url = "http://"+StaffLogin.serverAdd+"/NextDosage.php";
+        next_dosage_url = "http://"+serverAdd+"/NextDosage.php";
     }
 
     public static void setAddress(String s){
@@ -676,6 +677,7 @@ public class StaffLogin extends AppCompatActivity {
                 }
 
             }
+            checkNFCFlag = false;
         }
 
         public String getData(String link,String tag_id)
