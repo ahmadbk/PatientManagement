@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 
 /**
@@ -31,7 +33,7 @@ public class NextDosageListerFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_next_dosage_lister, container, false);
         mRowCount = StaffLogin.patientDetails.getNextDosageArrayList().size();
-        System.out.println(mRowCount);
+        System.out.println(StaffLogin.isDoctor);
         nextDosages= new String[mRowCount][3];
 
         for(int i = 0; i < mRowCount; i++){
@@ -56,10 +58,11 @@ public class NextDosageListerFragment extends Fragment {
             }
         }
 
+        LinearLayout layout = (LinearLayout)view.findViewById(R.id.nextDosageLinearLayout);
+
         for(int i = mRowCount; i < 5; i++){
-            CheckBox cb = (CheckBox)view.findViewById(getCheckBoxId(i));
-            cb.setEnabled(false);
-            cb.setVisibility(View.INVISIBLE);
+            LinearLayout hoLayout = (LinearLayout)view.findViewById(getId2(i));
+            layout.removeViewInLayout(hoLayout);
         }
 
         if(!StaffLogin.patientStaff) {
@@ -92,6 +95,17 @@ public class NextDosageListerFragment extends Fragment {
             case 2: return R.id.dosageCheckThree;
             case 3: return R.id.dosageCheckFour;
             case 4: return R.id.dosageCheckFive;
+        }
+        return R.id.dosageCheckOne;
+    }
+
+    public static int getId2(int index){
+        switch(index){
+            case 0: return R.id.nextDosageHoriontal;
+            case 1: return R.id.nextDosageHoriontal1;
+            case 2: return R.id.nextDosageHoriontal2;
+            case 3: return R.id.nextDosageHoriontal3;
+            case 4: return R.id.nextDosageHoriontal4;
         }
         return R.id.dosageCheckOne;
     }

@@ -94,6 +94,14 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
+        handleIntent(getIntent());
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         if(!StaffLogin.isDoctor){
             EditText firstEdit = (EditText)findViewById(R.id.surnameEditText);
             EditText secondEdit = (EditText)findViewById(R.id.firstNameEditText);
@@ -119,14 +127,6 @@ public class Login extends AppCompatActivity {
                     Toast.LENGTH_LONG).show();
             finish();
         }
-
-        handleIntent(getIntent());
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
 
         setupForegroundDispatch(this, mNfcAdapter);
 

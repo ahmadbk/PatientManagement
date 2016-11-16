@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -43,6 +44,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.IllegalFormatException;
 
 public class PatientManager extends AppCompatActivity {
     FragmentManager mFragmentManager;
@@ -53,6 +55,8 @@ public class PatientManager extends AppCompatActivity {
     public static final String TAG = "NfcDemo";
     PatientDetails patientDetails;
     private boolean tempDateSet = false;
+
+    Toolbar toolbar;
     private String tempDate = "";
     private boolean isPDF = false;
     String getFile_url = "http://"+StaffLogin.serverAdd+"/EncryptFile.php";
@@ -71,12 +75,12 @@ public class PatientManager extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SessionThread sessionThread = new SessionThread();
-        sessionThread.execute();
+
 
         setContentView(R.layout.activity_patient_manager);
 
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+
         if(!StaffLogin.patientStaff) {
             if (StaffLogin.isDoctor)
                 toolbar.setBackgroundResource(R.color.maroon);
@@ -131,7 +135,6 @@ public class PatientManager extends AppCompatActivity {
         }
 
         handleIntent(getIntent());
-
     }
 
     @Override
@@ -212,8 +215,13 @@ public class PatientManager extends AppCompatActivity {
         insertionType = "AddAllergy";
         String allergy = editText.getText().toString();
 
-        InsertBackgroundWorker insertBackgroundWorker = new InsertBackgroundWorker(this);
-        insertBackgroundWorker.execute(insertionType, allergy);
+        if(allergy.length()>0) {
+
+            InsertBackgroundWorker insertBackgroundWorker = new InsertBackgroundWorker(this);
+            insertBackgroundWorker.execute(insertionType, allergy);
+        }
+        else
+            Toast.makeText(getBaseContext(), "Enter text", Toast.LENGTH_SHORT).show();
 
     }
 
@@ -221,9 +229,13 @@ public class PatientManager extends AppCompatActivity {
         EditText notesEdit = (EditText) findViewById(R.id.notesEditText);
         String notes = notesEdit.getText().toString();
 
+        if(notes.length() > 0) {
 
-        InsertBackgroundWorker insertBackgroundWorker = new InsertBackgroundWorker(this);
-        insertBackgroundWorker.execute("AddDiagnostic", notes);
+            InsertBackgroundWorker insertBackgroundWorker = new InsertBackgroundWorker(this);
+            insertBackgroundWorker.execute("AddDiagnostic", notes);
+        }
+        else
+            Toast.makeText(getBaseContext(), "Enter Text", Toast.LENGTH_SHORT).show();
     }
 
     public void addPrescriptionButtonClick(View view) {
@@ -233,9 +245,22 @@ public class PatientManager extends AppCompatActivity {
         EditText quanEdit = (EditText) findViewById(R.id.dosageQuantity);
         String quantity = quanEdit.getText().toString();
 
+        try{
+            int n = Integer.parseInt(quantity);
+        }
+        catch(Exception e){
+            Toast.makeText(getBaseContext(), "Enter quantity", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         String isMorning = ((CheckBox) findViewById(R.id.addMorningCheckBox)).isChecked() ? "true" : "false";
         String isAfternoon = ((CheckBox) findViewById(R.id.addAfternoonCheckBox)).isChecked() ? "true" : "false";
         String isEvening = ((CheckBox) findViewById(R.id.addEveningCheckBox)).isChecked() ? "true" : "false";
+
+        if(!(isAfternoon.equals("true") || isEvening.equals("true") || isMorning.equals("true"))) {
+            Toast.makeText(getBaseContext(), "Select a time to take medication", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         Spinner mealSpinner = (Spinner) findViewById(R.id.mealRelationSpinner);
         String mealRelation = mealSpinner.getSelectedItemPosition() == 0 ? "BeforeMeal" : "AfterMeal";
@@ -317,11 +342,10 @@ public class PatientManager extends AppCompatActivity {
         new DownloadFile().execute(getFile_url, "/sdcard/" + ttt,dummy);
     }
 
-    public void destroy()
-    {
-        onDestroy();
-        //Intent intent = new Intent(PatientManager.this, Login.class);
-        //PatientManager.this.startActivity(intent);
+    private void setTime(int time){
+
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        toolbar.setSubtitle(toolbar.getSubtitle()+"\t\t\t"+time);
     }
 
     @Override
@@ -428,32 +452,6 @@ public class PatientManager extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-        }
-    }
-
-    private class SessionThread extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-
-            for(int i = 0; i<10;i++)
-            {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                System.out.println(10-(i+1));
-
-
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            destroy();
-            super.onPostExecute(aVoid);
         }
     }
 

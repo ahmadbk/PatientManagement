@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            tools:context="com.example.ahmad.patientmanagement.NextDosageListerFragment">
-
     <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context="com.example.ahmad.patientmanagement.NextDosageListerFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -31,10 +26,12 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/nextDosageLinearLayout"
                     android:orientation="vertical">
                     <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nextDosageHoriontal">
                         <FrameLayout
                             android:layout_width="100pt"
                             android:layout_height="wrap_content"
@@ -48,7 +45,8 @@
 
                     <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nextDosageHoriontal1">
                         <FrameLayout
                             android:layout_width="100pt"
                             android:layout_height="wrap_content"
@@ -61,7 +59,8 @@
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nextDosageHoriontal2">
                         <FrameLayout
                             android:layout_width="100pt"
                             android:layout_height="wrap_content"
@@ -74,7 +73,8 @@
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nextDosageHoriontal3">
                         <FrameLayout
                             android:layout_width="100pt"
                             android:layout_height="wrap_content"
@@ -87,7 +87,8 @@
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nextDosageHoriontal4">
                         <FrameLayout
                             android:layout_width="100pt"
                             android:layout_height="wrap_content"
@@ -98,20 +99,19 @@
                             android:layout_marginTop="32dp"
                             android:id="@+id/dosageCheckFive"/>
                     </LinearLayout>
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Submit"
+                        android:id="@+id/dealDosageButton"
+                        android:onClick="nextDosageSubmitOnClick"/>
                 </LinearLayout>
             </ScrollView>
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Submit"
-                android:id="@+id/dealDosageButton"
-                android:onClick="nextDosageSubmitOnClick"/>
         </LinearLayout>
         <FrameLayout
             android:layout_width="200pt"
             android:layout_height="wrap_content"
             android:id="@+id/dosagesFragment"></FrameLayout>
     </LinearLayout>
-
-</LinearLayout>

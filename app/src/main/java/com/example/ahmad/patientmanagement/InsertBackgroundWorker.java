@@ -314,7 +314,7 @@ public class InsertBackgroundWorker extends AsyncTask<String,Void,String> {
                 JSONObject object = new JSONObject();
                 try {
                     object.put("tag_id",patient_tag);
-                    object.put("doctor_tag",staff_tag);
+                    object.put("nurse_tag",staff_tag);
                     object.put("time",timeStamp);
                     object.put("prescription_id",StaffLogin.tempDosageArrayList.get(i).getPrescription_id());
                 } catch (JSONException e) {
