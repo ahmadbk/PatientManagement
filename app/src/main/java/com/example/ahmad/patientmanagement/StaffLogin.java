@@ -45,7 +45,8 @@ public class StaffLogin extends AppCompatActivity {
 
     public static final String MIME_TEXT_PLAIN = "text/plain";
     public static final String TAG = "NfcDemo";
-    public static String serverAdd = "192.168.1.100:54000";
+    public static String lastByte = "101";
+    public static String serverAdd = "192.168.1."+lastByte+":54000";
     public static String uniqueNumber= "12345678";
     public static boolean patientStaff = false;
     public static boolean isDoctor = false;
@@ -228,7 +229,9 @@ public class StaffLogin extends AppCompatActivity {
     }
 
     public static void setAddress(String s){
-        StaffLogin.serverAdd = s;
+        //StaffLogin.serverAdd = s;
+        StaffLogin.lastByte = s;
+        StaffLogin.serverAdd = "192.168.1."+StaffLogin.lastByte+":54000";
         System.out.println(StaffLogin.serverAdd);
     }
 
