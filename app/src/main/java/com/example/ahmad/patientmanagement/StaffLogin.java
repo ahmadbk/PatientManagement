@@ -678,7 +678,10 @@ public class StaffLogin extends AppCompatActivity {
                     Intent intent = new Intent(context, Login.class);
                     context.startActivity(intent);
                 }
-
+            }
+            else
+            {
+                Toast.makeText(getBaseContext(), "Unregistered Tag", Toast.LENGTH_SHORT).show();
             }
             checkNFCFlag = false;
         }

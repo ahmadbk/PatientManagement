@@ -699,6 +699,10 @@ public class Login extends AppCompatActivity {
                 dosageArrayList = new ArrayList<Dosage>();
 
             }
+            else
+            {
+                Toast.makeText(getBaseContext(), "Unregistered Tag", Toast.LENGTH_SHORT).show();
+            }
             checkNFC = false;
         }
 
